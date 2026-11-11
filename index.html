@@ -809,6 +809,92 @@ body.focus #bgLayer i{ opacity:0 !important; }
 @keyframes flyBlink{ from{ opacity:.12; } to{ opacity:.85; } }
 .pv.bgwrap .bg-sakura::after{ content:""; position:absolute; left:30%; top:30%; width:28%; height:28%; background:rgba(255,145,180,.9); border-radius:100% 0 100% 0; }
 .pv.bgwrap .bg-kunang::after{ content:""; position:absolute; left:42%; top:40%; width:14%; height:14%; border-radius:50%; background:#FFE27A; box-shadow:0 0 8px 3px rgba(255,220,100,.6); }
+
+/* ---- RANK ---- */
+.emblem{ display:block; overflow:visible; filter:drop-shadow(0 4px 8px rgba(0,0,0,.18)); }
+.emblem.float{ animation:embFloat 4s ease-in-out infinite; }
+.emblem.pop{ animation:embPop .9s cubic-bezier(.2,1.5,.4,1); }
+@keyframes embFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-5px); } }
+@keyframes embPop{ 0%{ transform:scale(.3) rotate(-12deg); opacity:0; } 70%{ transform:scale(1.12) rotate(2deg); opacity:1; } 100%{ transform:scale(1); } }
+body.focus .emblem.float{ animation:none; }
+.rankduo{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+.rankmini{
+  display:flex; align-items:center; gap:6px; width:100%; text-align:left; cursor:pointer; color:var(--ink);
+  background:var(--card); border:1px solid var(--line); border-radius:16px; padding:10px 8px 10px 4px; min-width:0;
+}
+.rankmini .rm-info{ flex:1; min-width:0; }
+.rm-label{ font-size:10.5px; font-weight:700; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rm-name{ font-family:'Shippori Mincho', serif; font-size:13.5px; font-weight:700; margin:1px 0 2px; line-height:1.25; }
+.rankmini .rstar{ font-size:12px; }
+.rm-days{ float:right; letter-spacing:0; text-transform:none; font-weight:600; }
+.rk-tabs{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px; }
+.rk-tab{ display:flex; align-items:center; gap:4px; text-align:left; padding:6px 8px 6px 2px; border-radius:14px; border:1px solid var(--line); background:var(--card); color:var(--ink); cursor:pointer; min-width:0; }
+.rk-tab b{ display:block; font-size:13px; white-space:nowrap; }
+.rk-tab small{ display:block; font-size:10.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rk-tab span{ min-width:0; }
+.rk-tab.on{ border-color:var(--indigo); box-shadow:0 0 0 2px var(--indigo); }
+.rk-mode{ font-size:11.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--indigo); }
+.rk-sent{ font-size:19px; line-height:1.9; margin:6px 0 4px; font-family:'Zen Kaku Gothic New', sans-serif; }
+.rk-situ{ font-size:12.5px; color:var(--muted); font-weight:700; margin-top:4px; }
+.rk-blank{ display:inline-block; min-width:3.2em; border-bottom:2px solid var(--indigo); color:var(--indigo); text-align:center; }
+.rk-rev{ border-top:1px dashed var(--line); padding:8px 0; font-size:14px; line-height:1.7; }
+.rk-rev small{ display:block; color:var(--muted); font-size:11px; }
+.wordinfo .simu{ text-decoration:underline; }
+.rstars{ display:flex; gap:3px; align-items:center; justify-content:inherit; }
+.rstar{ font-size:17px; line-height:1; color:color-mix(in srgb, var(--muted) 35%, transparent); }
+.rstar.on{ color:#F5B301; text-shadow:0 0 6px rgba(245,179,1,.45); }
+.rstar.gain{ animation:starGain .7s cubic-bezier(.2,1.6,.4,1) both; animation-delay:.5s; }
+.rstar.lose{ animation:starLose 1s ease both; animation-delay:.5s; }
+@keyframes starGain{ 0%{ transform:scale(0) rotate(-90deg); opacity:0; } 100%{ transform:scale(1); opacity:1; } }
+@keyframes starLose{ 0%{ color:#F5B301; transform:scale(1.3); } 100%{ transform:scale(1); } }
+.rstars.mythic{ gap:6px; font-family:'Shippori Mincho', serif; font-size:18px; }
+.rk-hero{
+  position:relative; text-align:center; background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:14px 18px 18px; margin-bottom:12px; overflow:hidden;
+}
+.rk-hero::before{ content:""; position:absolute; inset:0; background:radial-gradient(70% 55% at 50% 22%, var(--tc, transparent), transparent 70%); opacity:.28; pointer-events:none; }
+.rk-hero > *{ position:relative; }
+.tier-minarai{ --tc:#B7C0CA; } .tier-ashigaru{ --tc:#6FB3D2; } .tier-samurai{ --tc:#E0AE45; } .tier-hatamoto{ --tc:#2FB59B; }
+.tier-daimyo{ --tc:#8B6CF0; } .tier-shogun{ --tc:#E5484D; } .tier-tenka{ --tc:#FFC93C; }
+.rk-emb{ display:flex; justify-content:center; padding:6px 0 2px; }
+.rk-name{ font-family:'Shippori Mincho', serif; font-size:26px; font-weight:800; }
+.rk-sub{ font-size:12.5px; color:var(--muted); margin:2px 0 8px; }
+.rk-hero .rstars, .rk-result .rstars{ justify-content:center; }
+.rk-hero .rstar, .rk-result .rstar{ font-size:26px; }
+.rk-brave{ margin-top:14px; text-align:left; }
+.rk-bh{ display:flex; justify-content:space-between; font-size:12.5px; font-weight:700; }
+.rk-note{ font-size:12px; color:var(--muted); margin-top:8px; line-height:1.45; }
+.rk-play{ font-size:17px; padding:15px; }
+.rk-rules{ text-align:center; font-size:12px; color:var(--muted); margin:8px 4px 16px; line-height:1.5; }
+.statbox .sep{ opacity:.4; margin:0 2px; }
+.rk-season p{ margin-top:6px; }
+.rk-coin{ display:inline-flex; align-items:center; gap:4px; font-family:inherit !important; font-size:13px !important; color:var(--ink); }
+.rk-coin .coin{ font-size:14px; }
+.rk-ladder{ margin-top:12px; }
+.rk-ladder ul{ margin-bottom:10px; }
+.rk-list{ display:flex; flex-direction:column; gap:6px; }
+.rk-row{ display:flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:12px; padding:6px 10px 6px 4px; }
+.rk-row.on{ border-color:var(--indigo); box-shadow:0 0 0 1.5px var(--indigo); }
+.rk-row b{ display:block; font-size:14px; }
+.rk-row small{ display:block; font-size:11.5px; color:var(--muted); line-height:1.4; }
+.rk-rw{ display:flex; align-items:center; gap:4px; font-size:12px; font-weight:700; white-space:nowrap; }
+.rk-rw .coin{ font-size:13px; }
+.rk-result .rk-head{ font-family:'Shippori Mincho', serif; font-size:40px; font-weight:900; letter-spacing:.08em; line-height:1.1; }
+.rk-result.win .rk-head{ background:linear-gradient(100deg, #F59E0B, #FFD54A, #F59E0B); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.rk-result.lose .rk-head{ color:var(--muted); }
+.rk-score{ font-size:14px; color:var(--muted); margin-bottom:6px; }
+.rk-result .rk-name{ font-size:22px; margin-bottom:4px; }
+.rk-emb.promo{ position:relative; isolation:isolate; }
+.rk-emb.promo::before{ content:""; position:absolute; left:50%; top:50%; width:170px; height:170px; margin:-85px 0 0 -85px; border-radius:50%;
+  background:repeating-conic-gradient(rgba(245,179,1,.22) 0 8deg, transparent 8deg 24deg);
+  -webkit-mask:radial-gradient(circle, #000 25%, transparent 70%); mask:radial-gradient(circle, #000 25%, transparent 70%);
+  animation:spinRays 12s linear infinite; z-index:-1; }
+@keyframes spinRays{ to{ transform:rotate(360deg); } }
+.rk-promo{ margin:12px 0 4px; padding:10px; border-radius:12px; background:color-mix(in srgb, #F5B301 18%, var(--card)); border:1.5px solid #E9B62F; font-size:14px; }
+.rk-msg{ font-size:13.5px; margin-top:6px; color:var(--muted); font-weight:600; }
+.rk-msg.up{ color:var(--moss); } .rk-msg.down{ color:var(--seal); }
+.rk-bpline{ font-size:12px; color:var(--muted); margin:6px 0 14px; }
+.rk-result .reward{ margin-top:14px; }
 </style>
 </head>
 <body>
@@ -1195,7 +1281,7 @@ function nextLevelNum() {
 }
 
 /* ================= ROUTING ================= */
-function goMainMenu() { clearTimer(); state.screen = "main-menu"; render(); }
+function goMainMenu() { if (rankForfeitGuard()) return; clearTimer(); state.screen = "main-menu"; render(); }
 function goKanjiHome() { clearTimer(); state.screen = "kanji-home"; render(); }
 function goHome() { goKanjiHome(); } // alias dipakai layar hasil kuis/flashcard
 function goFlashPick() { state.screen = "flash-pick"; render(); }
@@ -1285,10 +1371,11 @@ function goKotobaSetup() { if (!KOTOBA_LESSONS.length) setKBook(state.kBook); cl
 
 /* tombol Kembali: naik satu tingkat, pengaturan terakhir tetap tersimpan */
 function goBack() {
+  if (rankForfeitGuard()) return;
   clearTimer();
   const s = state.screen;
   const map = {
-    "shop": "main-menu", "inventory": "main-menu",
+    "shop": "main-menu", "inventory": "main-menu", "rank": "main-menu", "rank-result": "rank",
     "kanji-home": "main-menu", "kotoba-home": "main-menu", "bunpo-home": "main-menu", "dokkai-home": "main-menu",
     "flash-pick": "kanji-home", "level-pick": "kanji-home", "speed-pick": "kanji-home",
     "kotoba-setup": "kotoba-home", "kotoba-result": "kotoba-setup",
@@ -1330,10 +1417,12 @@ function startKotobaQuiz(words) {
   render();
 }
 
-/* ================= TIMER (speed mode) ================= */
+/* ================= TIMER (speed & rank) ================= */
+function isTimed() { return state.mode === "speed" || state.mode === "rank"; }
+function curLimit() { return state.mode === "rank" ? state.rankTime : TIME_LIMIT; }
 function startTimerForCurrentQuestion() {
   clearTimer();
-  state.timeLeft = TIME_LIMIT;
+  state.timeLeft = curLimit();
   updateTimerUI();
   state.timerId = setInterval(() => {
     state.timeLeft = Math.max(0, state.timeLeft - 0.1);
@@ -1350,7 +1439,7 @@ function updateTimerUI() {
   const wrap = document.getElementById("timerRingWrap");
   if (!ring || !label) return;
   const circumference = 2 * Math.PI * 18;
-  const frac = state.timeLeft / TIME_LIMIT;
+  const frac = state.timeLeft / curLimit();
   ring.style.strokeDashoffset = String(circumference * (1 - frac));
   label.textContent = Math.ceil(state.timeLeft);
   if (wrap) wrap.classList.toggle("low", state.timeLeft <= 4);
@@ -1370,8 +1459,8 @@ function onAnswer(chosen) {
     state.correctCount++;
     state.streak++;
     state.maxStreak = Math.max(state.maxStreak, state.streak);
-    if (state.mode === "speed") {
-      const bonus = Math.floor(100 * (state.timeLeft / TIME_LIMIT));
+    if (isTimed()) {
+      const bonus = Math.floor(100 * (state.timeLeft / curLimit()));
       state.score += 100 + bonus;
     } else {
       state.score++;
@@ -1379,6 +1468,7 @@ function onAnswer(chosen) {
   } else {
     state.streak = 0;
     if (q.src && !state.kWrong.includes(q.src)) state.kWrong.push(q.src);
+    if (q.type === "ujian") state.uWrong.push(q);
   }
 
   document.querySelectorAll(".opt").forEach(btn => {
@@ -1403,6 +1493,7 @@ function onAnswer(chosen) {
       fb.className = "feedback show-wrong";
     }
   }
+  if (fb && q.note) fb.innerHTML = escHTML(fb.textContent) + `<div class="wordinfo">${q.note}</div>`;
   if (fb && q.src) {
     fb.innerHTML = escHTML(fb.textContent) + `<div class="wordinfo forceruby">${rubyHTML(q.src)} = ${escHTML(q.src.a)}</div>`;
   }
@@ -1411,7 +1502,7 @@ function onAnswer(chosen) {
     else { stamp.textContent = "✕"; stamp.classList.add("pop", "wrongstamp"); }
   }
 
-  if (state.mode === "speed") {
+  if (isTimed()) {
     updateStreakUI();
     setTimeout(onNext, 750); // auto-advance, ritme cepat
   } else {
@@ -1430,12 +1521,13 @@ function onNext() {
   state.answered = false;
   if (state.idx >= state.sessionQuestions.length) { renderResultScreen(); return; }
   render();
-  if (state.mode === "speed") startTimerForCurrentQuestion();
+  if (isTimed()) startTimerForCurrentQuestion();
 }
 
 /* ================= RESULT ================= */
 function renderResultScreen() {
   clearTimer();
+  if (state.mode === "rank") { finishRankMatch(false); return; }
   awardQuiz(state.mode === "kotoba-quiz" ? "kotoba" : state.mode === "kbook-quiz" ? "kbook" : "speed", state.correctCount, state.sessionQuestions.length);
   if (state.mode === "kotoba-quiz") { state.screen = "kotoba-result"; render(); return; }
   if (state.mode === "kbook-quiz") { state.screen = "kbook-result"; render(); return; }
@@ -1477,7 +1569,7 @@ function render() {
   const app = document.getElementById("app");
   applyCosmetics();
   app.innerHTML = topbarHTML() + screenHTML() + bottomNavHTML();
-  app.classList.toggle("hasnav", ["main-menu", "shop", "inventory"].includes(state.screen));
+  app.classList.toggle("hasnav", ["main-menu", "rank", "shop", "inventory"].includes(state.screen));
   document.body.classList.toggle("focus", ["quiz", "sim-test"].includes(state.screen));
   attachHandlers();
   window.scrollTo(0, 0);
@@ -1504,8 +1596,8 @@ function currentSectionKey() {
 function topbarHTML() {
   const themeBtn = `<button class="themebtn" id="btnTheme" title="Ganti tema terang/gelap">${state.theme === "dark" ? "&#9728;" : "&#9789;"}</button>`;
   const sec = currentSectionKey();
-  const top = ["main-menu", "shop", "inventory"].includes(state.screen);
-  const label = state.screen === "main-menu" ? "Beranda" : state.screen === "shop" ? "Toko" : state.screen === "inventory" ? "Koleksi" : (sec ? SECTION_META[sec].label : "Belajar");
+  const top = ["main-menu", "rank", "shop", "inventory"].includes(state.screen);
+  const label = state.screen === "rank" || state.screen === "rank-result" || (state.screen === "quiz" && state.mode === "rank") ? "Rank" : state.screen === "main-menu" ? "Beranda" : state.screen === "shop" ? "Toko" : state.screen === "inventory" ? "Koleksi" : (sec ? SECTION_META[sec].label : "Belajar");
   const busy = ["quiz", "sim-test"].includes(state.screen);
   const coin = `<button class="coinpill ${busy ? "static" : ""}" id="btnCoins" title="Koin"><span class="coin"></span><span>${fmtNum(SAVE.coins)}</span></button>`;
   return `
@@ -1527,6 +1619,8 @@ function screenHTML() {
   switch (state.screen) {
     case "main-menu": html = mainMenuHTML(); break;
     case "shop": html = shopHTML(); break;
+    case "rank": html = rankHTML(); break;
+    case "rank-result": html = rankResultHTML(); break;
     case "inventory": html = inventoryHTML(); break;
     case "kanji-home": html = kanjiHomeHTML(); break;
     case "flash-pick": html = flashPickHTML(); break;
@@ -1937,11 +2031,11 @@ function quizHTML() {
   const q = currentQuestion();
   const total = state.sessionQuestions.length;
   const pct = Math.round((state.idx) / total * 100);
-  const modeLabel = state.mode === "speed" ? "Mode Kecepatan"
+  const modeLabel = state.mode === "rank" ? `${RANK_MODES[state.rankMode].name} — ${rankName(curR())}` : state.mode === "speed" ? "Mode Kecepatan"
     : state.mode === "kotoba-quiz" ? `Kotoba — Pelajaran ${lessonsLabel(state.kSel)}`
     : `Kuis Bertahap — Level ${state.level}`;
 
-  const questionBlock = q.type === "kbook"
+  const questionBlock = q.promptHTML
     ? `${q.promptHTML}<div class="q-hint">${q.hint}</div>`
     : q.type === "reading"
     ? `<div class="kanji-big">${q.prompt}</div><div class="q-hint">Pilih bacaan (hiragana) yang tepat</div>`
@@ -1949,7 +2043,7 @@ function quizHTML() {
     ? `<div class="kanji-big">${q.prompt}</div><div class="q-hint">Pilih arti yang tepat</div>`
     : `<div class="q-desc">${q.prompt}</div><div class="q-hint">${q.type === "odd" ? "Pilih kata yang tidak sekategori" : "Pilih kata/kanji yang sesuai"}</div>`;
 
-  const timerBlock = state.mode === "speed" ? `
+  const timerBlock = isTimed() ? `
     <div class="timerwrap">
       <div class="timerring" id="timerRingWrap">
         <svg viewBox="0 0 40 40" width="40" height="40">
@@ -1957,7 +2051,7 @@ function quizHTML() {
           <circle class="fg" id="timerFg" cx="20" cy="20" r="18"
             stroke-dasharray="${2 * Math.PI * 18}" stroke-dashoffset="0"></circle>
         </svg>
-        <div class="num" id="timerNum">${TIME_LIMIT}</div>
+        <div class="num" id="timerNum">${curLimit()}</div>
       </div>
       <div class="streak" id="streakLabel">${state.streak > 1 ? `Combo ×${state.streak}` : ""}</div>
     </div>` : "";
@@ -1967,7 +2061,7 @@ function quizHTML() {
   return `
     <div class="eyebrow">${modeLabel}</div>
     <div class="progress-wrap">
-      <div class="progress-track"><div class="progress-fill ${state.mode === "speed" ? "speed" : ""}" style="width:${pct}%"></div></div>
+      <div class="progress-track"><div class="progress-fill ${isTimed() ? "speed" : ""}" style="width:${pct}%"></div></div>
       <div class="progress-label">問 ${state.idx + 1} / ${total}</div>
     </div>
     ${timerBlock}
@@ -2527,12 +2621,464 @@ function attachHandlers() {
   if ($("homeBtn")) $("homeBtn").addEventListener("click", goHome);
   attachKanjiExtraHandlers();
   attachShopHandlers();
+  attachRankHandlers();
 }
+
+/* bank soal gaya JFT: C5/C4 = [kalimat, jawaban, pengecoh, arti], E = [situasi, percakapan, jawaban, pengecoh, keterangan] */
+const JFT_BANK = {"C5": [["まいあさ コーヒーを （　）。", "飲みます", ["読みます", "書きます", "聞きます"], "minum"], ["ねる まえに ほんを （　）。", "読みます", ["飲みます", "食べます", "休みます"], "membaca"], ["ともだちに てがみを （　）。", "書きます", ["飲みます", "食べます", "休みます"], "menulis"], ["まいばん ラジオで おんがくを （　）。", "聞きます", ["書きます", "食べます", "出ます"], "mendengarkan"], ["デパートで くつを （　）。", "買いました", ["飲みました", "休みました", "聞きました"], "membeli"], ["あたまが いたいので、かいしゃを （　）。", "休みます", ["飲みます", "書きます", "入ります"], "absen; beristirahat"], ["へやに （　）ときは、くつを ぬいで ください。", "入る", ["飲む", "書く", "読む"], "masuk"], ["この ペンは 千円です。とても （　）です。", "高い", ["白い", "長い", "小さい"], "mahal"], ["ゆきは （　）です。", "白い", ["高い", "長い", "大きい"], "putih"], ["あしたは にちようびですから、がっこうは （　）です。", "休み", ["名前", "天気", "電車"], "libur"], ["ここに あなたの （　）を かいて ください。", "名前", ["天気", "電車", "半分"], "nama"], ["きょうは （　）が いいですね。そとで あそびましょう。", "天気", ["名前", "電車", "半分"], "cuaca"], ["（　）で えきまで 行きます。", "電車", ["天気", "名前", "半分"], "kereta listrik"], ["わからない ことばは （　）に ききましょう。", "先生", ["天気", "電車", "半分"], "guru"], ["あさごはんを （　）から、がっこうへ 行きます。", "食べて", ["聞いて", "書いて", "読んで"], "makan"], ["まいあさ 七時に うちを （　）。", "出ます", ["入ります", "飲みます", "書きます"], "keluar"], ["らいねん、日本へ （　）たいです。", "行き", ["飲み", "書き", "読み"], "pergi"], ["いまから 友だちが うちに （　）。", "来ます", ["書きます", "読みます", "飲みます"], "datang"], ["ケーキを （　）に きって、いっしょに 食べましょう。", "半分", ["名前", "天気", "電車"], "setengah"], ["この みせの ラーメンは 三百円です。とても （　）です。", "安い", ["高い", "長い", "白い"], "murah"], ["この はしは 二キロ あります。とても （　）です。", "長い", ["白い", "安い", "高い"], "panjang"], ["ははは いま だいどころで 水を （　）います。", "飲んで", ["書いて", "聞いて", "読んで"], "minum"], ["しゅうまつは うちで えいがを （　）。", "見ます", ["飲みます", "書きます", "入ります"], "menonton"], ["ちちは 毎日 しんぶんを （　）。", "読みます", ["飲みます", "入ります", "休みます"], "membaca"], ["えきの （　）に ぎんこうが あります。みぎに こうばんが あります。", "左", ["名前", "天気", "半分"], "kiri"], ["この カメラは とても （　）です。ポケットに 入ります。", "小さい", ["長い", "高い", "白い"], "kecil"]], "C4": [["あたらしい ことばを ノートに （　）、おぼえます。", "書いて", ["着て", "送って", "借りて"], "menulis"], ["あついですから、まどを （　）ください。", "開けて", ["着て", "送って", "借りて"], "membuka"], ["としょかんで 本を 三さつ （　）。", "借りました", ["着ました", "急ぎました", "起きました"], "meminjam"], ["国の 家族に にもつを （　）。", "送りました", ["着ました", "起きました", "歩きました"], "mengirim"], ["さむいので、セーターを （　）。", "着ました", ["走りました", "起きました", "急ぎました"], "memakai (baju)"], ["あさ 六時に （　）、ジョギングを します。", "起きて", ["借りて", "送って", "売って"], "bangun"], ["じかんが ありませんから、（　）ください。", "急いで", ["借りて", "送って", "着て"], "bergegas"], ["駅まで バスに のらないで、（　）行きます。", "歩いて", ["着て", "借りて", "売って"], "berjalan kaki"], ["この にもつは 三十キロ あります。とても （　）です。", "重い", ["早い", "明るい", "近い"], "berat"], ["へやの まどが 大きいので、とても （　）です。", "明るい", ["重い", "近い", "早い"], "terang"], ["駅は ここから 歩いて 三分です。とても （　）です。", "近い", ["重い", "明るい", "赤い"], "dekat"], ["風が （　）ですから、かさを さすのは むずかしいです。", "強い", ["近い", "赤い", "明るい"], "kuat; kencang"], ["ねつが ありますから、（　）へ 行きます。", "病院", ["図書館", "銀行", "工場"], "rumah sakit"], ["お金を おろしたいです。（　）は どこですか。", "銀行", ["病院", "図書館", "教室"], "bank"], ["本を かりたいです。（　）は 何時まで あいて いますか。", "図書館", ["病院", "銀行", "工場"], "perpustakaan"], ["この （　）では 車を 作って います。", "工場", ["教室", "図書館", "病院"], "pabrik"], ["先生は いま （　）で じゅぎょうを して います。", "教室", ["工場", "銀行", "台所"], "ruang kelas"], ["母は （　）で ばんごはんを 作って います。", "台所", ["銀行", "工場", "教室"], "dapur"], ["道が わからないので、（　）を 見ます。", "地図", ["写真", "手紙", "音楽"], "peta"], ["国の 母から （　）が とどきました。「げんき？」と 書いて ありました。", "手紙", ["地図", "音楽", "意味"], "surat"], ["この ことばの （　）が わかりません。じしょで しらべます。", "意味", ["手紙", "地図", "音楽"], "arti; makna"], ["しずかな （　）を 聞きながら べんきょうします。", "音楽", ["地図", "意味", "手紙"], "musik"], ["先生、（　）が あります。この 文の 読み方を 教えて ください。", "質問", ["音楽", "地図", "手紙"], "pertanyaan"], ["来週 日本語の （　）が ありますから、毎日 べんきょうして います。", "試験", ["地図", "工場", "台所"], "ujian"], ["兄は 大学で ロボットの （　）を して います。", "研究", ["地図", "台所", "手紙"], "penelitian"], ["わたしの しゅみは 古い きってを （　）ことです。", "集める", ["着る", "急ぐ", "起きる"], "mengumpulkan"], ["じゅぎょうは 九時に （　）、十二時に 終わります。", "始まって", ["着て", "借りて", "送って"], "dimulai"], ["この シャツは 千円でした。とても （　）です。", "安い", ["重い", "強い", "近い"], "murah"], ["かぜを ひいたので、（　）に みて もらいました。", "医者", ["地図", "工場", "台所"], "dokter"], ["しごとが （　）、うちへ 帰ります。", "終わったら", ["着たら", "借りたら", "送ったら"], "selesai"], ["日本語を 話すのは まだ （　）ですが、毎日 れんしゅうして います。", "下手", ["強い", "近い", "重い"], "tidak pandai"], ["父は 毎日 車を （　）して 会社へ 行きます。", "運転", ["研究", "質問", "注意"], "menyetir"]], "E": [["Mulai makan", "A：どうぞ、たくさん たべて ください。 B：（　）。", "いただきます", ["ごちそうさまでした", "いってきます", "おやすみなさい"], "diucapkan sebelum makan"], ["Selesai makan", "A：おいしかったですか。 B：はい、（　）。", "ごちそうさまでした", ["いただきます", "いってきます", "はじめまして"], "diucapkan setelah makan"], ["Berangkat dari rumah", "こども：（　）。 はは：いってらっしゃい。", "いってきます", ["ただいま", "おかえりなさい", "おやすみなさい"], "diucapkan saat pergi dari rumah"], ["Pulang ke rumah", "こども：（　）。 はは：おかえりなさい。", "ただいま", ["いってきます", "いってらっしゃい", "いただきます"], "diucapkan saat tiba di rumah"], ["Bertemu pertama kali", "A：はじめまして。リンです。 B：キムです。どうぞ（　）。", "よろしく おねがいします", ["おだいじに", "おかえりなさい", "おさきに しつれいします"], "salam perkenalan"], ["Mendapat bantuan", "A：ありがとうございました。 B：（　）。", "どういたしまして", ["おだいじに", "いってきます", "ごちそうさまでした"], "jawaban atas ucapan terima kasih"], ["Teman sedang sakit", "A：かぜを ひいて しまいました。 B：そうですか。（　）。", "おだいじに", ["おめでとうございます", "いただきます", "ただいま"], "semoga lekas sembuh"], ["Kabar gembira", "A：らいげつ けっこんします。 B：（　）！", "おめでとうございます", ["おだいじに", "おやすみなさい", "おじゃまします"], "selamat"], ["Masuk ruang guru setelah mengetuk pintu", "がくせい：（　）。 せんせい：はい、どうぞ。", "しつれいします", ["いただきます", "おかえりなさい", "おやすみなさい"], "permisi (saat masuk ruangan)"], ["Malam hari, mau tidur", "A：もう 十一時ですね。 B：ええ。じゃ、（　）。", "おやすみなさい", ["おはようございます", "いってきます", "いらっしゃいませ"], "selamat tidur"], ["Rekan kerja pulang lebih dulu", "A：おさきに しつれいします。 B：（　）。", "おつかれさまでした", ["いただきます", "いってきます", "はじめまして"], "terima kasih atas kerja kerasnya"], ["Ditanya kabar", "A：おげんきですか。 B：はい、（　）。", "おかげさまで", ["おだいじに", "どういたしまして", "おまたせしました"], "berkat doa Anda (baik-baik saja)"], ["Datang terlambat menemui teman", "A：（　）。 B：いいえ、だいじょうぶですよ。", "おまたせしました", ["おかげさまで", "おだいじに", "ごちそうさまでした"], "maaf membuat menunggu"], ["Pelanggan masuk toko", "てんいん：（　）。 きゃく：すみません、この シャツを ください。", "いらっしゃいませ", ["いってらっしゃい", "おかえりなさい", "おじゃまします"], "selamat datang (di toko)"], ["Bertamu ke rumah orang", "A：どうぞ、あがって ください。 B：（　）。", "おじゃまします", ["いらっしゃいませ", "おかえりなさい", "ただいま"], "permisi (masuk rumah orang)"], ["Diajak menonton film", "A：いっしょに えいがを 見に 行きませんか。 B：いいですね。（　）。", "行きましょう", ["行きませんでした", "行って いました", "行った ことが あります"], "ayo pergi"], ["Menolak ajakan dengan sopan", "A：あした いっしょに テニスを しませんか。 B：すみません、あしたは（　）。", "ちょっと……", ["いいですね", "ぜひ", "だいじょうぶです"], "menolak secara halus"], ["Tidak mendengar penjelasan guru", "せんせい：…… がくせい：すみません、（　）。", "もう いちど おねがいします", ["おさきに しつれいします", "おだいじに", "おまたせしました"], "tolong ulangi sekali lagi"], ["Setelah ditunjukkan jalan", "A：トイレは どこですか。 B：あそこですよ。 A：（　）。", "ありがとうございます", ["どういたしまして", "おだいじに", "おかえりなさい"], "terima kasih"], ["Pagi hari di kantor", "A：おはようございます。 B：（　）。", "おはようございます", ["こんばんは", "おやすみなさい", "いってきます"], "selamat pagi"], ["Menerima hadiah", "A：これ、どうぞ。 B：わあ、（　）。", "ありがとうございます", ["どういたしまして", "おまたせしました", "おさきに しつれいします"], "terima kasih"], ["Minta maaf karena salah", "A：あ、それ わたしの かさです。 B：（　）。", "すみません", ["どういたしまして", "おかげさまで", "いただきます"], "maaf"], ["Meminta tolong", "A：（　）、ペンを かして くれませんか。 B：はい、どうぞ。", "すみません", ["おかげさまで", "おやすみなさい", "おだいじに"], "permisi (meminta tolong)"], ["Di telepon", "A：もしもし、（　）。 B：あ、リンさん。こんにちは。", "リンです", ["リンさんです", "リンでした", "リンさんでした"], "menyebut nama sendiri tanpa さん"]]};
+/* =========================================================================
+   SISTEM RANK — 2 mode (mekanik ala MOBA: tier → divisi → bintang, musim)
+     • Rank Ujian  : simulasi soal JLPT (漢字読み, 表記) & JFT-Basic (語の意味, 漢字の意味と用法, 会話と表現)
+     • Rank Kotoba : kosakata 5 buku; makin tinggi rank, kata makin sulit & waktu makin singkat
+   ========================================================================= */
+const RANK_TIERS = [
+  { k: "minarai",  jp: "見習", n: "Minarai",  arti: "Murid magang",     divs: 3, stars: 3, safe: true,  col: ["#B7C0CA", "#5E6873", "#EEF1F4"] },
+  { k: "ashigaru", jp: "足軽", n: "Ashigaru", arti: "Prajurit",         divs: 3, stars: 4, safe: true,  col: ["#6FB3D2", "#24617F", "#DDF2FB"] },
+  { k: "samurai",  jp: "侍",   n: "Samurai",  arti: "Kesatria",         divs: 4, stars: 4, col: ["#E0AE45", "#8A5A12", "#FFF0C7"] },
+  { k: "hatamoto", jp: "旗本", n: "Hatamoto", arti: "Pengawal panji",   divs: 5, stars: 5, col: ["#2FB59B", "#0F5E4C", "#CFF5EA"] },
+  { k: "daimyo",   jp: "大名", n: "Daimyō",   arti: "Penguasa wilayah", divs: 5, stars: 5, col: ["#8B6CF0", "#3E2496", "#E6DDFF"] },
+  { k: "shogun",   jp: "将軍", n: "Shōgun",   arti: "Panglima",         divs: 5, stars: 5, col: ["#E5484D", "#86141D", "#FFD9D9"] },
+  { k: "tenka",    jp: "天下", n: "Tenka",    arti: "Penguasa negeri",  mythic: true,       col: ["#FFC93C", "#B4235A", "#FFF6CF"] },
+];
+const TENKA_TITLES = [[100, "不滅", "Fumetsu"], [50, "極", "Kiwami"], [25, "誉", "Homare"], [0, "", ""]];
+const RANK_MODES = {
+  ujian:  { name: "Rank Ujian",  jp: "試", sub: "Simulasi JLPT & JFT" },
+  kotoba: { name: "Rank Kotoba", jp: "言", sub: "Kosakata 5 buku" },
+};
+const RANK_MODE_KEYS = ["ujian", "kotoba"];
+/* Rank Ujian: p4 = peluang soal level N4, n = jumlah soal per jenis
+   r = 漢字読み, h = 表記, c = 漢字の意味と用法 (rumpang), m = 語の意味, e = 会話と表現 */
+const UJ_CFG = [
+  { p4: 0,   time: 30, n: { r: 3, h: 2, c: 2, m: 1, e: 2 }, desc: "N5 · banyak soal ungkapan" },
+  { p4: 0.1, time: 27, n: { r: 3, h: 2, c: 2, m: 1, e: 2 }, desc: "N5, sedikit N4" },
+  { p4: 0.4, time: 24, n: { r: 3, h: 3, c: 2, m: 1, e: 1 }, desc: "Campuran N5 & N4" },
+  { p4: 0.6, time: 21, n: { r: 3, h: 3, c: 2, m: 1, e: 1 }, desc: "Lebih banyak N4" },
+  { p4: 0.8, time: 18, n: { r: 3, h: 3, c: 3, m: 1, e: 0 }, desc: "Mayoritas N4" },
+  { p4: 0.9, time: 16, n: { r: 3, h: 3, c: 3, m: 1, e: 0 }, desc: "Hampir semua N4" },
+  { p4: 1,   time: 14, n: { r: 3, h: 4, c: 3, m: 0, e: 0 }, desc: "Semua N4" },
+];
+/* Rank Kotoba: posisi kata di kurikulum 0–1 (MNN I → MNN II, Irodori 入門 → 初級2) */
+const KT_CFG = [
+  { lo: 0,    hi: 0.18, dirs: { arti: 10, jp: 0, kana: 0 }, furi: true,  time: 15, desc: "Kata dasar · Jepang → arti" },
+  { lo: 0.04, hi: 0.32, dirs: { arti: 7,  jp: 3, kana: 0 }, furi: true,  time: 13, desc: "Pelajaran awal · + arti → Jepang" },
+  { lo: 0.15, hi: 0.48, dirs: { arti: 5,  jp: 3, kana: 2 }, furi: true,  time: 12, desc: "Akhir MNN I · + cara baca" },
+  { lo: 0.30, hi: 0.66, dirs: { arti: 4,  jp: 3, kana: 3 }, furi: false, time: 11, desc: "Awal MNN II · tanpa furigana" },
+  { lo: 0.45, hi: 0.82, dirs: { arti: 3,  jp: 4, kana: 3 }, furi: false, time: 10, desc: "MNN II & Irodori 初級 · tanpa furigana" },
+  { lo: 0.60, hi: 0.94, dirs: { arti: 3,  jp: 4, kana: 3 }, furi: false, time: 9,  desc: "Kata sulit · tanpa furigana" },
+  { lo: 0.72, hi: 1,    dirs: { arti: 2,  jp: 4, kana: 4 }, furi: false, time: 8,  desc: "Kata tersulit · tanpa furigana" },
+];
+const RANK_Q = 10, RANK_WIN = 7, BRAVE_MAX = 100, BRAVE_PER = 5;
+const SEASON_MONTHS = 2, SEASON_START = { y: 2026, m: 10 };   // Musim 1 = Nov–Des 2026 (m: 0 = Januari)
+const SEASON_REWARD = [50, 100, 180, 280, 400, 550, 800];
+const BOOK_SHORT = { 1: "MNN I", 2: "MNN II", 3: "Irodori 入門", 4: "Irodori 初級1", 5: "Irodori 初級2" };
+const ROMAN = ["", "I", "II", "III", "IV", "V"];
+function rankCoinPer(mode, t) { return (mode === "ujian" ? 5 : 4) + t; }
+function rankWinBonus(t) { return 20 + 5 * t; }
+function rankTierBonus(t) { return 50 + 25 * t; }
+
+function freshRank() { return { t: 0, di: 0, s: 0, m: 0, bp: 0, w: 0, l: 0, ws: 0, bestWs: 0, peak: 0, tw: 0, tl: 0, season: seasonNow().id, live: false }; }
+function freshRanks() { return { ujian: freshRank(), kotoba: freshRank() }; }
+function sanitizeRank(r) {
+  const out = freshRank();
+  if (!r || typeof r !== "object") return out;
+  Object.keys(out).forEach(k => {
+    if (k === "live") out.live = r.live === true;
+    else if (Number.isFinite(r[k]) && r[k] >= 0) out[k] = Math.floor(r[k]);
+  });
+  out.t = Math.min(out.t, RANK_TIERS.length - 1);
+  const T = RANK_TIERS[out.t];
+  if (T.mythic) { out.di = 0; out.s = 0; } else { out.di = Math.min(out.di, T.divs - 1); out.s = Math.min(out.s, T.stars); out.m = 0; }
+  out.bp = Math.min(out.bp, BRAVE_MAX); out.peak = Math.max(out.peak, out.t);
+  return out;
+}
+function sanitizeRanks(p) {
+  const src = (p && p.ranks) || (p && p.rank ? { kotoba: p.rank } : {});   // v2.2 hanya punya satu rank → jadi Rank Kotoba
+  return { ujian: sanitizeRank(src.ujian), kotoba: sanitizeRank(src.kotoba) };
+}
+function curR() { return SAVE.ranks[state.rankMode]; }
+
+/* ---------- musim ---------- */
+function seasonNow(d) {
+  d = d || new Date();
+  const idx = Math.max(0, Math.floor(((d.getFullYear() - SEASON_START.y) * 12 + d.getMonth() - SEASON_START.m) / SEASON_MONTHS));
+  const startM = SEASON_START.m + idx * SEASON_MONTHS;
+  const end = new Date(SEASON_START.y, startM + SEASON_MONTHS, 1);
+  return { id: idx + 1, end, daysLeft: Math.max(0, Math.ceil((end - d) / 86400000)) };
+}
+function checkSeason() {
+  const now = seasonNow().id, notes = [];
+  let oldSeason = null;
+  RANK_MODE_KEYS.forEach(mode => {
+    const R = SAVE.ranks[mode];
+    if (R.season >= now) return;
+    oldSeason = R.season;
+    const played = R.w + R.l > 0, reward = played ? SEASON_REWARD[R.peak] : 0, peak = R.peak;
+    const nt = R.t >= 2 ? (RANK_TIERS[R.t].mythic ? 5 : R.t - 1) : R.t;   // turun 1 tier (Minarai & Ashigaru tetap)
+    R.t = nt; R.di = 0; R.s = 0; R.m = 0; R.peak = nt; R.w = 0; R.l = 0; R.ws = 0; R.season = now;
+    SAVE.coins += reward; SAVE.earned += reward;
+    if (played) notes.push({ mode, peak, reward });
+  });
+  saveSave();
+  if (notes.length) state.seasonNotice = { oldSeason, newSeason: now, notes };
+}
+
+/* ---------- label & emblem ---------- */
+function tenkaTitle(m) { return TENKA_TITLES.find(x => m >= x[0]); }
+function rankName(R) {
+  const T = RANK_TIERS[R.t];
+  if (T.mythic) { const tt = tenkaTitle(R.m); return `${T.jp} ${T.n}${tt[1] ? " " + tt[1] : ""}`; }
+  return `${T.jp} ${T.n} ${ROMAN[T.divs - R.di]}`;
+}
+let EMB_ID = 0;
+function emblemSVG(t, size, extra) {
+  const T = RANK_TIERS[t], [c1, c2, c3] = T.col, id = "emb" + (++EMB_ID);
+  const shield = "M50 8 L84 19 L84 50 C84 72 69 87 50 95 C31 87 16 72 16 50 L16 19 Z";
+  const inner = "M50 15 L77 24 L77 50 C77 67 66 79 50 86 C34 79 23 67 23 50 L23 24 Z";
+  let deco = "";
+  if (t >= 6) {
+    let rays = "";
+    for (let i = 0; i < 16; i++) {
+      const a = (i / 16) * Math.PI * 2, a1 = a - 0.09, a2 = a + 0.09, r1 = 40, r2 = i % 2 ? 56 : 62;
+      rays += `<polygon points="${(50 + Math.cos(a1) * r1).toFixed(1)},${(52 + Math.sin(a1) * r1).toFixed(1)} ${(50 + Math.cos(a) * r2).toFixed(1)},${(52 + Math.sin(a) * r2).toFixed(1)} ${(50 + Math.cos(a2) * r1).toFixed(1)},${(52 + Math.sin(a2) * r1).toFixed(1)}"/>`;
+    }
+    deco += `<g fill="url(#${id}r)" opacity=".85">${rays}</g>`;
+  }
+  if (t >= 5) deco += `<g fill="url(#${id}w)" stroke="${c2}" stroke-width="1.2">
+      <path d="M17 30 C2 26 -8 38 -9 52 C-2 46 4 46 9 49 C0 52 -4 60 -3 68 C4 61 10 60 15 62 C10 67 9 73 11 79 C16 70 21 66 25 66 Z"/>
+      <path d="M83 30 C98 26 108 38 109 52 C102 46 96 46 91 49 C100 52 104 60 103 68 C96 61 90 60 85 62 C90 67 91 73 89 79 C84 70 79 66 75 66 Z"/></g>`;
+  else if (t >= 3) deco += `<g fill="url(#${id}w)" stroke="${c2}" stroke-width="1.2">
+      <path d="M17 34 C6 34 0 44 2 56 C7 50 12 49 17 50 C11 55 10 62 12 68 C16 62 20 60 24 60 Z"/>
+      <path d="M83 34 C94 34 100 44 98 56 C93 50 88 49 83 50 C89 55 90 62 88 68 C84 62 80 60 76 60 Z"/></g>`;
+  if (t >= 4) deco += `<path d="M33 14 L37 -2 L44 9 L50 -6 L56 9 L63 -2 L67 14 Z" fill="url(#${id}w)" stroke="${c2}" stroke-width="1.2" stroke-linejoin="round"/>`;
+  else if (t >= 1) deco += `<circle cx="50" cy="6" r="${t >= 2 ? 6 : 4.5}" fill="${c3}" stroke="${c2}" stroke-width="1.5"/>`;
+  if (t === 2) deco += `<path d="M16 22 L6 16 L10 30 Z M84 22 L94 16 L90 30 Z" fill="url(#${id}w)" stroke="${c2}" stroke-width="1.2"/>`;
+  const fs = T.jp.length > 1 ? 25 : 36;
+  return `<svg class="emblem ${extra || ""}" width="${size}" height="${size}" viewBox="-12 -12 124 124" aria-label="${T.n}">
+    <defs>
+      <linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c3}"/><stop offset=".45" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
+      <linearGradient id="${id}w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c3}"/><stop offset="1" stop-color="${c1}"/></linearGradient>
+      <radialGradient id="${id}r"><stop offset=".55" stop-color="${c3}"/><stop offset="1" stop-color="${c1}" stop-opacity="0"/></radialGradient>
+    </defs>
+    ${deco}
+    <path d="${shield}" fill="url(#${id}g)" stroke="${c2}" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="${inner}" fill="none" stroke="${c3}" stroke-opacity=".75" stroke-width="1.6"/>
+    <text x="50" y="${T.jp.length > 1 ? 59 : 63}" text-anchor="middle" font-family="'Shippori Mincho', serif" font-weight="800" font-size="${fs}" fill="#fff" stroke="${c2}" stroke-width="1.6" paint-order="stroke">${T.jp}</text>
+  </svg>`;
+}
+function starsHTML(R, anim) {
+  const T = RANK_TIERS[R.t];
+  if (T.mythic) return `<div class="rstars mythic"><span class="rstar on">★</span><b>${R.m}</b></div>`;
+  let h = "";
+  for (let i = 0; i < T.stars; i++) {
+    let cls = i < R.s ? "on" : "";
+    if (anim && anim.gain && i >= anim.from && i < R.s) cls += " gain";
+    if (anim && anim.lose && i === R.s) cls += " lose";
+    h += `<span class="rstar ${cls}">★</span>`;
+  }
+  return `<div class="rstars">${h}</div>`;
+}
+
+/* ---------- mekanik bintang ---------- */
+function rankAddStar(R) {
+  const T = RANK_TIERS[R.t];
+  if (T.mythic) { R.m++; return null; }
+  if (R.s < T.stars) { R.s++; return null; }
+  if (R.di < T.divs - 1) { R.di++; R.s = 1; return "div"; }
+  R.t++; R.di = 0; R.s = 1; R.m = RANK_TIERS[R.t].mythic ? 1 : 0;
+  R.peak = Math.max(R.peak, R.t);
+  return "tier";
+}
+function rankLoseStar(R) {
+  const T = RANK_TIERS[R.t];
+  if (T.safe) return "safe";
+  if (T.mythic) {
+    if (R.m > 0) { R.m--; return null; }
+    R.t--; const P = RANK_TIERS[R.t]; R.di = P.divs - 1; R.s = P.stars - 1; return "down";
+  }
+  if (R.s > 0) { R.s--; return null; }
+  if (R.di > 0) { R.di--; R.s = T.stars - 1; return "div"; }
+  return "floor";
+}
+
+/* ---------- soal Rank Ujian (JLPT & JFT) ---------- */
+const UJ_BANK = (() => {
+  const B = { N5: { r: [], h: [] }, N4: { r: [], h: [] } };
+  ["N5", "N4"].forEach(L => SIM_SETS[L].forEach(set => { B[L].r.push(...set.r); B[L].h.push(...set.h); }));
+  B.N5.c = JFT_BANK.C5; B.N4.c = JFT_BANK.C4; B.E = JFT_BANK.E;
+  return B;
+})();
+function ujSentence(s, ans) {
+  return escHTML(s).replace(/\[(.+?)\]/, (_, w) => `<span class="simu">${ans ? escHTML(ans) : w}</span>`);
+}
+function ujCloze(s, fill) { return escHTML(s).replace("（　）", fill ? `<span class="simu">${escHTML(fill)}</span>` : '<span class="rk-blank">（　　）</span>'); }
+function buildUjianQuestions(t) {
+  const C = UJ_CFG[t], used = new Set(), out = [];
+  const lvl = () => (Math.random() < C.p4 ? "N4" : "N5");
+  const pick = (list) => { const c = shuffle(list).find(q => !used.has(q[0])); if (c) used.add(c[0]); return c; };
+  const mk = (o) => out.push({ type: "ujian", optHTML: Object.fromEntries(o.options.map(x => [x, o.kanjiOpt ? `<span class="kjopt">${escHTML(x)}</span>` : escHTML(x)])), ...o });
+  for (let i = 0; i < C.n.r; i++) { const L = lvl(), q = pick(UJ_BANK[L].r); if (!q) continue;
+    mk({ topic: `JLPT ${L} · もんだい1 漢字読み`, hint: "Bagaimana kata bergaris bawah dibaca?", promptHTML: `<div class="rk-sent">${ujSentence(q[0])}</div>`,
+      correct: q[1], options: shuffle([q[1], ...q[2]]), note: `${ujSentence(q[0])} → <b>${escHTML(q[1])}</b> (${escHTML(q[3])})` }); }
+  for (let i = 0; i < C.n.h; i++) { const L = lvl(), q = pick(UJ_BANK[L].h); if (!q) continue;
+    mk({ topic: `JLPT ${L} · もんだい2 表記`, hint: "Bagaimana kata bergaris bawah ditulis dengan kanji?", promptHTML: `<div class="rk-sent">${ujSentence(q[0])}</div>`,
+      correct: q[1], options: shuffle([q[1], ...q[2]]), kanjiOpt: true, note: `${ujSentence(q[0], q[1])} (${escHTML(q[3])})` }); }
+  for (let i = 0; i < C.n.c; i++) { const L = lvl(), q = pick(UJ_BANK[L].c); if (!q) continue;
+    mk({ topic: `JFT · 漢字の意味と用法 (${L})`, hint: "Pilih kata yang paling tepat untuk （　）.", promptHTML: `<div class="rk-sent">${ujCloze(q[0])}</div>`,
+      correct: q[1], options: shuffle([q[1], ...q[2]]), kanjiOpt: true, note: `${ujCloze(q[0], q[1])} (${escHTML(q[1])} = ${escHTML(q[3])})` }); }
+  for (let i = 0; i < C.n.m; i++) {
+    const L = lvl(), q = pick(UJ_BANK[L].r); if (!q) continue;
+    const ds = []; const seen = new Set([q[3]]);
+    for (const x of shuffle(UJ_BANK[L].r.concat(UJ_BANK[L].h))) { if (ds.length >= 3) break; if (!seen.has(x[3])) { seen.add(x[3]); ds.push(x[3]); } }
+    mk({ topic: `JFT · 語の意味 (${L})`, hint: "Apa arti kata bergaris bawah?", promptHTML: `<div class="rk-sent">${ujSentence(q[0])}</div>`,
+      correct: q[3], options: shuffle([q[3], ...ds]), note: `${ujSentence(q[0])} = <b>${escHTML(q[3])}</b> (dibaca ${escHTML(q[1])})` });
+  }
+  for (let i = 0; i < C.n.e; i++) { const q = pick(UJ_BANK.E); if (!q) continue;
+    mk({ topic: "JFT · 会話と表現", hint: "Pilih ungkapan yang paling tepat untuk （　）.", promptHTML: `<div class="rk-situ">Situasi: ${escHTML(q[0])}</div><div class="rk-sent">${ujCloze(q[1])}</div>`,
+      correct: q[2], options: shuffle([q[2], ...q[3]]), note: `<b>${escHTML(q[2])}</b> = ${escHTML(q[4])}` }); }
+  return shuffle(out);
+}
+
+/* ---------- soal Rank Kotoba ---------- */
+function wordPos(w) {
+  if (w.b === 1 || w.b === 2) return (w.l - 1) / 50;
+  if (w.b === 3) return (w.l - 1) / 18 * 0.33;
+  if (w.b === 4) return 0.33 + (w.l - 1) / 18 * 0.33;
+  return 0.66 + (w.l - 1) / 18 * 0.34;
+}
+function buildKotobaRankQuestions(t) {
+  const C = KT_CFG[t];
+  let lo = C.lo, hi = C.hi, pool = [];
+  for (let k = 0; k < 4 && pool.length < 60; k++) {
+    pool = VOCAB.filter(w => { const p = wordPos(w); return p >= lo && p <= hi && w.jp.length <= 14 && w.a.length <= 70; });
+    lo = Math.max(0, lo - 0.05); hi = Math.min(1, hi + 0.05);
+  }
+  const counts = { ...C.dirs }, total = counts.arti + counts.jp + counts.kana;
+  if (total !== RANK_Q) counts.arti += RANK_Q - total;
+  let out = [], used = new Set();
+  Object.entries(counts).forEach(([d, n]) => {
+    if (!n) return;
+    const src = (d === "kana" ? pool.filter(w => w.hasK) : pool).filter(w => !used.has(w.id));
+    const qs = buildKotobaQuestions(src, d, n, pool);
+    qs.forEach(q => used.add(q.src.id));
+    out.push(...qs);
+  });
+  return shuffle(out).map(q => {
+    const nq = { ...q, topic: `${BOOK_SHORT[q.src.b]} · Pel. ${q.src.l} · ${DIR_META[q.dir].label}` };
+    if (!C.furi) {
+      const strip = (h) => String(h).replace(/<rt>.*?<\/rt>/g, "");
+      nq.promptHTML = strip(nq.promptHTML).replace('class="kanji-big ', 'class="kanji-big noruby ');
+      nq.optHTML = Object.fromEntries(Object.entries(nq.optHTML).map(([k, v]) => [k, strip(v)]));
+    }
+    return nq;
+  });
+}
+
+/* ---------- alur pertandingan ---------- */
+function rankTime(mode, t) { return (mode === "ujian" ? UJ_CFG : KT_CFG)[t].time; }
+function startRankMatch() {
+  clearTimer();
+  const R = curR(), mode = state.rankMode;
+  state.mode = "rank"; state.kWrong = []; state.uWrong = [];
+  state.rankTime = rankTime(mode, R.t);
+  state.rankBefore = { t: R.t, di: R.di, s: R.s, m: R.m, bp: R.bp };
+  state.sessionQuestions = mode === "ujian" ? buildUjianQuestions(R.t) : buildKotobaRankQuestions(R.t);
+  state.idx = 0; state.score = 0; state.correctCount = 0; state.answered = false; state.streak = 0; state.maxStreak = 0;
+  R.live = true; saveSave();
+  state.screen = "quiz"; render();
+  startTimerForCurrentQuestion();
+}
+function finishRankMatch(forfeit) {
+  clearTimer();
+  const R = curR(), mode = state.rankMode, total = state.sessionQuestions.length || RANK_Q;
+  const correct = forfeit ? Math.min(state.correctCount, RANK_WIN - 1) : state.correctCount;
+  const win = !forfeit && correct >= RANK_WIN, perfect = win && correct === total;
+  const res = { win, perfect, forfeit: !!forfeit, correct, total, gained: 0, lost: false, protected: false, promo: null, demo: null, divUps: 0 };
+  const tierBefore = R.t, coinTier = R.t;
+  R.bp = Math.min(BRAVE_MAX, R.bp + correct * BRAVE_PER);
+  if (win) {
+    R.w++; R.tw++; R.ws++; R.bestWs = Math.max(R.bestWs, R.ws);
+    for (let i = 0; i < (perfect ? 2 : 1); i++) {
+      const p = rankAddStar(R); res.gained++;
+      if (p === "div") res.divUps++;
+      if (p === "tier" || (p === "div" && res.promo !== "tier")) res.promo = p;
+    }
+  } else {
+    R.l++; R.tl++; R.ws = 0;
+    const T = RANK_TIERS[R.t];
+    const wouldLose = !T.safe && (T.mythic ? true : (R.s > 0 || R.di > 0));
+    if (wouldLose && R.bp >= BRAVE_MAX) { R.bp -= BRAVE_MAX; res.protected = true; }
+    else { const d = rankLoseStar(R); if (d === "safe") res.safe = true; else if (d === "floor") res.floor = true; else { res.lost = true; if (d) res.demo = d; } }
+  }
+  R.live = false;
+  res.tierUp = R.t > tierBefore;
+  // koin: per jawaban benar ikut tier, ditambah bonus menang, beruntun, naik divisi/tier
+  COIN_PER.rank = rankCoinPer(mode, coinTier);
+  awardQuiz("rank", correct, total);
+  const extra = [];
+  if (win) extra.push(["Menang pertandingan rank", rankWinBonus(coinTier)]);
+  if (win && R.ws >= 2) extra.push([`Menang beruntun ×${R.ws}`, Math.min(R.ws - 1, 5) * 5]);
+  if (res.divUps) extra.push(["Naik divisi", 15 * res.divUps]);
+  if (res.tierUp) extra.push([`Naik ke tier ${RANK_TIERS[R.t].n}`, rankTierBonus(R.t)]);
+  extra.forEach(([, v]) => { SAVE.coins += v; SAVE.earned += v; state.lastReward.sum += v; });
+  state.lastReward.extra = extra;
+  saveSave();
+  state.rankRes = res;
+  state.screen = "rank-result"; render();
+}
+function rankForfeitGuard() {
+  if (!(state.screen === "quiz" && state.mode === "rank")) return false;
+  const ok = window.confirm("Keluar dari pertandingan rank dihitung KALAH. Tetap keluar?");
+  if (!ok) return true;
+  finishRankMatch(true);
+  return true;
+}
+
+/* ---------- tampilan ---------- */
+function rankMiniHTML() {
+  const S = seasonNow();
+  const card = (mode) => {
+    const R = SAVE.ranks[mode], M = RANK_MODES[mode];
+    return `<button class="rankmini" data-rankgo="${mode}">
+      ${emblemSVG(R.t, 44)}
+      <div class="rm-info"><div class="rm-label">${M.jp} ${M.name}</div><div class="rm-name">${rankName(R)}</div>${starsHTML(R)}</div>
+    </button>`;
+  };
+  return `<div class="sectitle">Rank · Musim ${S.id} <span class="rm-days">${S.daysLeft} hari lagi</span></div>
+    <div class="rankduo">${RANK_MODE_KEYS.map(card).join("")}</div>`;
+}
+function rankHTML() {
+  const mode = state.rankMode, M = RANK_MODES[mode], R = curR(), T = RANK_TIERS[R.t], S = seasonNow();
+  const CF = (mode === "ujian" ? UJ_CFG : KT_CFG)[R.t];
+  const games = R.w + R.l, wr = games ? Math.round(R.w / games * 100) : 0;
+  const tt = T.mythic ? tenkaTitle(R.m) : null;
+  const nextTitle = T.mythic ? TENKA_TITLES.slice().reverse().find(x => x[0] > R.m) : null;
+  const sub = T.mythic
+    ? (nextTitle ? `${nextTitle[0] - R.m} bintang lagi menuju ${T.jp}${nextTitle[1]} ${nextTitle[2]}` : "Gelar tertinggi tercapai")
+    : `${T.arti} · Divisi ${ROMAN[T.divs - R.di]} dari ${ROMAN[T.divs]}`;
+  const brave = T.safe
+    ? `<div class="rk-note">Di tier ${T.n} bintang tidak berkurang kalau kalah.</div>`
+    : `<div class="rk-brave"><div class="rk-bh"><span>Poin Semangat</span><b>${R.bp} / ${BRAVE_MAX}</b></div>
+        <div class="minibar"><i style="width:${R.bp}%"></i></div>
+        <div class="rk-note">${R.bp >= BRAVE_MAX ? "Siap! Kekalahan berikutnya tidak mengurangi bintang." : `Dapat ${BRAVE_PER} poin per jawaban benar. Penuh = bintang terlindungi sekali.`}</div></div>`;
+  const tabs = RANK_MODE_KEYS.map(k => {
+    const X = RANK_MODES[k], RR = SAVE.ranks[k];
+    return `<button class="rk-tab ${k === mode ? "on" : ""}" data-rankmode="${k}">${emblemSVG(RR.t, 34)}<span><b>${X.jp} ${X.name}</b><small>${X.sub}</small></span></button>`;
+  }).join("");
+  const ladder = RANK_TIERS.map((X, i) => {
+    const c = (mode === "ujian" ? UJ_CFG : KT_CFG)[i];
+    return `<div class="rk-row ${i === R.t ? "on" : ""}">
+      ${emblemSVG(i, 40)}
+      <div style="flex:1;min-width:0"><b>${X.jp} ${X.n}</b><small>${X.mythic ? "Bintang tanpa batas · gelar 誉 (25★), 極 (50★), 不滅 (100★)" : `${X.divs} divisi × ${X.stars} bintang${X.safe ? " · tidak turun bintang" : ""}`}</small>
+      <small>${c.desc} · ${c.time} dtk/soal · ${rankCoinPer(mode, i)} koin/benar</small></div>
+      <span class="rk-rw"><span class="coin"></span>${SEASON_REWARD[i]}</span></div>`;
+  }).join("");
+  const content = mode === "ujian"
+    ? "Soal gaya JLPT (漢字読み, 表記) dan JFT-Basic (語の意味, 漢字の意味と用法, 会話と表現)."
+    : "Soal kosakata dari MNN I–II dan Irodori. Rank rendah = kata pelajaran awal, rank tinggi = kata pelajaran akhir.";
+  return `
+    <div class="eyebrow">Rank · Musim ${S.id}</div>
+    <div class="rk-tabs">${tabs}</div>
+    <div class="rk-hero tier-${T.k}">
+      <div class="rk-mode">${M.jp} ${M.name}</div>
+      <div class="rk-emb">${emblemSVG(R.t, 128, "float")}</div>
+      <div class="rk-name">${rankName(R)}</div>
+      <div class="rk-sub">${tt && tt[2] ? `Gelar ${tt[2]} · ` : ""}${sub}</div>
+      ${starsHTML(R)}
+      ${brave}
+    </div>
+    <button class="primary rk-play" id="rankPlay">Mulai Pertandingan</button>
+    <div class="rk-rules">${RANK_Q} soal · ${CF.time} detik per soal · menang jika benar ≥ ${RANK_WIN} · ${CF.desc}<br>
+      Hadiah: ${rankCoinPer(mode, R.t)} koin per jawaban benar + ${rankWinBonus(R.t)} koin kalau menang</div>
+    <div class="statrow">
+      <div class="statbox"><b>${R.w}<span class="sep">/</span>${R.l}</b><small>Menang / Kalah</small></div>
+      <div class="statbox"><b>${wr}%</b><small>Win rate</small></div>
+      <div class="statbox"><b>${R.ws}</b><small>Menang beruntun</small></div>
+    </div>
+    <div class="infobox rk-season"><b>Musim ${S.id}</b> berakhir ${S.end.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })} (${S.daysLeft} hari lagi).
+      <p>Hadiah akhir musim ${M.name} sesuai rank tertinggi musim ini (${RANK_TIERS[R.peak].n}): <b class="rk-coin"><span class="coin"></span>${SEASON_REWARD[R.peak]} koin</b>. Kedua mode dapat hadiah masing-masing. Musim baru: rank turun 1 tier (Minarai &amp; Ashigaru tetap).</p></div>
+    <details class="infobox rk-ladder"><summary>Daftar rank &amp; aturan ${M.name}</summary>
+      <p style="margin:6px 0 4px">${content}</p>
+      <ul>
+        <li>Menang (benar ≥ ${RANK_WIN}/${RANK_Q}): +1 bintang. Sempurna ${RANK_Q}/${RANK_Q}: +2 bintang.</li>
+        <li>Kalah: −1 bintang (kecuali Minarai &amp; Ashigaru). Bintang 0 lalu kalah = turun divisi, tapi tidak turun tier (kecuali dari Tenka).</li>
+        <li>Bintang penuh lalu menang = naik divisi / naik tier.</li>
+        <li>Koin: menang beruntun +5 s.d. +25, naik divisi +15, naik tier +${rankTierBonus(1)} s.d. +${rankTierBonus(6)}.</li>
+        <li>Keluar di tengah pertandingan atau menutup aplikasi = dihitung kalah.</li>
+      </ul>
+      <div class="rk-list">${ladder}</div>
+    </details>`;
+}
+function rankResultHTML() {
+  const r = state.rankRes, R = curR(), B = state.rankBefore, M = RANK_MODES[state.rankMode];
+  const head = r.forfeit ? "KELUAR" : r.perfect ? "SEMPURNA" : r.win ? "MENANG" : "KALAH";
+  const anim = r.win ? { gain: true, from: (B.t === R.t && B.di === R.di) ? B.s : 0 } : (r.lost && !r.demo ? { lose: true } : null);
+  const msgs = [];
+  if (r.tierUp) msgs.push(`<div class="rk-promo">Naik tier! Selamat datang di <b>${RANK_TIERS[R.t].jp} ${RANK_TIERS[R.t].n}</b></div>`);
+  else if (r.promo === "div") msgs.push(`<div class="rk-msg up">Naik divisi ke ${rankName(R)}</div>`);
+  if (r.win) msgs.push(`<div class="rk-msg up">+${r.gained} bintang${r.perfect ? " (bonus sempurna)" : ""}</div>`);
+  if (r.protected) msgs.push(`<div class="rk-msg">Poin Semangat melindungi bintangmu</div>`);
+  if (r.safe) msgs.push(`<div class="rk-msg">Tier ${RANK_TIERS[R.t].n} tidak kehilangan bintang</div>`);
+  if (r.floor) msgs.push(`<div class="rk-msg">Sudah di batas bawah tier, bintang tidak berkurang</div>`);
+  if (r.lost) msgs.push(`<div class="rk-msg down">${r.demo === "down" ? `Turun ke ${rankName(R)}` : r.demo === "div" ? `Turun divisi ke ${rankName(R)}` : "−1 bintang"}</div>`);
+  const nWrong = state.rankMode === "ujian" ? state.uWrong.length : state.kWrong.length;
+  return `
+    <div class="eyebrow">Hasil · ${M.jp} ${M.name}</div>
+    <div class="result rk-result ${r.win ? "win" : "lose"}">
+      <div class="rk-head">${head}</div>
+      <div class="rk-score">${r.correct} / ${r.total} benar</div>
+      <div class="rk-emb ${r.tierUp ? "promo" : ""}">${emblemSVG(R.t, 120, r.tierUp ? "pop" : "")}</div>
+      <div class="rk-name">${rankName(R)}</div>
+      ${starsHTML(R, anim)}
+      ${msgs.join("")}
+      ${RANK_TIERS[R.t].safe ? "" : `<div class="rk-bpline">Poin Semangat ${R.bp}/${BRAVE_MAX}</div>`}
+      ${rewardHTML()}
+      <button class="primary" id="rankAgain">Main Lagi</button>
+      ${nWrong ? `<button class="ghost" id="rankReview">Lihat ${nWrong} soal yang salah</button>` : ""}
+      <button class="ghost" id="rankHome">Halaman Rank</button>
+    </div>
+    <div id="rankReviewBox"></div>`;
+}
+function seasonNoticeHTML(n) {
+  const top = Math.max(...n.notes.map(x => x.peak));
+  return `<div class="gacha" id="seasonBox"><div class="gacha-box revealed" style="--rc:${RANK_TIERS[top].col[0]}">
+    <div class="gacha-title">Musim ${n.oldSeason} selesai</div>
+    <div class="gacha-prev">${emblemSVG(top, 100)}</div>
+    ${n.notes.map(x => `<div class="gacha-note" style="margin:4px 0">${RANK_MODES[x.mode].name}: tertinggi <b>${RANK_TIERS[x.peak].n}</b> · <b>+${x.reward} koin</b></div>`).join("")}
+    <div class="gacha-note">Musim ${n.newSeason} dimulai. Rank turun 1 tier.</div>
+    <button class="primary" id="seasonOk">Mulai Musim ${n.newSeason}</button></div></div>`;
+}
+function goRank(mode) { if (RANK_MODES[mode]) state.rankMode = mode; clearTimer(); state.screen = "rank"; render(); }
+function attachRankHandlers() {
+  const $ = (id) => document.getElementById(id);
+  document.querySelectorAll("[data-rankgo]").forEach(b => b.addEventListener("click", () => goRank(b.dataset.rankgo)));
+  document.querySelectorAll("[data-rankmode]").forEach(b => b.addEventListener("click", () => { state.rankMode = b.dataset.rankmode; render(); }));
+  if ($("rankPlay")) $("rankPlay").addEventListener("click", startRankMatch);
+  if ($("rankAgain")) $("rankAgain").addEventListener("click", startRankMatch);
+  if ($("rankHome")) $("rankHome").addEventListener("click", () => goRank());
+  if ($("rankReview")) $("rankReview").addEventListener("click", () => {
+    $("rankReview").remove();
+    const rows = state.rankMode === "ujian"
+      ? state.uWrong.map(q => `<div class="rk-rev"><small>${escHTML(q.topic)}</small><div>${q.note}</div></div>`).join("")
+      : state.kWrong.map(w => `<div class="kjex"><span class="forceruby">${rubyHTML(w)}</span><small>${escHTML(w.a)}</small></div>`).join("");
+    $("rankReviewBox").innerHTML = `<div class="infobox"><b>Soal yang salah</b>${rows}</div>`;
+  });
+  if ($("seasonOk")) $("seasonOk").addEventListener("click", () => { state.seasonNotice = null; render(); });
+}
+function rankBoot() {
+  if (!SAVE.ranks) SAVE.ranks = freshRanks();
+  RANK_MODE_KEYS.forEach(mode => {
+    const R = SAVE.ranks[mode];
+    if (R.live) { R.live = false; R.l++; R.tl++; R.ws = 0; rankLoseStar(R); }   // aplikasi ditutup saat bertanding
+  });
+  saveSave();
+  checkSeason();
+}
+Object.assign(state, { rankMode: "ujian", uWrong: [] });
 
 /* =========================================================================
    V2 — KOIN, TOKO GACHA, KOLEKSI, KOSMETIK, SIMPAN PROGRES
    ========================================================================= */
-const APP_VERSION = "2.1.0";
+const APP_VERSION = "2.3.0";
 const SAVE_KEY = "nihongoStudy.save.v1";   // JANGAN diganti saat update, supaya progres murid tidak hilang
 const RAR = {
   c: { name: "Common",   w: 50,  refund: 5 },
@@ -2649,11 +3195,12 @@ let SAVE = null;
 function freshSave() {
   return { v: 1, coins: 100, earned: 0, quizzes: 0, pulls: 0, streak: 0, lastDay: "", theme: null, pity: {},
     owned: { warna: [], tampilan: [], icon: [], bg: [] },
-    eq: { warna: "default", tampilan: "default", icon: "default", bg: "default" } };
+    eq: { warna: "default", tampilan: "default", icon: "default", bg: "default" }, ranks: freshRanks() };
 }
 function sanitizeSave(p) {
   const s = freshSave();
   if (!p || typeof p !== "object") return s;
+  s.ranks = sanitizeRanks(p);
   ["coins", "earned", "quizzes", "pulls", "streak"].forEach(k => { if (Number.isFinite(p[k]) && p[k] >= 0) s[k] = Math.floor(p[k]); });
   if (typeof p.lastDay === "string") s.lastDay = p.lastDay;
   if (p.theme === "dark" || p.theme === "light") s.theme = p.theme;
@@ -2691,7 +3238,7 @@ function ownedTotal() { return CHEST_KEYS.reduce((a, k) => a + ownedIn(k), 0); }
 function isOwned(cat, id) { return id === "default" || SAVE.owned[cat].includes(id); }
 
 /* ---------- koin dari kuis ---------- */
-const COIN_PER = { kotoba: 2, kbook: 2, speed: 3, sim: 5 };
+const COIN_PER = { kotoba: 2, kbook: 2, speed: 3, sim: 5, rank: 3 };
 function awardQuiz(kind, correct, total) {
   const per = COIN_PER[kind] || 2, base = correct * per, pct = total ? correct / total : 0;
   let bonus = 0, bonusLabel = "";
@@ -2722,6 +3269,7 @@ function rewardHTML() {
       <li><span>Jawaban benar ${r.correct} × ${r.per}</span><b>+${r.base}</b></li>
       ${r.bonus ? `<li><span>Bonus: ${r.bonusLabel}</span><b>+${r.bonus}</b></li>` : ""}
       ${r.daily ? `<li><span>Bonus harian (hari ke-${SAVE.streak})</span><b>+${r.daily}</b></li>` : ""}
+      ${(r.extra || []).map(([l, v]) => `<li><span>${l}</span><b>+${v}</b></li>`).join("")}
     </ul></div>`;
 }
 
@@ -2835,6 +3383,7 @@ function mainMenuHTML() {
       <div class="statbox"><b>${curStreak()}</b><small>Hari beruntun</small></div>
       <div class="statbox"><b>${fmtNum(SAVE.quizzes)}</b><small>Kuis selesai</small></div>
     </div>
+    ${rankMiniHTML()}
     ${welcome}
     <div class="sectitle">Belajar</div>
     <div class="category-grid">${tilesHTML}</div>
@@ -2852,11 +3401,12 @@ function mainMenuHTML() {
         <div class="minilabel">Koleksi ${ownedTotal()} / ${TOTAL_ITEMS}</div>
       </div>
     </button>
-    <div class="footer-note">Progres &amp; koin tersimpan di perangkat ini · v${APP_VERSION}</div>`;
+    <div class="footer-note">Progres &amp; koin tersimpan di perangkat ini · v${APP_VERSION}</div>
+    ${state.seasonNotice ? seasonNoticeHTML(state.seasonNotice) : ""}`;
 }
 function bottomNavHTML() {
-  if (!["main-menu", "shop", "inventory"].includes(state.screen)) return "";
-  const tabs = [["main-menu", "学", "Belajar"], ["shop", "店", "Toko"], ["inventory", "蔵", "Koleksi"]];
+  if (!["main-menu", "rank", "shop", "inventory"].includes(state.screen)) return "";
+  const tabs = [["main-menu", "学", "Belajar"], ["rank", "戦", "Rank"], ["shop", "店", "Toko"], ["inventory", "蔵", "Koleksi"]];
   return `<nav class="bottomnav">${tabs.map(([k, m, l]) => `<button class="navbtn ${state.screen === k ? "on" : ""}" data-nav="${k}"><span>${m}</span>${l}</button>`).join("")}</nav>`;
 }
 function goShop() { clearTimer(); state.screen = "shop"; render(); }
@@ -3014,7 +3564,7 @@ function attachShopHandlers() {
   const keepY = (fn) => () => { const y = window.scrollY; fn(); render(); window.scrollTo(0, y); };
   document.querySelectorAll("[data-nav]").forEach(b => b.addEventListener("click", () => {
     const k = b.dataset.nav;
-    if (k === "shop") goShop(); else if (k === "inventory") goInventory(); else goMainMenu();
+    if (k === "shop") goShop(); else if (k === "inventory") goInventory(); else if (k === "rank") goRank(); else goMainMenu();
   }));
   if ($("btnCoins") && !$("btnCoins").classList.contains("static")) $("btnCoins").addEventListener("click", goShop);
   if ($("homeShop")) $("homeShop").addEventListener("click", goShop);
@@ -3045,6 +3595,7 @@ if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
 }
 
+rankBoot();
 loadPrefs();
 jLoadPrefs();
 render();
