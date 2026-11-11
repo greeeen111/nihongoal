@@ -1,0 +1,17 @@
+{
+  "name": "Nihongo Study",
+  "short_name": "Nihongo",
+  "description": "Latihan Kotoba & Kanji bahasa Jepang (MNN I–II, Irodori) dengan kuis, simulasi JLPT, dan koleksi hadiah.",
+  "lang": "id",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F6F3EC",
+  "theme_color": "#2F4C6B",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
