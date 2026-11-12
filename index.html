@@ -3321,7 +3321,7 @@ Object.assign(state, { dokLv: "N5", dokList: [] });
 /* =========================================================================
    V2 — KOIN, TOKO GACHA, KOLEKSI, KOSMETIK, SIMPAN PROGRES
    ========================================================================= */
-const APP_VERSION = "2.5.4";
+const APP_VERSION = "2.5.5";
 const SAVE_KEY = "nihongoStudy.save.v1";   // JANGAN diganti saat update, supaya progres murid tidak hilang
 const RAR = {
   c: { name: "Common",   w: 50,  refund: 5 },
@@ -3903,6 +3903,26 @@ function deviceRedeemed() {
 function markDeviceRedeemed(id) {
   try { localStorage.setItem("nihongoStudy.redeemed.v1", JSON.stringify([...new Set([...deviceRedeemed(), id])])); } catch (e) { /* abaikan */ }
 }
+/* kode khusus guru untuk review: buka semua item + rank maks; cadangan progres asli disimpan agar bisa dikembalikan */
+const REVIEW_BK = "nihongoStudy.reviewBackup.v1";
+function reviewUnlock() {
+  if (PREVIEW) endTry(false);
+  try { if (!localStorage.getItem(REVIEW_BK)) localStorage.setItem(REVIEW_BK, JSON.stringify(SAVE)); } catch (e) { /* abaikan */ }
+  CHEST_KEYS.forEach(k => { SAVE.owned[k] = CHESTS[k].items.map(i => i.id); });
+  RANK_MODE_KEYS.forEach(k => { const R = SAVE.ranks[k]; R.t = RANK_TIERS.length - 1; R.di = 0; R.s = 0; R.m = Math.max(R.m, 100); R.peak = R.t; R.live = false; });
+  saveSave();
+  return { ok: true, msg: "Mode review aktif: semua item terbuka dan kedua rank jadi Mythical Immortal. Progres asli sudah dicadangkan." };
+}
+function reviewRestore() {
+  let bk = null;
+  try { bk = localStorage.getItem(REVIEW_BK); } catch (e) { /* abaikan */ }
+  if (!bk) return { ok: false, msg: "Tidak ada cadangan mode review di perangkat ini." };
+  if (PREVIEW) endTry(false);
+  try { SAVE = sanitizeSave(JSON.parse(bk)); } catch (e) { return { ok: false, msg: "Cadangan rusak, tidak bisa dikembalikan." }; }
+  saveSave();
+  try { localStorage.removeItem(REVIEW_BK); } catch (e) { /* abaikan */ }
+  return { ok: true, msg: "Progres dikembalikan ke kondisi sebelum mode review." };
+}
 function redeemHash(code) {
   let h = 0x811c9dc5;
   for (const b of new TextEncoder().encode("ns-salt|" + code)) { h ^= b; h = Math.imul(h, 0x01000193) >>> 0; }
@@ -3911,7 +3931,10 @@ function redeemHash(code) {
 function redeemCode(raw) {
   const code = String(raw || "").toUpperCase().replace(/[\s-]/g, "");
   if (!code) return { ok: false, msg: "Masukkan kode dulu." };
-  const hit = REDEEM_CODES.find(c => c.h === redeemHash(code));
+  const ah = redeemHash(code);
+  if (ah === "eccc76eb") return reviewUnlock();
+  if (ah === "48120083") return reviewRestore();
+  const hit = REDEEM_CODES.find(c => c.h === ah);
   if (!hit) return { ok: false, msg: "Kode tidak dikenal. Cek lagi penulisannya." };
   if (SAVE.redeemed.includes(hit.id) || deviceRedeemed().includes(hit.id)) return { ok: false, msg: "Kode ini sudah pernah dipakai dan tidak bisa dipakai lagi." };
   SAVE.redeemed.push(hit.id); markDeviceRedeemed(hit.id); SAVE.coins += hit.coins; SAVE.earned += hit.coins; saveSave();
