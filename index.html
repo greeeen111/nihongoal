@@ -895,6 +895,13 @@ body.focus .emblem.float{ animation:none; }
 .rk-msg.up{ color:var(--moss); } .rk-msg.down{ color:var(--seal); }
 .rk-bpline{ font-size:12px; color:var(--muted); margin:6px 0 14px; }
 .rk-result .reward{ margin-top:14px; }
+.redeembox{ margin-bottom:12px; }
+.redeemrow{ display:flex; gap:8px; margin-top:8px; }
+.redeemrow input{ flex:1; min-width:0; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--ink); padding:10px 12px; font-size:15px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; font-family:inherit; }
+.redeemrow input:focus{ outline:2px solid var(--indigo); outline-offset:1px; }
+.redeemrow button.primary{ margin-top:0; width:auto; padding:10px 18px; }
+.redeemmsg{ margin-top:8px; font-size:13px; font-weight:700; }
+.redeemmsg.ok{ color:var(--moss); } .redeemmsg.ng{ color:var(--seal); }
 </style>
 </head>
 <body>
@@ -2632,15 +2639,15 @@ const JFT_BANK = {"C5": [["まいあさ コーヒーを （　）。", "飲み�
      • Rank Kotoba : kosakata 5 buku; makin tinggi rank, kata makin sulit & waktu makin singkat
    ========================================================================= */
 const RANK_TIERS = [
-  { k: "minarai",  jp: "見習", n: "Minarai",  arti: "Murid magang",     divs: 3, stars: 3, safe: true,  col: ["#B7C0CA", "#5E6873", "#EEF1F4"] },
-  { k: "ashigaru", jp: "足軽", n: "Ashigaru", arti: "Prajurit",         divs: 3, stars: 4, safe: true,  col: ["#6FB3D2", "#24617F", "#DDF2FB"] },
-  { k: "samurai",  jp: "侍",   n: "Samurai",  arti: "Kesatria",         divs: 4, stars: 4, col: ["#E0AE45", "#8A5A12", "#FFF0C7"] },
-  { k: "hatamoto", jp: "旗本", n: "Hatamoto", arti: "Pengawal panji",   divs: 5, stars: 5, col: ["#2FB59B", "#0F5E4C", "#CFF5EA"] },
-  { k: "daimyo",   jp: "大名", n: "Daimyō",   arti: "Penguasa wilayah", divs: 5, stars: 5, col: ["#8B6CF0", "#3E2496", "#E6DDFF"] },
-  { k: "shogun",   jp: "将軍", n: "Shōgun",   arti: "Panglima",         divs: 5, stars: 5, col: ["#E5484D", "#86141D", "#FFD9D9"] },
-  { k: "tenka",    jp: "天下", n: "Tenka",    arti: "Penguasa negeri",  mythic: true,       col: ["#FFC93C", "#B4235A", "#FFF6CF"] },
+  { k: "minarai",  jp: "戦", n: "Warrior",     arti: "Pejuang",     divs: 3, stars: 3, safe: true,  col: ["#B7C0CA", "#5E6873", "#EEF1F4"] },
+  { k: "ashigaru", jp: "精", n: "Elite",       arti: "Pasukan elit",         divs: 3, stars: 4, safe: true,  col: ["#6FB3D2", "#24617F", "#DDF2FB"] },
+  { k: "samurai",  jp: "師", n: "Master",      arti: "Ahli",         divs: 4, stars: 4, col: ["#E0AE45", "#8A5A12", "#FFF0C7"] },
+  { k: "hatamoto", jp: "匠", n: "Grandmaster", arti: "Ahli agung",   divs: 5, stars: 5, col: ["#2FB59B", "#0F5E4C", "#CFF5EA"] },
+  { k: "daimyo",   jp: "英", n: "Epic",        arti: "Pahlawan", divs: 5, stars: 5, col: ["#8B6CF0", "#3E2496", "#E6DDFF"] },
+  { k: "shogun",   jp: "伝", n: "Legend",      arti: "Legenda",         divs: 5, stars: 5, col: ["#E5484D", "#86141D", "#FFD9D9"] },
+  { k: "tenka",    jp: "神", n: "Mythic",      arti: "Mitos",  mythic: true,       col: ["#FFC93C", "#B4235A", "#FFF6CF"] },
 ];
-const TENKA_TITLES = [[100, "不滅", "Fumetsu"], [50, "極", "Kiwami"], [25, "誉", "Homare"], [0, "", ""]];
+const TENKA_TITLES = [[100, "", "Mythical Immortal"], [50, "", "Mythical Glory"], [25, "", "Mythical Honor"], [0, "", "Mythic"]];
 const RANK_MODES = {
   ujian:  { name: "Rank Ujian",  jp: "試", sub: "Simulasi JLPT & JFT" },
   kotoba: { name: "Rank Kotoba", jp: "言", sub: "Kosakata 5 buku" },
@@ -2713,7 +2720,7 @@ function checkSeason() {
     if (R.season >= now) return;
     oldSeason = R.season;
     const played = R.w + R.l > 0, reward = played ? SEASON_REWARD[R.peak] : 0, peak = R.peak;
-    const nt = R.t >= 2 ? (RANK_TIERS[R.t].mythic ? 5 : R.t - 1) : R.t;   // turun 1 tier (Minarai & Ashigaru tetap)
+    const nt = R.t >= 2 ? (RANK_TIERS[R.t].mythic ? 5 : R.t - 1) : R.t;   // turun 1 tier (Warrior & Elite tetap)
     R.t = nt; R.di = 0; R.s = 0; R.m = 0; R.peak = nt; R.w = 0; R.l = 0; R.ws = 0; R.season = now;
     SAVE.coins += reward; SAVE.earned += reward;
     if (played) notes.push({ mode, peak, reward });
@@ -2726,8 +2733,8 @@ function checkSeason() {
 function tenkaTitle(m) { return TENKA_TITLES.find(x => m >= x[0]); }
 function rankName(R) {
   const T = RANK_TIERS[R.t];
-  if (T.mythic) { const tt = tenkaTitle(R.m); return `${T.jp} ${T.n}${tt[1] ? " " + tt[1] : ""}`; }
-  return `${T.jp} ${T.n} ${ROMAN[T.divs - R.di]}`;
+  if (T.mythic) return tenkaTitle(R.m)[2];
+  return `${T.n} ${ROMAN[T.divs - R.di]}`;
 }
 let EMB_ID = 0;
 function emblemSVG(t, size, extra) {
@@ -2953,7 +2960,7 @@ function rankHTML() {
   const tt = T.mythic ? tenkaTitle(R.m) : null;
   const nextTitle = T.mythic ? TENKA_TITLES.slice().reverse().find(x => x[0] > R.m) : null;
   const sub = T.mythic
-    ? (nextTitle ? `${nextTitle[0] - R.m} bintang lagi menuju ${T.jp}${nextTitle[1]} ${nextTitle[2]}` : "Gelar tertinggi tercapai")
+    ? (nextTitle ? `${nextTitle[0] - R.m} bintang lagi menuju ${nextTitle[2]}` : "Gelar tertinggi tercapai")
     : `${T.arti} · Divisi ${ROMAN[T.divs - R.di]} dari ${ROMAN[T.divs]}`;
   const brave = T.safe
     ? `<div class="rk-note">Di tier ${T.n} bintang tidak berkurang kalau kalah.</div>`
@@ -2968,7 +2975,7 @@ function rankHTML() {
     const c = (mode === "ujian" ? UJ_CFG : KT_CFG)[i];
     return `<div class="rk-row ${i === R.t ? "on" : ""}">
       ${emblemSVG(i, 40)}
-      <div style="flex:1;min-width:0"><b>${X.jp} ${X.n}</b><small>${X.mythic ? "Bintang tanpa batas · gelar 誉 (25★), 極 (50★), 不滅 (100★)" : `${X.divs} divisi × ${X.stars} bintang${X.safe ? " · tidak turun bintang" : ""}`}</small>
+      <div style="flex:1;min-width:0"><b>${X.jp} ${X.n}</b><small>${X.mythic ? "Bintang tanpa batas · Mythical Honor (25★), Glory (50★), Immortal (100★)" : `${X.divs} divisi × ${X.stars} bintang${X.safe ? " · tidak turun bintang" : ""}`}</small>
       <small>${c.desc} · ${c.time} dtk/soal · ${rankCoinPer(mode, i)} koin/benar</small></div>
       <span class="rk-rw"><span class="coin"></span>${SEASON_REWARD[i]}</span></div>`;
   }).join("");
@@ -2982,7 +2989,7 @@ function rankHTML() {
       <div class="rk-mode">${M.jp} ${M.name}</div>
       <div class="rk-emb">${emblemSVG(R.t, 128, "float")}</div>
       <div class="rk-name">${rankName(R)}</div>
-      <div class="rk-sub">${tt && tt[2] ? `Gelar ${tt[2]} · ` : ""}${sub}</div>
+      <div class="rk-sub">${sub}</div>
       ${starsHTML(R)}
       ${brave}
     </div>
@@ -2995,12 +3002,12 @@ function rankHTML() {
       <div class="statbox"><b>${R.ws}</b><small>Menang beruntun</small></div>
     </div>
     <div class="infobox rk-season"><b>Musim ${S.id}</b> berakhir ${S.end.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })} (${S.daysLeft} hari lagi).
-      <p>Hadiah akhir musim ${M.name} sesuai rank tertinggi musim ini (${RANK_TIERS[R.peak].n}): <b class="rk-coin"><span class="coin"></span>${SEASON_REWARD[R.peak]} koin</b>. Kedua mode dapat hadiah masing-masing. Musim baru: rank turun 1 tier (Minarai &amp; Ashigaru tetap).</p></div>
+      <p>Hadiah akhir musim ${M.name} sesuai rank tertinggi musim ini (${RANK_TIERS[R.peak].n}): <b class="rk-coin"><span class="coin"></span>${SEASON_REWARD[R.peak]} koin</b>. Kedua mode dapat hadiah masing-masing. Musim baru: rank turun 1 tier (Warrior &amp; Elite tetap).</p></div>
     <details class="infobox rk-ladder"><summary>Daftar rank &amp; aturan ${M.name}</summary>
       <p style="margin:6px 0 4px">${content}</p>
       <ul>
         <li>Menang (benar ≥ ${RANK_WIN}/${RANK_Q}): +1 bintang. Sempurna ${RANK_Q}/${RANK_Q}: +2 bintang.</li>
-        <li>Kalah: −1 bintang (kecuali Minarai &amp; Ashigaru). Bintang 0 lalu kalah = turun divisi, tapi tidak turun tier (kecuali dari Tenka).</li>
+        <li>Kalah: −1 bintang (kecuali Warrior &amp; Elite). Bintang 0 lalu kalah = turun divisi, tapi tidak turun tier (kecuali dari Mythic).</li>
         <li>Bintang penuh lalu menang = naik divisi / naik tier.</li>
         <li>Koin: menang beruntun +5 s.d. +25, naik divisi +15, naik tier +${rankTierBonus(1)} s.d. +${rankTierBonus(6)}.</li>
         <li>Keluar di tengah pertandingan atau menutup aplikasi = dihitung kalah.</li>
@@ -3013,7 +3020,7 @@ function rankResultHTML() {
   const head = r.forfeit ? "KELUAR" : r.perfect ? "SEMPURNA" : r.win ? "MENANG" : "KALAH";
   const anim = r.win ? { gain: true, from: (B.t === R.t && B.di === R.di) ? B.s : 0 } : (r.lost && !r.demo ? { lose: true } : null);
   const msgs = [];
-  if (r.tierUp) msgs.push(`<div class="rk-promo">Naik tier! Selamat datang di <b>${RANK_TIERS[R.t].jp} ${RANK_TIERS[R.t].n}</b></div>`);
+  if (r.tierUp) msgs.push(`<div class="rk-promo">Naik tier! Selamat datang di <b>${RANK_TIERS[R.t].n}</b></div>`);
   else if (r.promo === "div") msgs.push(`<div class="rk-msg up">Naik divisi ke ${rankName(R)}</div>`);
   if (r.win) msgs.push(`<div class="rk-msg up">+${r.gained} bintang${r.perfect ? " (bonus sempurna)" : ""}</div>`);
   if (r.protected) msgs.push(`<div class="rk-msg">Poin Semangat melindungi bintangmu</div>`);
@@ -3078,7 +3085,7 @@ Object.assign(state, { rankMode: "ujian", uWrong: [] });
 /* =========================================================================
    V2 — KOIN, TOKO GACHA, KOLEKSI, KOSMETIK, SIMPAN PROGRES
    ========================================================================= */
-const APP_VERSION = "2.3.0";
+const APP_VERSION = "2.3.3";
 const SAVE_KEY = "nihongoStudy.save.v1";   // JANGAN diganti saat update, supaya progres murid tidak hilang
 const RAR = {
   c: { name: "Common",   w: 50,  refund: 5 },
@@ -3195,12 +3202,13 @@ let SAVE = null;
 function freshSave() {
   return { v: 1, coins: 100, earned: 0, quizzes: 0, pulls: 0, streak: 0, lastDay: "", theme: null, pity: {},
     owned: { warna: [], tampilan: [], icon: [], bg: [] },
-    eq: { warna: "default", tampilan: "default", icon: "default", bg: "default" }, ranks: freshRanks() };
+    eq: { warna: "default", tampilan: "default", icon: "default", bg: "default" }, ranks: freshRanks(), redeemed: [] };
 }
 function sanitizeSave(p) {
   const s = freshSave();
   if (!p || typeof p !== "object") return s;
   s.ranks = sanitizeRanks(p);
+  if (Array.isArray(p.redeemed)) s.redeemed = p.redeemed.filter(x => typeof x === "string").slice(0, 200);
   ["coins", "earned", "quizzes", "pulls", "streak"].forEach(k => { if (Number.isFinite(p[k]) && p[k] >= 0) s[k] = Math.floor(p[k]); });
   if (typeof p.lastDay === "string") s.lastDay = p.lastDay;
   if (p.theme === "dark" || p.theme === "light") s.theme = p.theme;
@@ -3216,6 +3224,7 @@ function loadSave() {
   let p = null;
   try { p = JSON.parse(localStorage.getItem(SAVE_KEY) || "null"); } catch (e) { /* abaikan */ }
   SAVE = sanitizeSave(p);
+  SAVE.redeemed = [...new Set([...SAVE.redeemed, ...deviceRedeemed()])];
   if (SAVE.theme) state.theme = SAVE.theme;
 }
 function saveSave() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(SAVE)); } catch (e) { /* penyimpanan tidak tersedia */ } }
@@ -3223,7 +3232,9 @@ function exportCode() { return "NS1." + btoa(unescape(encodeURIComponent(JSON.st
 function importCode(code) {
   code = String(code || "").trim();
   if (!code.startsWith("NS1.")) return false;
+  const prevRedeemed = SAVE ? SAVE.redeemed : [];
   try { SAVE = sanitizeSave(JSON.parse(decodeURIComponent(escape(atob(code.slice(4)))))); } catch (e) { return false; }
+  SAVE.redeemed = [...new Set([...prevRedeemed, ...SAVE.redeemed, ...deviceRedeemed()])];   // kode redeem yang sudah dipakai tetap tercatat
   if (SAVE.theme) state.theme = SAVE.theme;
   saveSave(); return true;
 }
@@ -3409,8 +3420,36 @@ function bottomNavHTML() {
   const tabs = [["main-menu", "学", "Belajar"], ["rank", "戦", "Rank"], ["shop", "店", "Toko"], ["inventory", "蔵", "Koleksi"]];
   return `<nav class="bottomnav">${tabs.map(([k, m, l]) => `<button class="navbtn ${state.screen === k ? "on" : ""}" data-nav="${k}"><span>${m}</span>${l}</button>`).join("")}</nav>`;
 }
-function goShop() { clearTimer(); state.screen = "shop"; render(); }
+function goShop() { clearTimer(); state.redeemMsg = null; state.screen = "shop"; render(); }
 function goInventory(tab) { clearTimer(); if (tab) state.invTab = tab; state.screen = "inventory"; render(); }
+
+/* ---------- kode redeem ----------
+   Kode disimpan sebagai hash, bukan teks asli. Tiap kode hanya bisa dipakai sekali per perangkat
+   dan hanya menambah koin (progres lain tidak berubah). */
+const REDEEM_CODES = [
+  { id: "r500a", h: "57d81e00", coins: 500 },
+];
+/* catatan kode terpakai per perangkat, terpisah dari data progres (tidak ikut tertimpa saat memulihkan cadangan) */
+function deviceRedeemed() {
+  try { const a = JSON.parse(localStorage.getItem("nihongoStudy.redeemed.v1") || "[]"); return Array.isArray(a) ? a.filter(x => typeof x === "string") : []; } catch (e) { return []; }
+}
+function markDeviceRedeemed(id) {
+  try { localStorage.setItem("nihongoStudy.redeemed.v1", JSON.stringify([...new Set([...deviceRedeemed(), id])])); } catch (e) { /* abaikan */ }
+}
+function redeemHash(code) {
+  let h = 0x811c9dc5;
+  for (const b of new TextEncoder().encode("ns-salt|" + code)) { h ^= b; h = Math.imul(h, 0x01000193) >>> 0; }
+  return h.toString(16).padStart(8, "0");
+}
+function redeemCode(raw) {
+  const code = String(raw || "").toUpperCase().replace(/[\s-]/g, "");
+  if (!code) return { ok: false, msg: "Masukkan kode dulu." };
+  const hit = REDEEM_CODES.find(c => c.h === redeemHash(code));
+  if (!hit) return { ok: false, msg: "Kode tidak dikenal. Cek lagi penulisannya." };
+  if (SAVE.redeemed.includes(hit.id) || deviceRedeemed().includes(hit.id)) return { ok: false, msg: "Kode ini sudah pernah dipakai dan tidak bisa dipakai lagi." };
+  SAVE.redeemed.push(hit.id); markDeviceRedeemed(hit.id); SAVE.coins += hit.coins; SAVE.earned += hit.coins; saveSave();
+  return { ok: true, msg: `Berhasil! +${fmtNum(hit.coins)} koin masuk ke saldo.` };
+}
 
 /* ---------- toko ---------- */
 function oddsHTML(key) {
@@ -3446,12 +3485,18 @@ function shopHTML() {
     <div class="sub">Buka chest untuk dapat item acak, dari Common sampai Legend. Item dipasang lewat menu Koleksi.</div>
     <div class="balance"><span class="coin lg"></span><b>${fmtNum(SAVE.coins)}</b> koin</div>
     ${rows}
+    <div class="infobox redeembox"><b>Kode Redeem</b>
+      <p>Punya kode dari guru? Tukarkan di sini untuk dapat koin.</p>
+      <div class="redeemrow"><input id="redeemIn" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Masukkan kode" maxlength="40"><button class="primary" id="redeemBtn">Tukar</button></div>
+      ${state.redeemMsg ? `<div class="redeemmsg ${state.redeemMsg.ok ? "ok" : "ng"}">${escHTML(state.redeemMsg.msg)}</div>` : ""}
+    </div>
     <div class="infobox"><b>Cara dapat koin</b>
       <ul>
         <li>Kuis Kotoba &amp; Kanji per bab: 2 koin per jawaban benar</li>
         <li>Mode Kecepatan: 3 koin per jawaban benar</li>
         <li>Simulasi JLPT: 5 koin per jawaban benar, +20 kalau lulus, +40 kalau sempurna</li>
         <li>Kuis 10 soal ke atas: +10 kalau nilai ≥ 80%, +25 kalau sempurna</li>
+        <li>Pertandingan Rank: 4–11 koin per jawaban benar (makin tinggi rank makin besar), +20 s.d. +50 kalau menang, bonus menang beruntun, naik divisi &amp; naik tier</li>
         <li>Kuis pertama tiap hari: bonus harian +20</li>
       </ul>
     </div>`;
@@ -3578,6 +3623,11 @@ function attachShopHandlers() {
     const st = SETS[Number(b.dataset.set)];
     SAVE.eq.warna = st.w; SAVE.eq.tampilan = st.t; SAVE.eq.bg = st.b; saveSave();
   })));
+  if ($("redeemBtn")) {
+    const go = () => { state.redeemMsg = redeemCode($("redeemIn").value); const y = window.scrollY; render(); window.scrollTo(0, y); };
+    $("redeemBtn").addEventListener("click", go);
+    $("redeemIn").addEventListener("keydown", (e) => { if (e.key === "Enter") go(); });
+  }
   if ($("bkCopy")) $("bkCopy").addEventListener("click", () => {
     const t = $("bkOut"); t.select();
     const done = () => { $("bkMsg").textContent = "Kode disalin."; };
