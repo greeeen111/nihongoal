@@ -12,7 +12,7 @@
 <link rel="icon" href="icon-192.png">
 <meta name="description" content="Latihan Kanji, Kotoba, Bunpo, dan Dokkai N5/N4.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@400;500;700;900&family=DotGothic16&display=swap" rel="stylesheet">
 <style>
 /* =========================================================================
    Nihongo Study — design tokens
@@ -21,6 +21,7 @@
    moments and a stamp-card motif for level progress.
    ========================================================================= */
 :root{
+  --f-head:'Zen Maru Gothic', 'Zen Kaku Gothic New', sans-serif; --f-body:'Zen Maru Gothic', 'Zen Kaku Gothic New', sans-serif;
   --bg:#F6F3EC;
   --card:#FFFDF8;
   --ink:#201E1B;
@@ -66,7 +67,7 @@ body, .qcard, .card, .flashface{ transition: background-color .25s ease, border-
 }
 html,body{
   margin:0; padding:0; background:var(--bg); color:var(--ink);
-  font-family:'Zen Kaku Gothic New', sans-serif;
+  font-family:var(--f-body);
   -webkit-tap-highlight-color: transparent;
 }
 #app{
@@ -75,7 +76,7 @@ html,body{
   display:flex; flex-direction:column;
   padding: 18px 18px 48px;
 }
-h1,h2,h3{ font-family:'Shippori Mincho', serif; margin:0; }
+h1,h2,h3{ font-family:var(--f-head); margin:0; }
 a{ color:var(--indigo); }
 button{ font-family:inherit; }
 
@@ -85,7 +86,7 @@ button{ font-family:inherit; }
   margin-bottom:14px;
 }
 .brand{
-  font-family:'Shippori Mincho', serif; font-weight:700; font-size:19px;
+  font-family:var(--f-head); font-weight:700; font-size:19px;
 }
 .brand .jp{ color:var(--indigo); font-size:13px; letter-spacing:0.1em; display:block; margin-bottom:1px; }
 .backbtn{
@@ -105,7 +106,7 @@ button{ font-family:inherit; }
 
 /* ---------- Main menu (top level) ---------- */
 .hero{ text-align:center; margin: 10px 0 22px; }
-.hero .kanji-mark{ font-family:'Shippori Mincho', serif; font-size:34px; color:var(--indigo); margin-bottom:4px; }
+.hero .kanji-mark{ font-family:var(--f-head); font-size:34px; color:var(--indigo); margin-bottom:4px; }
 .hero h1{ font-size:24px; margin-bottom:6px; }
 .hero p{ color:var(--muted); font-size:13.5px; max-width:320px; margin:0 auto; line-height:1.5; }
 
@@ -120,7 +121,7 @@ button{ font-family:inherit; }
 }
 .category-tile:active{ transform: scale(0.98); }
 .category-tile .catmark{
-  font-family:'Shippori Mincho', serif; font-size:30px; font-weight:700;
+  font-family:var(--f-head); font-size:30px; font-weight:700;
   width:48px; height:48px; border-radius:12px;
   display:flex; align-items:center; justify-content:center;
   background:var(--bg); border:1px solid var(--line);
@@ -146,7 +147,7 @@ button{ font-family:inherit; }
   align-items:center; justify-content:center; gap:10px;
 }
 .comingsoon .mark{
-  font-family:'Shippori Mincho', serif; font-size:44px; color:var(--muted);
+  font-family:var(--f-head); font-size:44px; color:var(--muted);
   width:80px; height:80px; border-radius:50%; border:1.5px dashed var(--line);
   display:flex; align-items:center; justify-content:center; margin-bottom:6px;
 }
@@ -170,7 +171,7 @@ button{ font-family:inherit; }
   width:46px; height:46px; border-radius:50%;
   border:2px dashed var(--line);
   display:flex; align-items:center; justify-content:center;
-  font-family:'Shippori Mincho', serif; font-weight:700; font-size:15px;
+  font-family:var(--f-head); font-weight:700; font-size:15px;
   color:var(--line); flex-shrink:0; position:relative;
 }
 .stampslot.done{
@@ -179,7 +180,7 @@ button{ font-family:inherit; }
 }
 .stampslot.current{ border-color:var(--indigo); color:var(--indigo); border-style:solid; }
 .stampcard .label{ font-size:13px; color:var(--muted); line-height:1.5; }
-.stampcard .label strong{ color:var(--ink); font-family:'Shippori Mincho', serif; font-size:15px; display:block; }
+.stampcard .label strong{ color:var(--ink); font-family:var(--f-head); font-size:15px; display:block; }
 
 /* ---------- Home menu ---------- */
 .modecard{
@@ -195,7 +196,7 @@ button{ font-family:inherit; }
 .modecard .icon{
   width:44px; height:44px; border-radius:12px; flex-shrink:0;
   display:flex; align-items:center; justify-content:center;
-  font-family:'Shippori Mincho', serif; font-size:22px; font-weight:700;
+  font-family:var(--f-head); font-size:22px; font-weight:700;
   background:var(--bg); border:1px solid var(--line); color:var(--indigo);
 }
 .modecard h3{ font-size:17px; margin-bottom:3px; }
@@ -217,10 +218,10 @@ button{ font-family:inherit; }
 .levelrow .num{
   width:38px; height:38px; border-radius:50%; flex-shrink:0;
   display:flex; align-items:center; justify-content:center;
-  font-family:'Shippori Mincho', serif; font-weight:700; font-size:16px;
+  font-family:var(--f-head); font-weight:700; font-size:16px;
   background:var(--bg); border:1px solid var(--line); color:var(--indigo);
 }
-.levelrow h4{ font-size:15px; margin:0 0 2px; font-family:'Shippori Mincho', serif; }
+.levelrow h4{ font-size:15px; margin:0 0 2px; font-family:var(--f-head); }
 .levelrow p{ margin:0; font-size:12.5px; color:var(--muted); line-height:1.4; }
 .levelrow.locked{ opacity:0.55; cursor:not-allowed; }
 .levelrow .lockicon{ margin-left:auto; color:var(--muted); font-size:18px; }
@@ -253,14 +254,14 @@ button{ font-family:inherit; }
 }
 .qcard::before{
   content:"問"; position:absolute; top:-14px; right:-6px;
-  font-family:'Shippori Mincho', serif; font-size:110px; color:var(--indigo);
+  font-family:var(--f-head); font-size:110px; color:var(--indigo);
   opacity:0.05; line-height:1; pointer-events:none;
 }
 .section-tag{
   font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
   color:var(--seal); margin-bottom:10px;
 }
-.kanji-big{ font-family:'Shippori Mincho', serif; font-size:56px; font-weight:700; line-height:1.1; margin:4px 0 6px; }
+.kanji-big{ font-family:var(--f-head); font-size:56px; font-weight:700; line-height:1.1; margin:4px 0 6px; }
 .q-desc{ font-size:17px; line-height:1.55; font-weight:500; margin:4px 0 6px; }
 .q-hint{ color:var(--muted); font-size:13.5px; margin-bottom:16px; }
 
@@ -291,7 +292,7 @@ button{ font-family:inherit; }
 .stamp{
   position:absolute; top:18px; right:18px; width:64px; height:64px; border-radius:50%;
   border:3px solid var(--seal); color:var(--seal); display:flex; align-items:center; justify-content:center;
-  font-family:'Shippori Mincho', serif; font-weight:700; font-size:24px;
+  font-family:var(--f-head); font-weight:700; font-size:24px;
   opacity:0; transform:scale(1.6) rotate(-18deg); pointer-events:none;
 }
 .stamp.pop{ animation: stampIn .38s cubic-bezier(.2,1.4,.4,1) forwards; }
@@ -340,10 +341,10 @@ button.ghost{
   padding:20px; text-align:center;
 }
 .flashface .topic{ position:absolute; top:14px; left:32px; font-size:11px; color:var(--muted); letter-spacing:0.06em; text-transform:uppercase; }
-.flashface .kanji{ font-family:'Shippori Mincho', serif; font-size:46px; font-weight:700; }
+.flashface .kanji{ font-family:var(--f-head); font-size:46px; font-weight:700; }
 .flashface .prompttext{ font-size:16px; line-height:1.5; }
 .flashface.back{ transform: rotateY(180deg); }
-.flashface .reading{ font-family:'Shippori Mincho', serif; font-size:26px; margin-bottom:6px; }
+.flashface .reading{ font-family:var(--f-head); font-size:26px; margin-bottom:6px; }
 .flashface .meaning{ font-size:14px; color:var(--muted); }
 .flashhint{ text-align:center; font-size:12px; color:var(--muted); margin-top:10px; }
 .flashnav{ display:flex; gap:10px; margin-top:14px; }
@@ -358,7 +359,7 @@ button.ghost{
 .result .bigstamp{
   width:120px; height:120px; border-radius:50%; border:4px solid var(--seal); color:var(--seal);
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  margin:0 auto 18px; transform: rotate(-8deg); font-family:'Shippori Mincho', serif;
+  margin:0 auto 18px; transform: rotate(-8deg); font-family:var(--f-head);
 }
 .result .bigstamp.amber{ border-color:var(--amber); color:var(--amber-dark); }
 .result .bigstamp .score-num{ font-size:34px; font-weight:700; line-height:1; }
@@ -367,7 +368,7 @@ button.ghost{
 .result p{ color:var(--muted); font-size:14px; margin:0 0 20px; line-height:1.6; }
 .breakdown{ display:flex; justify-content:center; gap:18px; margin-bottom:22px; flex-wrap:wrap; }
 .breakdown div{ font-size:13px; color:var(--muted); }
-.breakdown strong{ display:block; font-size:20px; color:var(--ink); font-family:'Shippori Mincho', serif; }
+.breakdown strong{ display:block; font-size:20px; color:var(--ink); font-family:var(--f-head); }
 .passbadge{
   display:inline-block; margin-bottom:14px; padding:5px 14px; border-radius:999px;
   font-size:12.5px; font-weight:700; letter-spacing:0.04em;
@@ -414,7 +415,7 @@ body.nofuri ruby rt{ display:none; }
 .chip{
   padding:11px 0; border:1.5px solid var(--line); border-radius:12px; background:var(--card);
   color:var(--ink); font-size:15px; font-weight:700; cursor:pointer;
-  font-family:'Shippori Mincho', serif;
+  font-family:var(--f-head);
 }
 .chip.on{ background:var(--indigo); border-color:var(--indigo); color:var(--bg); }
 .rangerow{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:12px; font-size:13.5px; color:var(--muted); }
@@ -435,7 +436,7 @@ body.nofuri ruby rt{ display:none; }
 .topbar-actions .backbtn{ padding:6px 11px; }
 
 /* ---- kanji dari buku & simulasi ---- */
-.kjopt{ font-family:'Shippori Mincho', serif; font-size:20px; }
+.kjopt{ font-family:var(--f-head); font-size:20px; }
 .kjback{ text-align:left; justify-content:flex-start; padding-top:34px; overflow:auto; }
 .kjrow{ display:flex; gap:10px; font-size:14px; margin:4px 0; width:100%; }
 .kjrow b{ min-width:38px; color:var(--indigo); }
@@ -492,7 +493,7 @@ body.nofuri ruby rt{ display:none; }
   font-size:18px; width:1em; height:1em; border-radius:50%;
   background:radial-gradient(circle at 35% 30%, #FFE9A0, #E9B62F 60%, #C48A12); border:1px solid #B07A0C;
 }
-.coin::before{ content:"円"; font-family:'Shippori Mincho', serif; font-size:.58em; font-weight:700; color:#7A5200; line-height:1; }
+.coin::before{ content:"円"; font-family:var(--f-head); font-size:.58em; font-weight:700; color:#7A5200; line-height:1; }
 .coin.lg{ font-size:28px; }
 
 /* ---- beranda ---- */
@@ -515,12 +516,12 @@ body.nofuri ruby rt{ display:none; }
 }
 @keyframes ringGlow{ from{ box-shadow:0 0 4px rgba(245,158,11,.35); } to{ box-shadow:0 0 16px rgba(245,158,11,.8); } }
 .pf-hello{ font-size:12px; color:var(--indigo); letter-spacing:.08em; font-weight:700; }
-.pf-title{ font-family:'Shippori Mincho', serif; font-size:21px; font-weight:700; margin:1px 0 4px; }
+.pf-title{ font-family:var(--f-head); font-size:21px; font-weight:700; margin:1px 0 4px; }
 .pf-daily{ font-size:12.5px; color:var(--amber-dark); line-height:1.4; }
 .pf-daily.done{ color:var(--moss); }
 .statrow{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px; }
 .statbox{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px 6px 10px; text-align:center; }
-.statbox b{ display:flex; align-items:center; justify-content:center; gap:6px; font-size:21px; font-family:'Shippori Mincho', serif; font-variant-numeric:tabular-nums; }
+.statbox b{ display:flex; align-items:center; justify-content:center; gap:6px; font-size:21px; font-family:var(--f-head); font-variant-numeric:tabular-nums; }
 .statbox small{ color:var(--muted); font-size:11.5px; }
 .sectitle{ font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:4px 2px 10px; }
 .category-tile{ min-height:132px; padding:16px 14px; color:var(--ink); }
@@ -546,7 +547,7 @@ body.nofuri ruby rt{ display:none; }
   flex:1; background:none; border:none; border-radius:12px; padding:6px 4px 5px; cursor:pointer;
   display:flex; flex-direction:column; align-items:center; gap:2px; font-size:11.5px; font-weight:700; color:var(--muted);
 }
-.navbtn span{ font-family:'Shippori Mincho', serif; font-size:20px; line-height:1.15; }
+.navbtn span{ font-family:var(--f-head); font-size:20px; line-height:1.15; }
 .navbtn.on{ color:var(--indigo); background:color-mix(in srgb, var(--indigo) 12%, transparent); }
 
 /* ---- hadiah di layar hasil ---- */
@@ -554,8 +555,8 @@ body.nofuri ruby rt{ display:none; }
   border:1.5px solid #E9B62F; background:color-mix(in srgb, #F4C63D 14%, var(--card)); border-radius:14px;
   padding:12px 14px; margin:0 0 18px; text-align:left;
 }
-.reward .rw-top{ display:flex; align-items:center; gap:8px; font-family:'Shippori Mincho', serif; font-size:20px; font-weight:700; color:var(--ink); }
-.reward .rw-top small{ margin-left:auto; font-family:'Zen Kaku Gothic New', sans-serif; font-size:12px; font-weight:500; color:var(--muted); }
+.reward .rw-top{ display:flex; align-items:center; gap:8px; font-family:var(--f-head); font-size:20px; font-weight:700; color:var(--ink); }
+.reward .rw-top small{ margin-left:auto; font-family:var(--f-body); font-size:12px; font-weight:500; color:var(--muted); }
 .reward ul{ margin:8px 0 0; padding:0; list-style:none; font-size:12.5px; color:var(--muted); line-height:1.7; }
 .reward li{ display:flex; justify-content:space-between; gap:10px; }
 .reward li b{ color:var(--ink); font-variant-numeric:tabular-nums; }
@@ -565,7 +566,7 @@ body.nofuri ruby rt{ display:none; }
   display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--line); border-radius:14px;
   padding:12px 16px; margin-bottom:14px; font-size:14px; color:var(--muted);
 }
-.balance b{ font-family:'Shippori Mincho', serif; font-size:26px; color:var(--ink); font-variant-numeric:tabular-nums; }
+.balance b{ font-family:var(--f-head); font-size:26px; color:var(--ink); font-variant-numeric:tabular-nums; }
 .shopcard{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; margin-bottom:12px; }
 .shop-top{ display:flex; gap:16px; align-items:center; }
 .shop-info{ flex:1; min-width:0; }
@@ -582,7 +583,7 @@ body.nofuri ruby rt{ display:none; }
 .oddsitem .pv{ width:20px; height:20px; font-size:12px; border-width:1.5px; }
 .oddsnote{ font-size:11.5px; color:var(--muted); line-height:1.5; margin-top:4px; }
 .infobox{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-top:6px; font-size:13px; line-height:1.6; color:var(--ink); }
-.infobox b{ font-family:'Shippori Mincho', serif; font-size:15px; }
+.infobox b{ font-family:var(--f-head); font-size:15px; }
 .infobox ul{ margin:6px 0 0; padding-left:18px; color:var(--muted); }
 .infobox summary{ cursor:pointer; font-weight:700; }
 .infobox textarea{ width:100%; margin:8px 0 6px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--ink); padding:8px; font-family:monospace; font-size:11px; resize:vertical; }
@@ -628,7 +629,7 @@ body.nofuri ruby rt{ display:none; }
 .gacha-title{ font-size:13px; color:var(--muted); }
 .gacha-rar{ font-size:12px; font-weight:900; letter-spacing:.18em; text-transform:uppercase; color:var(--rc); }
 .gacha-prev{ display:flex; justify-content:center; margin:14px 0 10px; }
-.gacha-name{ font-family:'Shippori Mincho', serif; font-size:22px; font-weight:700; }
+.gacha-name{ font-family:var(--f-head); font-size:22px; font-weight:700; }
 .gacha-note{ font-size:13px; color:var(--muted); margin:6px 0 16px; line-height:1.5; }
 .gacha-note b{ color:var(--moss); }
 .gacha-box button.ghost{ display:flex; align-items:center; justify-content:center; gap:8px; }
@@ -643,8 +644,8 @@ body.nofuri ruby rt{ display:none; }
 .uiprev-card{ width:70%; height:62%; display:flex; align-items:center; justify-content:center; background:var(--card); border:1px solid var(--line); border-radius:6px; font-style:normal; font-weight:700; font-size:.6em; color:var(--ink); }
 
 /* ---- koleksi ---- */
-.invtabs{ display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:14px; }
-.invtabs .segbtn{ padding:9px 2px; font-size:12.5px; }
+.invtabs{ display:grid; grid-template-columns:repeat(5,1fr); gap:5px; margin-bottom:14px; }
+.invtabs .segbtn{ padding:9px 1px; font-size:11.5px; }
 .invtabs .segbtn small{ display:block; font-size:10.5px; color:var(--muted); font-weight:500; }
 .invgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:16px; }
 .invitem{
@@ -671,15 +672,15 @@ button.primary{ background:var(--accent-bg, var(--indigo)); color:var(--on-accen
 /* ---- TAMPILAN: gaya kartu & tombol ---- */
 .uiscope{
   --c-radius:14px; --b-radius:12px; --c-bw:1px; --c-bs:solid; --c-bc:var(--line); --c-shadow:none;
-  --c-bg:var(--card); --c-filter:none; --b-shadow:none; font-family:'Zen Kaku Gothic New', sans-serif;
+  --c-bg:var(--card); --c-filter:none; --b-shadow:none; font-family:var(--f-body);
 }
 .ui-bulat{ --c-radius:26px; --b-radius:999px; }
 .ui-kotak{ --c-radius:3px; --b-radius:3px; }
 .ui-tegas{ --c-bw:2px; --c-bc:var(--ink); }
 .ui-putus{ --c-bs:dashed; --c-bw:1.5px; --c-bc:var(--muted); }
 .ui-lembut{ --c-bc:transparent; --c-shadow:0 6px 20px rgba(0,0,0,.09); --c-radius:18px; }
-.ui-mincho{ --c-radius:8px; --b-radius:8px; font-family:'Shippori Mincho', serif; }
-.ui-maru{ --c-radius:22px; --b-radius:18px; font-family:'Zen Maru Gothic', 'Zen Kaku Gothic New', sans-serif; }
+.ui-mincho{ --c-radius:8px; --b-radius:8px; --f-head:'Shippori Mincho', serif; --f-body:'Shippori Mincho', serif; }
+.ui-maru{ --c-radius:22px; --b-radius:18px; }
 .ui-aksen{ --c-shadow:inset 5px 0 0 var(--indigo); --c-radius:10px; }
 .ui-kaca{ --c-bg:color-mix(in srgb, var(--card) 55%, transparent); --c-filter:blur(12px) saturate(1.4); --c-bc:color-mix(in srgb, var(--ink) 16%, transparent); --c-shadow:0 8px 24px rgba(0,0,0,.08); --c-radius:18px; }
 .ui-brutal{ --c-bw:2px; --c-bc:var(--ink); --c-shadow:4px 4px 0 var(--ink); --c-radius:8px; --b-radius:8px; --b-shadow:3px 3px 0 var(--ink); }
@@ -734,7 +735,7 @@ button.primary.amber{ color:var(--on-amber, #fff); }
 .ui-bento :is(.statbox,.category-tile):nth-child(4n+4), .ui-bento :is(.modecard,.levelrow,.shopcard):nth-of-type(4n+4){ background:color-mix(in srgb, var(--seal) 13%, var(--card)); }
 
 /* ---- kombinasi siap pakai ---- */
-.setbtn{ width:100%; margin-bottom:14px; padding:10px; }
+.setbtn{ width:100%; margin-bottom:14px; padding:10px; flex:none; }
 .setbtn small{ display:block; font-size:10.5px; color:var(--muted); font-weight:500; }
 .setpv{ display:flex; flex-shrink:0; }
 .setpv .pv{ width:40px; height:40px; margin-left:-10px; box-shadow:0 0 0 2px var(--card); }
@@ -828,7 +829,7 @@ body.focus .emblem.float{ animation:none; }
 }
 .rankmini .rm-info{ flex:1; min-width:0; }
 .rm-label{ font-size:10.5px; font-weight:700; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.rm-name{ font-family:'Shippori Mincho', serif; font-size:13.5px; font-weight:700; margin:1px 0 2px; line-height:1.25; }
+.rm-name{ font-family:var(--f-head); font-size:13.5px; font-weight:700; margin:1px 0 2px; line-height:1.25; }
 .rankmini .rstar{ font-size:12px; }
 .rm-days{ float:right; letter-spacing:0; text-transform:none; font-weight:600; }
 .rk-tabs{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px; }
@@ -838,7 +839,7 @@ body.focus .emblem.float{ animation:none; }
 .rk-tab span{ min-width:0; }
 .rk-tab.on{ border-color:var(--indigo); box-shadow:0 0 0 2px var(--indigo); }
 .rk-mode{ font-size:11.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--indigo); }
-.rk-sent{ font-size:19px; line-height:1.9; margin:6px 0 4px; font-family:'Zen Kaku Gothic New', sans-serif; }
+.rk-sent{ font-size:19px; line-height:1.9; margin:6px 0 4px; font-family:var(--f-body); }
 .rk-situ{ font-size:12.5px; color:var(--muted); font-weight:700; margin-top:4px; }
 .rk-blank{ display:inline-block; min-width:3.2em; border-bottom:2px solid var(--indigo); color:var(--indigo); text-align:center; }
 .rk-rev{ border-top:1px dashed var(--line); padding:8px 0; font-size:14px; line-height:1.7; }
@@ -851,7 +852,7 @@ body.focus .emblem.float{ animation:none; }
 .rstar.lose{ animation:starLose 1s ease both; animation-delay:.5s; }
 @keyframes starGain{ 0%{ transform:scale(0) rotate(-90deg); opacity:0; } 100%{ transform:scale(1); opacity:1; } }
 @keyframes starLose{ 0%{ color:#F5B301; transform:scale(1.3); } 100%{ transform:scale(1); } }
-.rstars.mythic{ gap:6px; font-family:'Shippori Mincho', serif; font-size:18px; }
+.rstars.mythic{ gap:6px; font-family:var(--f-head); font-size:18px; }
 .rk-hero{
   position:relative; text-align:center; background:var(--card); border:1px solid var(--line); border-radius:20px;
   padding:14px 18px 18px; margin-bottom:12px; overflow:hidden;
@@ -861,7 +862,7 @@ body.focus .emblem.float{ animation:none; }
 .tier-minarai{ --tc:#B7C0CA; } .tier-ashigaru{ --tc:#6FB3D2; } .tier-samurai{ --tc:#E0AE45; } .tier-hatamoto{ --tc:#2FB59B; }
 .tier-daimyo{ --tc:#8B6CF0; } .tier-shogun{ --tc:#E5484D; } .tier-tenka{ --tc:#FFC93C; }
 .rk-emb{ display:flex; justify-content:center; padding:6px 0 2px; }
-.rk-name{ font-family:'Shippori Mincho', serif; font-size:26px; font-weight:800; }
+.rk-name{ font-family:var(--f-head); font-size:26px; font-weight:800; }
 .rk-sub{ font-size:12.5px; color:var(--muted); margin:2px 0 8px; }
 .rk-hero .rstars, .rk-result .rstars{ justify-content:center; }
 .rk-hero .rstar, .rk-result .rstar{ font-size:26px; }
@@ -883,7 +884,7 @@ body.focus .emblem.float{ animation:none; }
 .rk-row small{ display:block; font-size:11.5px; color:var(--muted); line-height:1.4; }
 .rk-rw{ display:flex; align-items:center; gap:4px; font-size:12px; font-weight:700; white-space:nowrap; }
 .rk-rw .coin{ font-size:13px; }
-.rk-result .rk-head{ font-family:'Shippori Mincho', serif; font-size:40px; font-weight:900; letter-spacing:.08em; line-height:1.1; }
+.rk-result .rk-head{ font-family:var(--f-head); font-size:40px; font-weight:900; letter-spacing:.08em; line-height:1.1; }
 .rk-result.win .rk-head{ background:linear-gradient(100deg, #F59E0B, #FFD54A, #F59E0B); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .rk-result.lose .rk-head{ color:var(--muted); }
 .rk-score{ font-size:14px; color:var(--muted); margin-bottom:6px; }
@@ -1028,6 +1029,179 @@ body.focus.ui-hw-jaring :is(.profile,.shopbanner)::after{ animation:none !import
 :root:not([data-theme="dark"]) body.ui-hw-jaring .bottomnav{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%2364748B' stroke-width='1.2' stroke-linecap='round' opacity='0.4'%3E%3Cpath d='M0 0 L140.0 0.0 M0 0 L135.2 36.2 M0 0 L121.2 70.0 M0 0 L99.0 99.0 M0 0 L70.0 121.2 M0 0 L36.2 135.2 M0 0 L0.0 140.0 '/%3E%3Cpath d='M16.0 0.0 Q12.9 1.7 15.5 4.1 Q12.0 5.0 13.9 8.0 Q10.3 7.9 11.3 11.3 Q7.9 10.3 8.0 13.9 Q5.0 12.0 4.1 15.5 Q1.7 12.9 0.0 16.0 M30.0 0.0 Q24.2 3.2 29.0 7.8 Q22.5 9.3 26.0 15.0 Q19.3 14.8 21.2 21.2 Q14.8 19.3 15.0 26.0 Q9.3 22.5 7.8 29.0 Q3.2 24.2 0.0 30.0 M46.0 0.0 Q37.1 4.9 44.4 11.9 Q34.6 14.3 39.8 23.0 Q29.7 22.8 32.5 32.5 Q22.8 29.7 23.0 39.8 Q14.3 34.6 11.9 44.4 Q4.9 37.1 0.0 46.0 M64.0 0.0 Q51.6 6.8 61.8 16.6 Q48.1 19.9 55.4 32.0 Q41.3 31.7 45.3 45.3 Q31.7 41.3 32.0 55.4 Q19.9 48.1 16.6 61.8 Q6.8 51.6 0.0 64.0 M84.0 0.0 Q67.7 8.9 81.1 21.7 Q63.1 26.1 72.7 42.0 Q54.2 41.6 59.4 59.4 Q41.6 54.2 42.0 72.7 Q26.1 63.1 21.7 81.1 Q8.9 67.7 0.0 84.0 M106.0 0.0 Q85.4 11.2 102.4 27.4 Q79.6 33.0 91.8 53.0 Q68.4 52.5 75.0 75.0 Q52.5 68.4 53.0 91.8 Q33.0 79.6 27.4 102.4 Q11.2 85.4 0.0 106.0 '/%3E%3C/g%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg transform='translate(120 0) scale(-1 1)' fill='none' stroke='%2364748B' stroke-width='1.2' stroke-linecap='round' opacity='0.4'%3E%3Cpath d='M0 0 L140.0 0.0 M0 0 L135.2 36.2 M0 0 L121.2 70.0 M0 0 L99.0 99.0 M0 0 L70.0 121.2 M0 0 L36.2 135.2 M0 0 L0.0 140.0 '/%3E%3Cpath d='M16.0 0.0 Q12.9 1.7 15.5 4.1 Q12.0 5.0 13.9 8.0 Q10.3 7.9 11.3 11.3 Q7.9 10.3 8.0 13.9 Q5.0 12.0 4.1 15.5 Q1.7 12.9 0.0 16.0 M30.0 0.0 Q24.2 3.2 29.0 7.8 Q22.5 9.3 26.0 15.0 Q19.3 14.8 21.2 21.2 Q14.8 19.3 15.0 26.0 Q9.3 22.5 7.8 29.0 Q3.2 24.2 0.0 30.0 M46.0 0.0 Q37.1 4.9 44.4 11.9 Q34.6 14.3 39.8 23.0 Q29.7 22.8 32.5 32.5 Q22.8 29.7 23.0 39.8 Q14.3 34.6 11.9 44.4 Q4.9 37.1 0.0 46.0 M64.0 0.0 Q51.6 6.8 61.8 16.6 Q48.1 19.9 55.4 32.0 Q41.3 31.7 45.3 45.3 Q31.7 41.3 32.0 55.4 Q19.9 48.1 16.6 61.8 Q6.8 51.6 0.0 64.0 M84.0 0.0 Q67.7 8.9 81.1 21.7 Q63.1 26.1 72.7 42.0 Q54.2 41.6 59.4 59.4 Q41.6 54.2 42.0 72.7 Q26.1 63.1 21.7 81.1 Q8.9 67.7 0.0 84.0 M106.0 0.0 Q85.4 11.2 102.4 27.4 Q79.6 33.0 91.8 53.0 Q68.4 52.5 75.0 75.0 Q52.5 68.4 53.0 91.8 Q33.0 79.6 27.4 102.4 Q11.2 85.4 0.0 106.0 '/%3E%3C/g%3E%3C/svg%3E"); background-position:left top, right top; background-size:46px 46px; background-repeat:no-repeat; }
 
 @media (max-width:700px){ .bg-hw-kuburteal{ background-size:auto 58vh, auto, auto, auto; } .bg-hw-kuburungu{ background-size:auto 58vh, auto, auto, auto; } .bg-hw-kunang{ background-size:auto 56vh, auto, auto, auto; } .bg-hw-rumahhantu{ background-size:auto 50vh, auto, auto, auto; } }
+
+
+/* ---------- TEMA PIXEL / DUNIA BLOK ---------- */
+.bg-pxpapan{ background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2732%27 height=%2732%27 shape-rendering=%27crispEdges%27%3E%3Crect width=%2716%27 height=%2716%27 fill=%27rgba%28128%2C128%2C128%2C.07%29%27/%3E%3Crect x=%2716%27 y=%2716%27 width=%2716%27 height=%2716%27 fill=%27rgba%28128%2C128%2C128%2C.07%29%27/%3E%3C/svg%3E"); background-size:32px 32px; image-rendering:pixelated; }
+.bg-pxawan{ background:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27240%27 height=%27160%27 shape-rendering=%27crispEdges%27%3E%3Cg opacity=%27.85%27%3E%3Crect x=%2732%27 y=%2724%27 width=%2736%27 height=%276%27 fill=%27%23fff%27/%3E%3Crect x=%2720%27 y=%2730%27 width=%2760%27 height=%276%27 fill=%27%23fff%27/%3E%3Crect x=%2720%27 y=%2736%27 width=%2760%27 height=%276%27 fill=%27%23fff%27/%3E%3Crect x=%2726%27 y=%2742%27 width=%2748%27 height=%276%27 fill=%27%23fff%27/%3E%3Crect x=%27150%27 y=%2796%27 width=%2730%27 height=%275%27 fill=%27%23fff%27/%3E%3Crect x=%27140%27 y=%27101%27 width=%2750%27 height=%275%27 fill=%27%23fff%27/%3E%3Crect x=%27140%27 y=%27106%27 width=%2750%27 height=%275%27 fill=%27%23fff%27/%3E%3Crect x=%27145%27 y=%27111%27 width=%2740%27 height=%275%27 fill=%27%23fff%27/%3E%3C/g%3E%3C/svg%3E") 0 0 / 240px 160px repeat, linear-gradient(180deg, rgba(110,175,240,.30), rgba(110,175,240,.08) 80%); }
+.bg-pxbukit{ background:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27160%27 height=%2790%27 shape-rendering=%27crispEdges%27%3E%3Cg opacity=%27.5%27%3E%3Crect x=%270%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%272%27 y=%2785%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%270%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%270%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%270%27 y=%2767%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2710%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2712%27 y=%2785%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2710%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2710%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2710%27 y=%2767%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2720%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2720%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2722%27 y=%2775%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2720%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2722%27 y=%2762%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2720%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2720%27 y=%2757%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2730%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2730%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2732%27 y=%2772%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2730%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2730%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2730%27 y=%2757%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2740%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2740%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2745%27 y=%2772%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2740%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2740%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2742%27 y=%2755%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2740%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2740%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2750%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2752%27 y=%2785%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2750%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2750%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2750%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2752%27 y=%2755%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2750%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2750%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2760%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2762%27 y=%2782%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2760%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2760%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2765%27 y=%2765%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2760%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2765%27 y=%2755%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2760%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2760%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2770%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2772%27 y=%2782%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2770%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2775%27 y=%2775%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2770%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2770%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2770%27 y=%2757%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2780%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2780%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2782%27 y=%2772%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2780%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2780%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2780%27 y=%2757%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2790%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2795%27 y=%2782%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2790%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2790%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2790%27 y=%2767%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%27100%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27102%27 y=%2785%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%27100%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27105%27 y=%2775%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%27100%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%27100%27 y=%2767%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%27110%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27110%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%27110%27 y=%2777%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%27120%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27122%27 y=%2785%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%27120%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%27120%27 y=%2777%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%27130%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27132%27 y=%2782%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%27130%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%27130%27 y=%2777%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%27140%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27140%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27145%27 y=%2775%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%27140%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%27140%27 y=%2767%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%27150%27 y=%2780%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27150%27 y=%2770%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27150%27 y=%2760%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%27150%27 y=%2767%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3C/g%3E%3C/svg%3E") 0 100% / 160px 90px repeat-x, url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27240%27 height=%27160%27 shape-rendering=%27crispEdges%27%3E%3Cg opacity=%27.85%27%3E%3Crect x=%2732%27 y=%2724%27 width=%2736%27 height=%276%27 fill=%27%23fff%27/%3E%3Crect x=%2720%27 y=%2730%27 width=%2760%27 height=%276%27 fill=%27%23fff%27/%3E%3Crect x=%2720%27 y=%2736%27 width=%2760%27 height=%276%27 fill=%27%23fff%27/%3E%3Crect x=%2726%27 y=%2742%27 width=%2748%27 height=%276%27 fill=%27%23fff%27/%3E%3Crect x=%27150%27 y=%2796%27 width=%2730%27 height=%275%27 fill=%27%23fff%27/%3E%3Crect x=%27140%27 y=%27101%27 width=%2750%27 height=%275%27 fill=%27%23fff%27/%3E%3Crect x=%27140%27 y=%27106%27 width=%2750%27 height=%275%27 fill=%27%23fff%27/%3E%3Crect x=%27145%27 y=%27111%27 width=%2740%27 height=%275%27 fill=%27%23fff%27/%3E%3C/g%3E%3C/svg%3E") 0 0 / 240px 160px repeat, linear-gradient(180deg, rgba(110,175,240,.26), rgba(110,175,240,.06) 85%); }
+.bg-pxmalam{ background:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27160%27 height=%2790%27 shape-rendering=%27crispEdges%27%3E%3Crect x=%270%27 y=%2760%27 width=%2710%27 height=%2730%27 fill=%27%2314213D%27/%3E%3Crect x=%2710%27 y=%2760%27 width=%2710%27 height=%2730%27 fill=%27%2314213D%27/%3E%3Crect x=%2720%27 y=%2750%27 width=%2710%27 height=%2740%27 fill=%27%2314213D%27/%3E%3Crect x=%2730%27 y=%2750%27 width=%2710%27 height=%2740%27 fill=%27%2314213D%27/%3E%3Crect x=%2740%27 y=%2740%27 width=%2710%27 height=%2750%27 fill=%27%2314213D%27/%3E%3Crect x=%2750%27 y=%2740%27 width=%2710%27 height=%2750%27 fill=%27%2314213D%27/%3E%3Crect x=%2760%27 y=%2740%27 width=%2710%27 height=%2750%27 fill=%27%2314213D%27/%3E%3Crect x=%2770%27 y=%2750%27 width=%2710%27 height=%2740%27 fill=%27%2314213D%27/%3E%3Crect x=%2780%27 y=%2750%27 width=%2710%27 height=%2740%27 fill=%27%2314213D%27/%3E%3Crect x=%2790%27 y=%2760%27 width=%2710%27 height=%2730%27 fill=%27%2314213D%27/%3E%3Crect x=%27100%27 y=%2760%27 width=%2710%27 height=%2730%27 fill=%27%2314213D%27/%3E%3Crect x=%27110%27 y=%2770%27 width=%2710%27 height=%2720%27 fill=%27%2314213D%27/%3E%3Crect x=%27120%27 y=%2770%27 width=%2710%27 height=%2720%27 fill=%27%2314213D%27/%3E%3Crect x=%27130%27 y=%2770%27 width=%2710%27 height=%2720%27 fill=%27%2314213D%27/%3E%3Crect x=%27140%27 y=%2760%27 width=%2710%27 height=%2730%27 fill=%27%2314213D%27/%3E%3Crect x=%27150%27 y=%2760%27 width=%2710%27 height=%2730%27 fill=%27%2314213D%27/%3E%3C/svg%3E") 0 100% / 160px 90px repeat-x, url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2760%27 height=%2760%27 shape-rendering=%27crispEdges%27%3E%3Crect x=%2710%27 y=%2710%27 width=%2740%27 height=%2740%27 fill=%27%23F4F1DE%27/%3E%3Crect x=%2716%27 y=%2716%27 width=%278%27 height=%278%27 fill=%27%23D8D3B8%27/%3E%3Crect x=%2732%27 y=%2730%27 width=%2710%27 height=%2710%27 fill=%27%23D8D3B8%27/%3E%3C/svg%3E") 82% 8% / 60px 60px no-repeat, url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27200%27 height=%27200%27 shape-rendering=%27crispEdges%27%3E%3Crect x=%275%27 y=%27118%27 width=%273%27 height=%273%27 fill=%27%23fff%27 opacity=%270.6%27/%3E%3Crect x=%27156%27 y=%2729%27 width=%272%27 height=%272%27 fill=%27%23fff%27 opacity=%270.6%27/%3E%3Crect x=%2755%27 y=%27196%27 width=%272%27 height=%272%27 fill=%27%23fff%27 opacity=%270.6%27/%3E%3Crect x=%27189%27 y=%2763%27 width=%272%27 height=%272%27 fill=%27%23fff%27 opacity=%270.6%27/%3E%3Crect x=%27127%27 y=%2720%27 width=%274%27 height=%274%27 fill=%27%23fff%27 opacity=%270.4%27/%3E%3Crect x=%27102%27 y=%27140%27 width=%274%27 height=%274%27 fill=%27%23fff%27 opacity=%270.6%27/%3E%3Crect x=%27110%27 y=%27140%27 width=%272%27 height=%272%27 fill=%27%23fff%27 opacity=%270.6%27/%3E%3Crect x=%2791%27 y=%27174%27 width=%274%27 height=%274%27 fill=%27%23fff%27 opacity=%270.6%27/%3E%3Crect x=%2738%27 y=%2721%27 width=%272%27 height=%272%27 fill=%27%23fff%27 opacity=%270.4%27/%3E%3Crect x=%2759%27 y=%27168%27 width=%272%27 height=%272%27 fill=%27%23fff%27 opacity=%270.4%27/%3E%3Crect x=%27124%27 y=%27150%27 width=%272%27 height=%272%27 fill=%27%23fff%27 opacity=%270.4%27/%3E%3Crect x=%2772%27 y=%271%27 width=%273%27 height=%273%27 fill=%27%23fff%27 opacity=%270.4%27/%3E%3Crect x=%27136%27 y=%2794%27 width=%274%27 height=%274%27 fill=%27%23fff%27 opacity=%270.9%27/%3E%3Crect x=%2732%27 y=%27176%27 width=%273%27 height=%273%27 fill=%27%23fff%27 opacity=%270.9%27/%3E%3Crect x=%27116%27 y=%27174%27 width=%272%27 height=%272%27 fill=%27%23fff%27 opacity=%270.9%27/%3E%3Crect x=%27101%27 y=%27102%27 width=%274%27 height=%274%27 fill=%27%23fff%27 opacity=%270.6%27/%3E%3C/svg%3E") 0 0 / 200px 200px repeat, linear-gradient(180deg, #1B1D3A, #2B2D5C 70%, #3A3270); }
+.pv.bgwrap .bg-pxpapan{ background-size:12px 12px; }
+.pv.bgwrap .bg-pxawan{ background-size:90px 60px, auto; }
+.pv.bgwrap .bg-pxbukit{ background-size:48px 27px, 90px 60px, auto; }
+.pv.bgwrap .bg-pxmalam{ background-size:48px 27px, 18px 18px, 80px 80px, auto; }
+.ui-pixel{
+  --c-radius:0; --b-radius:0; --c-bw:0px; --c-bs:solid; --c-bc:transparent;
+  --px-panel:color-mix(in srgb, var(--indigo) 22%, rgba(22,34,96,.88));
+  --px-edge:#0A0F2A; --px-hi:color-mix(in srgb, var(--indigo) 35%, #6F8BEA);
+  --c-bg:var(--px-panel);
+  --c-shadow:inset 0 0 0 3px var(--px-edge), inset 0 0 0 6px var(--px-hi), inset 6px 6px 0 3px rgba(255,255,255,.07), 0 4px 0 rgba(0,0,0,.22);
+  --b-shadow:inset 0 -4px 0 rgba(0,0,0,.30), inset 0 4px 0 rgba(255,255,255,.28), inset 0 0 0 2px rgba(0,0,0,.45);
+  --f-head:'DotGothic16', 'Zen Maru Gothic', sans-serif; --f-body:'DotGothic16', 'Zen Maru Gothic', sans-serif;
+}
+/* panel ala game petualangan: biru gelap transparan, bingkai dobel, sudut bertangga */
+.ui-pixel :is(.modecard,.levelrow,.qcard,.result,.category-tile,.shopcard,.profile,.statbox,.shopbanner,.simpart,.invitem,.infobox,.balance,.uiprev-card,.rankmini,.rk-hero,.rk-tab,.welcome,.reward,.trybar,.flashface,.comingsoon,.redeembox){
+  --ink:#F4F6FF; --muted:#B9C6F0; --line:rgba(150,175,255,.35); --card:rgba(6,12,40,.55); --bg:rgba(6,12,40,.45);
+  --moss:#7EE29A; --moss-tint:rgba(70,190,110,.28); --seal:#FF8E99; --seal-dark:#FF8E99; --seal-tint:rgba(230,70,90,.26);
+  --amber-dark:#FFD27A;
+  color:var(--ink); background:var(--px-panel) !important; border:none !important; border-radius:0 !important;
+  box-shadow:var(--c-shadow) !important; clip-path:polygon(0 6px,3px 6px,3px 3px,6px 3px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 3px,calc(100% - 3px) 3px,calc(100% - 3px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 3px) calc(100% - 6px),calc(100% - 3px) calc(100% - 3px),calc(100% - 6px) calc(100% - 3px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 3px),3px calc(100% - 3px),3px calc(100% - 6px),0 calc(100% - 6px));
+  -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
+}
+.ui-pixel .invitem{ clip-path:none; }
+.ui-pixel .invitem.on{ --px-hi:#FFD24A; }
+.ui-pixel .invitem.locked{ opacity:.7; }
+.ui-pixel :is(.modecard,.levelrow,.qcard,.result,.category-tile,.shopcard,.profile,.statbox,.shopbanner,.simpart,.invitem,.infobox,.balance,.uiprev-card,.rankmini,.rk-hero,.rk-tab,.welcome,.reward,.trybar,.flashface,.comingsoon,.redeembox) :is(h1,h2,h3,h4,.pf-title,.score-num,.rk-name,.gacha-name){ text-shadow:-2px 0 0 #0A0F2A, 2px 0 0 #0A0F2A, 0 -2px 0 #0A0F2A, 0 2px 0 #0A0F2A, 2px 2px 0 #0A0F2A; color:#fff; }
+.ui-pixel :is(h2,.brand){ letter-spacing:.03em; }
+.ui-pixel #app > h2, .ui-pixel .hero h1{ color:#fff; text-shadow:-2px 0 0 #0A0F2A, 2px 0 0 #0A0F2A, 0 -2px 0 #0A0F2A, 0 2px 0 #0A0F2A, 2px 2px 0 #0A0F2A; }
+/* slot: pilihan jawaban, tombol kecil, nomor, ikon */
+.ui-pixel :is(.opt, .segbtn, .pill, .chip, .simopt, button.ghost, .furibtn, .backbtn, .themebtn, #btnCoins){
+  background:rgba(6,12,40,.55); color:#F4F6FF; border:none !important; border-radius:0 !important; clip-path:polygon(0 3px,3px 3px,3px 0,calc(100% - 3px) 0,calc(100% - 3px) 3px,100% 3px,100% calc(100% - 3px),calc(100% - 3px) calc(100% - 3px),calc(100% - 3px) 100%,3px 100%,3px calc(100% - 3px),0 calc(100% - 3px));
+  box-shadow:inset 0 0 0 2px #0A0F2A, inset 0 0 0 4px rgba(120,150,240,.55), inset 4px 4px 0 2px rgba(255,255,255,.06);
+}
+.ui-pixel :is(button.ghost){ color:#FFE38A; }
+.ui-pixel :is(.segbtn.on, .chip.on, .simopt.on, .levelrow.on){ box-shadow:inset 0 0 0 2px #0A0F2A, inset 0 0 0 4px #FFD24A !important; color:#FFE38A; }
+.ui-pixel .opt .letter, .ui-pixel .levelrow .num, .ui-pixel .catmark, .ui-pixel .modecard .icon{ background:rgba(6,12,40,.6); border:none; border-radius:0; box-shadow:inset 0 0 0 2px #0A0F2A, inset 0 0 0 3px rgba(120,150,240,.5); color:#FFE38A; }
+.ui-pixel .opt.correct{ background:rgba(60,170,95,.42); box-shadow:inset 0 0 0 2px #0A0F2A, inset 0 0 0 4px #7EE29A; }
+.ui-pixel .opt.wrong{ background:rgba(220,60,80,.38); box-shadow:inset 0 0 0 2px #0A0F2A, inset 0 0 0 4px #FF8E99; }
+.ui-pixel .opt.correct .letter{ background:#3FA95E; } .ui-pixel .opt.wrong .letter{ background:#D9485B; }
+/* tombol utama: balok timbul */
+.ui-pixel button.primary{ border-radius:0; clip-path:polygon(0 3px,3px 3px,3px 0,calc(100% - 3px) 0,calc(100% - 3px) 3px,100% 3px,100% calc(100% - 3px),calc(100% - 3px) calc(100% - 3px),calc(100% - 3px) 100%,3px 100%,3px calc(100% - 3px),0 calc(100% - 3px)); box-shadow:var(--b-shadow); text-shadow:-2px 0 0 #0A0F2A, 2px 0 0 #0A0F2A, 0 -2px 0 #0A0F2A, 0 2px 0 #0A0F2A, 2px 2px 0 #0A0F2A; color:#fff; letter-spacing:.04em; }
+.ui-pixel button.primary:active{ box-shadow:inset 0 4px 0 rgba(0,0,0,.3), inset 0 0 0 2px rgba(0,0,0,.45); transform:translateY(2px); }
+.ui-pixel :is(#btnCoins, .catstatus, .badge, .tag, .passbadge, .progress-track, .progress-fill, .minibar, .minibar i, .avatar, .pv, .navbtn, .bottomnav, .petbubble){ border-radius:0 !important; }
+.ui-pixel .progress-track{ height:12px; background:rgba(6,12,40,.55); box-shadow:inset 0 0 0 2px #0A0F2A; }
+.ui-pixel .progress-fill{ box-shadow:inset 0 -3px 0 rgba(0,0,0,.25), inset 0 3px 0 rgba(255,255,255,.3); }
+.ui-pixel .bottomnav{ background:color-mix(in srgb, var(--indigo) 22%, rgba(22,34,96,.94)); box-shadow:inset 0 3px 0 #0A0F2A, inset 0 6px 0 rgba(120,150,240,.55); border:none; }
+.ui-pixel .navbtn{ color:#B9C6F0; } .ui-pixel .navbtn.on{ background:rgba(6,12,40,.55) !important; color:#FFE38A !important; box-shadow:inset 0 0 0 2px #FFD24A; }
+.ui-pixel .petbubble{ background:rgba(16,26,80,.92); color:#B9C6F0; border:none; box-shadow:inset 0 0 0 2px #0A0F2A, inset 0 0 0 4px rgba(120,150,240,.6); }
+.ui-pixel .petbubble b{ color:#fff; text-shadow:-2px 0 0 #0A0F2A, 2px 0 0 #0A0F2A, 0 -2px 0 #0A0F2A, 0 2px 0 #0A0F2A, 2px 2px 0 #0A0F2A; }
+.ui-pixel .petbubble.ok b{ color:#9CF0B2; } .ui-pixel .petbubble.ng b{ color:#FFAAB3; }
+.ui-pixel .stamp{ border-radius:0; }
+.ui-pixel :is(.brand, .eyebrow, .sub, .sectitle, .progress-label, .flash-progress, .flashhint, .footer-note, .selsum, .setuplabel, .rangerow, #app > h2, .rk-season, .sectitle *){ color:#fff !important; text-shadow:-1px 0 0 #0A0F2A, 1px 0 0 #0A0F2A, 0 -1px 0 #0A0F2A, 0 1px 0 #0A0F2A, 1px 2px 0 #0A0F2A; }
+.ui-pixel .brand .jp{ color:#FFE38A; }
+.ui-pixel #app > h2, .ui-pixel .brand{ text-shadow:-2px 0 0 #0A0F2A, 2px 0 0 #0A0F2A, 0 -2px 0 #0A0F2A, 0 2px 0 #0A0F2A, 2px 2px 0 #0A0F2A; }
+.ui-pixel button.primary{ text-shadow:-1px 0 0 #0A0F2A, 1px 0 0 #0A0F2A, 0 -1px 0 #0A0F2A, 0 1px 0 #0A0F2A, 1px 2px 0 #0A0F2A; }
+
+.ui-pixel .eyebrow{ text-shadow:none; }
+/* isi soal tetap huruf maru supaya kanji gampang dibaca */
+.ui-pixel :is(.qcard, .flashface, .simpart, .rk-sent){ --f-head:'Zen Maru Gothic', 'Zen Kaku Gothic New', sans-serif; --f-body:'Zen Maru Gothic', 'Zen Kaku Gothic New', sans-serif; font-family:var(--f-body); }
+.ui-pixel .qcard .section-tag{ font-family:'DotGothic16', sans-serif; color:#FFD27A; }
+.ui-pixel .uiprev-card{ color:#fff; text-shadow:-2px 0 0 #0A0F2A, 2px 0 0 #0A0F2A, 0 -2px 0 #0A0F2A, 0 2px 0 #0A0F2A, 2px 2px 0 #0A0F2A; }
+
+.bg-pxhutan{ background:
+  url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27160%27 height=%2760%27 shape-rendering=%27crispEdges%27%3E%3Crect x=%270%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%275%27 y=%2755%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%270%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%270%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%273%27 y=%2737%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%2710%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2710%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2710%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2713%27 y=%2737%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%2720%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2720%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2720%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2723%27 y=%2737%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%2730%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2735%27 y=%2752%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2730%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2735%27 y=%2742%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2730%27 y=%2730%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2730%27 y=%2737%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2733%27 y=%2727%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%2740%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2742%27 y=%2755%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2740%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2740%27 y=%2730%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2740%27 y=%2737%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2743%27 y=%2727%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%2750%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2750%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2750%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2753%27 y=%2737%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%2760%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2760%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2760%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2763%27 y=%2737%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%2770%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2772%27 y=%2752%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2770%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2770%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2773%27 y=%2737%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%2780%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2782%27 y=%2752%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%2780%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2780%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2783%27 y=%2737%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%2790%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2790%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%2790%27 y=%2730%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%2790%27 y=%2737%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%2793%27 y=%2727%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%27100%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27102%27 y=%2752%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%27100%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27100%27 y=%2730%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%27100%27 y=%2737%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%27103%27 y=%2727%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%27110%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27112%27 y=%2755%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%27110%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27110%27 y=%2730%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%27110%27 y=%2737%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%27113%27 y=%2727%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%27120%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27122%27 y=%2755%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%27120%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%27120%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%27123%27 y=%2737%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%27130%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27132%27 y=%2755%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%27130%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%27130%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%27133%27 y=%2737%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%27140%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27142%27 y=%2755%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%27140%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%27140%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%27143%27 y=%2737%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3Crect x=%27150%27 y=%2750%27 width=%2710%27 height=%2710%27 fill=%27%238B5A2B%27/%3E%3Crect x=%27155%27 y=%2755%27 width=%273%27 height=%273%27 fill=%27%236E4420%27/%3E%3Crect x=%27150%27 y=%2740%27 width=%2710%27 height=%2710%27 fill=%27%236AAA3A%27/%3E%3Crect x=%27150%27 y=%2747%27 width=%2710%27 height=%273%27 fill=%27%234E8A2A%27/%3E%3Crect x=%27153%27 y=%2737%27 width=%273%27 height=%273%27 fill=%27%237CC24A%27/%3E%3C/svg%3E") 0 100% / 160px 60px repeat-x,
+  url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27240%27 height=%27120%27 shape-rendering=%27crispEdges%27%3E%3Crect x=%270%27 y=%2790%27 width=%2710%27 height=%2730%27 fill=%27%234F8F4A%27/%3E%3Crect x=%2710%27 y=%2790%27 width=%2710%27 height=%2730%27 fill=%27%234F8F4A%27/%3E%3Crect x=%2720%27 y=%2780%27 width=%2710%27 height=%2740%27 fill=%27%234F8F4A%27/%3E%3Crect x=%2730%27 y=%2780%27 width=%2710%27 height=%2740%27 fill=%27%234F8F4A%27/%3E%3Crect x=%2740%27 y=%2780%27 width=%2710%27 height=%2740%27 fill=%27%234F8F4A%27/%3E%3Crect x=%2750%27 y=%2770%27 width=%2710%27 height=%2750%27 fill=%27%234F8F4A%27/%3E%3Crect x=%2760%27 y=%2770%27 width=%2710%27 height=%2750%27 fill=%27%234F8F4A%27/%3E%3Crect x=%2770%27 y=%2780%27 width=%2710%27 height=%2740%27 fill=%27%234F8F4A%27/%3E%3Crect x=%2780%27 y=%2780%27 width=%2710%27 height=%2740%27 fill=%27%234F8F4A%27/%3E%3Crect x=%2790%27 y=%2790%27 width=%2710%27 height=%2730%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27100%27 y=%2790%27 width=%2710%27 height=%2730%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27110%27 y=%2790%27 width=%2710%27 height=%2730%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27120%27 y=%2780%27 width=%2710%27 height=%2740%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27130%27 y=%2780%27 width=%2710%27 height=%2740%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27140%27 y=%2770%27 width=%2710%27 height=%2750%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27150%27 y=%2770%27 width=%2710%27 height=%2750%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27160%27 y=%2770%27 width=%2710%27 height=%2750%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27170%27 y=%2780%27 width=%2710%27 height=%2740%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27180%27 y=%2780%27 width=%2710%27 height=%2740%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27190%27 y=%2790%27 width=%2710%27 height=%2730%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27200%27 y=%2790%27 width=%2710%27 height=%2730%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27210%27 y=%2790%27 width=%2710%27 height=%2730%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27220%27 y=%2790%27 width=%2710%27 height=%2730%27 fill=%27%234F8F4A%27/%3E%3Crect x=%27230%27 y=%2790%27 width=%2710%27 height=%2730%27 fill=%27%234F8F4A%27/%3E%3Crect x=%2730%27 y=%2762%27 width=%276%27 height=%2718%27 fill=%27%235B3A1E%27/%3E%3Crect x=%2718%27 y=%2744%27 width=%2730%27 height=%2718%27 fill=%27%232E6B3A%27/%3E%3Crect x=%2724%27 y=%2732%27 width=%2718%27 height=%2712%27 fill=%27%232E6B3A%27/%3E%3Crect x=%2724%27 y=%2744%27 width=%276%27 height=%276%27 fill=%27rgba%28255%2C255%2C255%2C.18%29%27/%3E%3Crect x=%27164%27 y=%2759%27 width=%277%27 height=%2721%27 fill=%27%235B3A1E%27/%3E%3Crect x=%27150%27 y=%2738%27 width=%2735%27 height=%2721%27 fill=%27%232E6B3A%27/%3E%3Crect x=%27157%27 y=%2724%27 width=%2721%27 height=%2714%27 fill=%27%232E6B3A%27/%3E%3Crect x=%27157%27 y=%2738%27 width=%277%27 height=%277%27 fill=%27rgba%28255%2C255%2C255%2C.18%29%27/%3E%3Crect x=%27106%27 y=%2775%27 width=%275%27 height=%2715%27 fill=%27%235B3A1E%27/%3E%3Crect x=%2796%27 y=%2760%27 width=%2725%27 height=%2715%27 fill=%27%233D7F45%27/%3E%3Crect x=%27101%27 y=%2750%27 width=%2715%27 height=%2710%27 fill=%27%233D7F45%27/%3E%3Crect x=%27101%27 y=%2760%27 width=%275%27 height=%275%27 fill=%27rgba%28255%2C255%2C255%2C.18%29%27/%3E%3C/svg%3E") 0 calc(100% - 30px) / 240px 120px repeat-x,
+  url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27320%27 height=%27140%27 shape-rendering=%27crispEdges%27%3E%3Crect x=%270%27 y=%2780%27 width=%2710%27 height=%2760%27 fill=%27%239DB7E0%27/%3E%3Crect x=%2710%27 y=%2770%27 width=%2710%27 height=%2770%27 fill=%27%239DB7E0%27/%3E%3Crect x=%2720%27 y=%2760%27 width=%2710%27 height=%2780%27 fill=%27%239DB7E0%27/%3E%3Crect x=%2730%27 y=%2750%27 width=%2710%27 height=%2790%27 fill=%27%239DB7E0%27/%3E%3Crect x=%2740%27 y=%2740%27 width=%2710%27 height=%27100%27 fill=%27%239DB7E0%27/%3E%3Crect x=%2750%27 y=%2740%27 width=%2710%27 height=%27100%27 fill=%27%239DB7E0%27/%3E%3Crect x=%2760%27 y=%2730%27 width=%2710%27 height=%27110%27 fill=%27%239DB7E0%27/%3E%3Crect x=%2770%27 y=%2720%27 width=%2710%27 height=%27120%27 fill=%27%239DB7E0%27/%3E%3Crect x=%2780%27 y=%2720%27 width=%2710%27 height=%27120%27 fill=%27%239DB7E0%27/%3E%3Crect x=%2790%27 y=%2730%27 width=%2710%27 height=%27110%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27100%27 y=%2740%27 width=%2710%27 height=%27100%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27110%27 y=%2750%27 width=%2710%27 height=%2790%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27120%27 y=%2760%27 width=%2710%27 height=%2780%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27130%27 y=%2760%27 width=%2710%27 height=%2780%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27140%27 y=%2770%27 width=%2710%27 height=%2770%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27150%27 y=%2770%27 width=%2710%27 height=%2770%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27160%27 y=%2760%27 width=%2710%27 height=%2780%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27170%27 y=%2750%27 width=%2710%27 height=%2790%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27180%27 y=%2740%27 width=%2710%27 height=%27100%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27190%27 y=%2730%27 width=%2710%27 height=%27110%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27200%27 y=%2720%27 width=%2710%27 height=%27120%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27210%27 y=%2710%27 width=%2710%27 height=%27130%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27220%27 y=%2710%27 width=%2710%27 height=%27130%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27230%27 y=%2720%27 width=%2710%27 height=%27120%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27240%27 y=%2730%27 width=%2710%27 height=%27110%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27250%27 y=%2740%27 width=%2710%27 height=%27100%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27260%27 y=%2750%27 width=%2710%27 height=%2790%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27270%27 y=%2760%27 width=%2710%27 height=%2780%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27280%27 y=%2770%27 width=%2710%27 height=%2770%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27290%27 y=%2770%27 width=%2710%27 height=%2770%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27300%27 y=%2780%27 width=%2710%27 height=%2760%27 fill=%27%239DB7E0%27/%3E%3Crect x=%27310%27 y=%2780%27 width=%2710%27 height=%2760%27 fill=%27%239DB7E0%27/%3E%3C/svg%3E") 0 calc(100% - 70px) / 320px 140px repeat-x,
+  url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2760%27 height=%2760%27 shape-rendering=%27crispEdges%27%3E%3Crect x=%2712%27 y=%2712%27 width=%2736%27 height=%2736%27 fill=%27%23FFE36E%27/%3E%3Crect x=%2718%27 y=%276%27 width=%2724%27 height=%2748%27 fill=%27%23FFE36E%27/%3E%3Crect x=%276%27 y=%2718%27 width=%2748%27 height=%2724%27 fill=%27%23FFE36E%27/%3E%3Crect x=%2718%27 y=%2718%27 width=%2712%27 height=%2712%27 fill=%27%23FFF6B8%27/%3E%3C/svg%3E") 84% 9% / 54px 54px no-repeat,
+  url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27260%27 height=%27120%27 shape-rendering=%27crispEdges%27%3E%3Cg fill=%27%23fff%27 opacity=%27.9%27%3E%3Crect x=%2724%27 y=%2730%27 width=%2748%27 height=%278%27/%3E%3Crect x=%2712%27 y=%2738%27 width=%2780%27 height=%278%27/%3E%3Crect x=%2712%27 y=%2746%27 width=%2788%27 height=%278%27/%3E%3Crect x=%27160%27 y=%2778%27 width=%2732%27 height=%276%27/%3E%3Crect x=%27150%27 y=%2784%27 width=%2760%27 height=%276%27/%3E%3C/g%3E%3C/svg%3E") 0 6% / 260px 120px repeat-x,
+  linear-gradient(180deg, #4A8FE7 0%, #7DB4F0 45%, #BFE0FA 100%); image-rendering:pixelated; }
+:root[data-theme="dark"] .bg-pxhutan{ filter:brightness(.55) saturate(.9); }
+.pv.bgwrap .bg-pxhutan{ background-size:48px 18px, 72px 36px, 96px 42px, 16px 16px, 78px 36px, auto; background-position:0 100%, 0 calc(100% - 9px), 0 calc(100% - 21px), 84% 9%, 0 6%, 0 0; }
+@keyframes pxCloud{ from{ background-position:0 100%, 0 calc(100% - 30px), 0 calc(100% - 70px), 84% 9%, 0 6%, 0 0; } to{ background-position:0 100%, 0 calc(100% - 30px), 0 calc(100% - 70px), 84% 9%, 260px 6%, 0 0; } }
+#bgLayer.bg-pxhutan{ animation:pxCloud 40s linear infinite; }
+
+/* swipe flashcard */
+.flashcard{ touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+.flashcard.in-right{ animation:flashInR .22s ease-out; } .flashcard.in-left{ animation:flashInL .22s ease-out; }
+@keyframes flashInR{ from{ transform:translateX(60%); opacity:0; } to{ transform:none; opacity:1; } }
+@keyframes flashInL{ from{ transform:translateX(-60%); opacity:0; } to{ transform:none; opacity:1; } }
+/* pet loncat */
+.pet.jumping .pet-svg{ animation:none; transform:scale(.94,1.08); }
+#petLayer .petbubble.float{ white-space:normal; max-width:230px; }
+#petLayer .petbubble.float b{ font-size:14px; }
+/* ---------- PET (teman belajar) ---------- */
+.chest.k-pet{ --cc:#EC6F9E; --cd:#9D2F5C; } .chest.k-pet .lock{ background:#FDE68A; }
+.pf-h, .pf-s{ display:none; }
+.pet.happy .pf-n, .pet.sad .pf-n{ display:none; }
+.pet.happy .pf-h, .pet.sad .pf-s{ display:inline; }
+.pet{ position:relative; width:74px; height:74px; flex:none; }
+.pet .pet-svg{ width:100%; height:100%; overflow:visible; display:block; transform-origin:50% 100%; animation:petBob 2.8s ease-in-out infinite; }
+.pet-koi .pet-svg, .pet-kirin .pet-svg{ animation:petFloat 3.2s ease-in-out infinite; }
+.pblink{ transform-box:fill-box; transform-origin:center; animation:petBlink 4.6s infinite; }
+.pt-tail{ animation:petTail 2.4s ease-in-out infinite; }
+.pt-paw{ animation:petPaw 1.8s ease-in-out infinite; }
+.pt-bub{ animation:petBub 3s ease-in-out infinite; }
+.pt-glow{ animation:petGlow 2.4s ease-in-out infinite alternate; transform-box:fill-box; transform-origin:center; }
+.pt-spark{ animation:petTwinkle 1.6s ease-in-out infinite alternate; }
+.pet.happy .pet-svg{ animation:petJump .55s cubic-bezier(.3,1.6,.5,1) 2, petBob 2.2s ease-in-out 1.1s infinite; }
+.pet.happy .pt-tail{ animation-duration:.6s; }
+.pet.happy .pt-paw{ animation-duration:.5s; }
+.pet.sad .pet-svg{ animation:petDroop .5s ease-out forwards; filter:saturate(.65); }
+.pet.sad .pt-tail, .pet.sad .pt-paw{ animation:none; }
+.ptear{ animation:petTear 1.3s ease-in infinite; }
+.pet-fx{ position:absolute; inset:0; pointer-events:none; z-index:2; }
+.pet-fx i{ position:absolute; font-style:normal; font-size:15px; opacity:0; color:#F5B301; text-shadow:0 0 6px rgba(255,214,90,.7); }
+.pet-fx i:nth-child(1){ left:-4px; top:14px; } .pet-fx i:nth-child(2){ right:-2px; top:4px; color:#EC4899; }
+.pet-fx i:nth-child(3){ left:30px; top:-10px; } .pet-fx i:nth-child(4){ right:-8px; top:34px; font-size:12px; }
+.pet.happy .pet-fx i{ animation:petSpark .9s ease-out forwards; }
+.pet.happy .pet-fx i:nth-child(2){ animation-delay:.08s; } .pet.happy .pet-fx i:nth-child(3){ animation-delay:.16s; } .pet.happy .pet-fx i:nth-child(4){ animation-delay:.24s; }
+.petbar{ display:flex; align-items:flex-end; gap:8px; margin:-2px 0 6px; }
+.petbubble{
+  position:relative; background:var(--card); border:1.5px solid var(--line); border-radius:14px 14px 14px 4px;
+  padding:7px 12px; font-size:12.5px; color:var(--muted); line-height:1.4; margin-bottom:30px; max-width:240px;
+  transition:border-color .2s ease;
+}
+.petbubble b{ display:block; color:var(--ink); font-size:14px; font-family:var(--f-body); }
+.petbubble.ok{ border-color:var(--moss); } .petbubble.ok b{ color:var(--moss); }
+.petbubble.ng{ border-color:var(--seal); } .petbubble.ng b{ color:var(--seal-dark); }
+.petbubble.ok, .petbubble.ng{ animation:petBubPop .3s ease-out; }
+.pethome{ margin-left:auto; background:none; border:none; padding:0; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:2px; flex:none; }
+.pethome .pet{ width:62px; height:62px; }
+.petbubble.mini{ margin:0; padding:3px 8px; font-size:10.5px; border-radius:10px; max-width:96px; text-align:center; }
+.petbubble.mini b{ font-size:11.5px; }
+.pv.pt{ background:var(--bg); border-color:var(--rc, var(--line)); }
+.pv.pt .pet-svg{ width:84%; height:84%; overflow:visible; }
+.pv.pt .pblink, .pv.pt .pt-tail, .pv.pt .pt-paw, .pv.pt .pt-bub, .pv.pt .pt-glow, .pv.pt .pt-spark{ animation:none; }
+.pv.pt.xl .pet-svg{ animation:petBob 2.8s ease-in-out infinite; transform-origin:50% 100%; }
+.pv.pt.xl .pblink{ animation:petBlink 4.6s infinite; } .pv.pt.xl .pt-tail{ animation:petTail 2.4s ease-in-out infinite; } .pv.pt.xl .pt-paw{ animation:petPaw 1.8s ease-in-out infinite; }
+.pv.pt .nopet{ font-size:20px; color:var(--muted); }
+@keyframes petBob{ 0%,100%{ transform:translateY(0) scale(1,1); } 50%{ transform:translateY(-2px) scale(1.02,.98); } }
+@keyframes petFloat{ 0%,100%{ transform:translateY(0) rotate(-2deg); } 50%{ transform:translateY(-5px) rotate(2deg); } }
+@keyframes petBlink{ 0%,92%,100%{ transform:scaleY(1); } 95%{ transform:scaleY(.1); } }
+@keyframes petTail{ 0%,100%{ transform:rotate(-7deg); } 50%{ transform:rotate(9deg); } }
+@keyframes petPaw{ 0%,100%{ transform:rotate(0); } 50%{ transform:rotate(-22deg); } }
+@keyframes petBub{ 0%{ transform:translateY(6px); opacity:0; } 40%{ opacity:1; } 100%{ transform:translateY(-10px); opacity:0; } }
+@keyframes petGlow{ from{ opacity:.55; transform:scale(.94); } to{ opacity:1; transform:scale(1.04); } }
+@keyframes petTwinkle{ from{ opacity:.35; } to{ opacity:1; } }
+@keyframes petJump{ 0%{ transform:translateY(0) scale(1.08,.9); } 45%{ transform:translateY(-16px) scale(.95,1.06); } 100%{ transform:translateY(0) scale(1,1); } }
+@keyframes petDroop{ to{ transform:translateY(5px) rotate(-6deg) scale(.95); } }
+@keyframes petTear{ 0%{ transform:translateY(0); opacity:0; } 25%{ opacity:1; } 100%{ transform:translateY(9px); opacity:0; } }
+@keyframes petSpark{ 0%{ opacity:0; transform:translateY(6px) scale(.4); } 35%{ opacity:1; transform:translateY(-4px) scale(1.15); } 100%{ opacity:0; transform:translateY(-16px) scale(.9); } }
+@keyframes petBubPop{ 0%{ transform:scale(.92); } 60%{ transform:scale(1.04); } 100%{ transform:scale(1); } }
+
+
+#petLayer{ position:fixed; inset:0; z-index:60; pointer-events:none; overflow:hidden; }
+#petLayer .petwalker{ position:absolute; left:0; top:0; bottom:auto; }
+#petLayer .pet{ width:58px; height:58px; filter:drop-shadow(0 3px 3px rgba(0,0,0,.12)); }
+#petLayer .petbubble.float{ position:absolute; top:0; left:0; }
+.pettrack{ position:relative; height:110px; margin:-6px 0 4px; }
+.pettrack::after{ content:""; position:absolute; left:6px; right:6px; bottom:2px; border-bottom:2px dashed var(--line); opacity:.8; }
+.pettrack.home{ height:104px; margin:2px 0 8px; cursor:pointer; }
+.petwalker{ position:absolute; left:0; bottom:2px; z-index:1; will-change:transform; }
+.pettrack .pet{ width:64px; height:64px; }
+.pet.flip{ transform:scaleX(-1); }
+.pet.flip .noflip{ transform:scaleX(-1); transform-box:fill-box; transform-origin:center; }
+.pet.walking .pet-svg{ animation:petWalk .44s ease-in-out infinite; }
+.pet-koi.walking .pet-svg, .pet-kirin.walking .pet-svg{ animation:petSwim 1.2s ease-in-out infinite; }
+.pet.walking .pt-tail{ animation-duration:.9s; }
+.petbubble.float{
+  position:absolute; top:0; left:0; margin:0; white-space:nowrap; max-width:none; border-radius:12px; padding:5px 11px;
+  opacity:0; transition:opacity .25s ease; pointer-events:none; z-index:2;
+}
+.petbubble.float.show{ opacity:1; }
+.petbubble.float b{ font-size:13px; }
+@keyframes petWalk{ 0%,100%{ transform:translateY(0) rotate(-3deg); } 50%{ transform:translateY(-4px) rotate(3deg); } }
+@keyframes petSwim{ 0%,100%{ transform:translateY(0) rotate(-4deg); } 50%{ transform:translateY(-6px) rotate(4deg); } }
 </style>
 </head>
 <body>
@@ -1634,6 +1808,7 @@ function onAnswer(chosen) {
     if (isCorrect) { stamp.textContent = "正"; stamp.classList.add("pop"); }
     else { stamp.textContent = "✕"; stamp.classList.add("pop", "wrongstamp"); }
   }
+  petReact(isCorrect, chosen === null);
 
   if (isTimed()) {
     updateStreakUI();
@@ -1695,6 +1870,36 @@ function flashNext() {
 function flashPrev() {
   if (state.flashIdx > 0) { state.flashIdx--; state.flashFlipped = false; render(); }
 }
+/* geser kartu: ke kiri = kata berikutnya, ke kanan = kata sebelumnya. Ketuk tetap membalik kartu. */
+function attachFlashSwipe() {
+  const el = document.getElementById("flashcardEl"); if (!el) return;
+  if (state.flashIn) { el.classList.add("in-" + state.flashIn); state.flashIn = null; }
+  let x0 = null, y0 = 0, dx = 0, swiped = false, horiz = null;
+  const atEnd = (d) => d < 0 ? state.flashIdx >= state.flashDeck.length - 1 : state.flashIdx <= 0;
+  el.addEventListener("pointerdown", (e) => { x0 = e.clientX; y0 = e.clientY; dx = 0; horiz = null; el.style.transition = "none"; try { el.setPointerCapture(e.pointerId); } catch (_) {} });
+  el.addEventListener("pointermove", (e) => {
+    if (x0 === null) return;
+    dx = e.clientX - x0;
+    if (horiz === null && (Math.abs(dx) > 8 || Math.abs(e.clientY - y0) > 8)) horiz = Math.abs(dx) > Math.abs(e.clientY - y0);
+    if (!horiz) return;
+    const d = atEnd(dx) ? dx * 0.25 : dx;   // di kartu pertama/terakhir: cuma geser sedikit
+    el.style.transform = `translateX(${d}px) rotate(${d / 30}deg)`;
+  });
+  const end = () => {
+    if (x0 === null) return;
+    x0 = null; el.style.transition = "transform .2s ease, opacity .2s ease";
+    if (horiz && Math.abs(dx) > 60 && !atEnd(dx)) {
+      swiped = true;
+      el.style.transform = `translateX(${dx < 0 ? -130 : 130}%) rotate(${dx < 0 ? -12 : 12}deg)`; el.style.opacity = "0";
+      setTimeout(() => { state.flashIn = dx < 0 ? "right" : "left"; dx < 0 ? flashNext() : flashPrev(); }, 180);
+    } else {
+      if (horiz && Math.abs(dx) > 8) swiped = true;
+      el.style.transform = "";
+    }
+  };
+  el.addEventListener("pointerup", end); el.addEventListener("pointercancel", end); el.addEventListener("pointerleave", end);
+  el.addEventListener("click", (e) => { if (swiped) { e.stopImmediatePropagation(); swiped = false; } }, true);
+}
 
 /* ================= RENDER ================= */
 function render() {
@@ -1707,6 +1912,8 @@ function render() {
   app.classList.toggle("hasnav", ["main-menu", "rank", "shop", "inventory"].includes(state.screen));
   document.body.classList.toggle("focus", ["quiz", "sim-test"].includes(state.screen));
   attachHandlers();
+  mountPet();
+  petUpdateLayer();
   if (document.getElementById("tryDone")) document.getElementById("tryDone").addEventListener("click", () => endTry(true));
   document.querySelectorAll("[data-try]").forEach(b => b.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -1949,7 +2156,7 @@ function kotobaFlashcardHTML() {
         </div>
       </div>
     </div>
-    <div class="flashhint">Ketuk kartu untuk membalik</div>
+    <div class="flashhint">Ketuk kartu untuk membalik · geser ke kiri/kanan untuk ganti kata</div>
     <div class="flashnav">
       <button id="flashPrev" ${state.flashIdx === 0 ? "disabled" : ""}>&larr; Sebelumnya</button>
       <button id="flashNext" ${state.flashIdx === deck.length - 1 ? "disabled" : ""}>Berikutnya &rarr;</button>
@@ -2102,7 +2309,7 @@ function flashcardHTML() {
         </div>
       </div>
     </div>
-    <div class="flashhint">Ketuk kartu untuk membalik</div>
+    <div class="flashhint">Ketuk kartu untuk membalik · geser ke kiri/kanan untuk ganti kata</div>
     <div class="flashnav">
       <button id="flashPrev" ${state.flashIdx === 0 ? "disabled" : ""}>&larr; Sebelumnya</button>
       <button id="flashNext" ${state.flashIdx === deck.length - 1 ? "disabled" : ""}>Berikutnya &rarr;</button>
@@ -2476,7 +2683,7 @@ function kbookFlashcardHTML() {
         </div>
       </div>
     </div>
-    <div class="flashhint">Ketuk kartu untuk membalik</div>
+    <div class="flashhint">Ketuk kartu untuk membalik · geser ke kiri/kanan untuk ganti kata</div>
     <div class="flashnav">
       <button id="flashPrev" ${state.flashIdx === 0 ? "disabled" : ""}>&larr; Sebelumnya</button>
       <button id="flashNext" ${state.flashIdx === state.flashDeck.length - 1 ? "disabled" : ""}>Berikutnya &rarr;</button>
@@ -2730,6 +2937,7 @@ function attachHandlers() {
 
   // flashcard
   if ($("flashcardEl")) $("flashcardEl").addEventListener("click", flashFlip);
+  attachFlashSwipe();
   if ($("flashPrev")) $("flashPrev").addEventListener("click", flashPrev);
   if ($("flashNext")) $("flashNext").addEventListener("click", flashNext);
   if ($("flashToQuiz")) $("flashToQuiz").addEventListener("click", () => {
@@ -2799,12 +3007,12 @@ const STAGE_NAME = ["Warrior", "Elite", "Master", "Grandmaster", "Epic", "Legend
 /* Rank Ujian: lv = peluang level soal, n = jumlah soal per jenis, time = detik/soal, dt = detik/soal dokkai
    r = 漢字読み, h = 表記, c = kalimat rumpang, m = 語の意味, e = 会話と表現, d = 読解 (dokkai) */
 const UJ_CFG = [
-  { lv: { N5: 1 },                time: 30, dt: 75, n: { r: 3, h: 2, c: 2, m: 1, e: 1, d: 1 }, desc: "N5 · ungkapan & bacaan pendek" },
-  { lv: { N5: .9, N4: .1 },       time: 27, dt: 70, n: { r: 3, h: 2, c: 2, m: 1, e: 1, d: 1 }, desc: "N5, sedikit N4" },
-  { lv: { N5: .6, N4: .4 },       time: 24, dt: 65, n: { r: 3, h: 2, c: 2, m: 1, e: 1, d: 1 }, desc: "Campuran N5 & N4" },
-  { lv: { N5: .35, N4: .65 },     time: 21, dt: 60, n: { r: 3, h: 3, c: 2, m: 1, e: 0, d: 1 }, desc: "Lebih banyak N4" },
-  { lv: { N5: .15, N4: .85 },     time: 18, dt: 55, n: { r: 3, h: 3, c: 2, m: 1, e: 0, d: 1 }, desc: "Mayoritas N4" },
-  { lv: { N4: .75, N3: .25 },     time: 16, dt: 50, n: { r: 3, h: 3, c: 2, m: 1, e: 0, d: 1 }, desc: "N4 + mulai N3" },
+  { lv: { N5: 1 },                time: 30, dt: 75, n: { r: 3, h: 2, c: 3, m: 1, e: 1, d: 0 }, desc: "N5 · kosakata & ungkapan" },
+  { lv: { N5: .9, N4: .1 },       time: 27, dt: 70, n: { r: 3, h: 2, c: 3, m: 1, e: 1, d: 0 }, desc: "N5, sedikit N4" },
+  { lv: { N5: .6, N4: .4 },       time: 24, dt: 65, n: { r: 3, h: 2, c: 3, m: 1, e: 1, d: 0 }, desc: "Campuran N5 & N4" },
+  { lv: { N5: .35, N4: .65 },     time: 21, dt: 60, n: { r: 3, h: 3, c: 2, m: 2, e: 0, d: 0 }, desc: "Lebih banyak N4" },
+  { lv: { N5: .15, N4: .85 },     time: 18, dt: 55, n: { r: 3, h: 3, c: 2, m: 2, e: 0, d: 0 }, desc: "Mayoritas N4" },
+  { lv: { N4: .75, N3: .25 },     time: 16, dt: 50, n: { r: 3, h: 3, c: 2, m: 1, e: 0, d: 1 }, desc: "N4 + mulai N3 · mulai ada bacaan" },
   { lv: { N4: .5, N3: .5 },       time: 13, dt: 45, n: { r: 3, h: 3, c: 2, m: 1, e: 0, d: 1 }, desc: "N4 & N3" },
   { lv: { N4: .25, N3: .75 },     time: 10, dt: 35, n: { r: 3, h: 3, c: 2, m: 0, e: 0, d: 2 }, desc: "Mayoritas N3 · 2 bacaan" },
   { lv: { N4: .1, N3: .9 },       time: 8,  dt: 30, n: { r: 3, h: 3, c: 2, m: 0, e: 0, d: 2 }, desc: "Hampir semua N3 · 2 bacaan" },
@@ -2916,7 +3124,7 @@ function emblemSVG(t, size, extra) {
     ${deco}
     <path d="${shield}" fill="url(#${id}g)" stroke="${c2}" stroke-width="2.5" stroke-linejoin="round"/>
     <path d="${inner}" fill="none" stroke="${c3}" stroke-opacity=".75" stroke-width="1.6"/>
-    <text x="50" y="${T.jp.length > 1 ? 59 : 63}" text-anchor="middle" font-family="'Shippori Mincho', serif" font-weight="800" font-size="${fs}" fill="#fff" stroke="${c2}" stroke-width="1.6" paint-order="stroke">${T.jp}</text>
+    <text x="50" y="${T.jp.length > 1 ? 59 : 63}" text-anchor="middle" style="font-family:var(--f-head)" font-weight="800" font-size="${fs}" fill="#fff" stroke="${c2}" stroke-width="1.6" paint-order="stroke">${T.jp}</text>
   </svg>`;
 }
 function starsHTML(R, anim) {
@@ -3281,7 +3489,7 @@ function dokkaiHomeHTML() {
     <div class="seg" style="margin-bottom:14px;">${["N5", "N4", "N3"].map(L => `<button class="segbtn ${lv === L ? "on" : ""}" data-doklv="${L}">${L}</button>`).join("")}</div>
     <button class="primary" id="dokRandom" style="margin:0 0 14px;">Acak 3 teks ${lv}</button>
     ${rows}
-    <div class="footer-note">Soal dokkai juga muncul di Rank Ujian.</div>`;
+    <div class="footer-note">Soal dokkai juga muncul di Rank Ujian mulai tier Legend.</div>`;
 }
 function dokkaiResultHTML() {
   const total = state.sessionQuestions.length, correct = state.correctCount, pct = Math.round(correct / total * 100);
@@ -3321,7 +3529,7 @@ Object.assign(state, { dokLv: "N5", dokList: [] });
 /* =========================================================================
    V2 — KOIN, TOKO GACHA, KOLEKSI, KOSMETIK, SIMPAN PROGRES
    ========================================================================= */
-const APP_VERSION = "2.5.5";
+const APP_VERSION = "2.8.0";
 const SAVE_KEY = "nihongoStudy.save.v1";   // JANGAN diganti saat update, supaya progres murid tidak hilang
 const RAR = {
   c: { name: "Common",   w: 50,  refund: 5 },
@@ -3363,6 +3571,12 @@ const CHESTS = {
       { id: "pelangi", n: "Pelangi",       r: "l", c: ["#FF5A6E", "#FF9F1C", "#F4D03F", "#2ECC71", "#3498DB", "#9B59B6", "#FF5A6E"], s: "#3498DB", anim: true },
       { id: "kilau",   n: "Emas Berkilau", r: "l", c: ["#B8860B", "#FFE28A", "#D4A017", "#FFF3C4", "#B8860B"], s: "#8A6D1A", anim: true, L: { bg: "#F6F1E3", card: "#FFFDF5" }, D: { bg: "#0E0C08", card: "#1B1811" } },
       { id: "es",      n: "Hologram Es",   r: "l", c: ["#8EC5FC", "#E0C3FC", "#FFC8DD", "#BDE0FE", "#8EC5FC"], s: "#7C3AED", anim: true, L: { bg: "#F1F3FB", card: "#FFFFFF" }, D: { bg: "#10121C", card: "#1A1D2B" } },
+      { id: "px-rumput",  n: "Rumput Blok",  r: "c", c: ["#5B9C34"], s: "#8B5A2B" },
+      { id: "px-tanah",   n: "Tanah Rumput", r: "u", c: ["#7A5230"], s: "#5B9C34", L: { bg: "#EFE7DA", card: "#FBF7EF" }, D: { bg: "#17120D", card: "#231B14" } },
+      { id: "px-batu",    n: "Batu Gua",     r: "r", c: ["#6E6E6E"], s: "#2FC4C4", L: { bg: "#E9E9E9", card: "#F8F8F8" }, D: { bg: "#121212", card: "#1E1E1E" } },
+      { id: "px-berlian", n: "Berlian",      r: "e", c: ["#1FB5B5", "#7FE8E3"], s: "#5B9C34", L: { bg: "#EAF7F6", card: "#FFFFFF" }, D: { bg: "#0B1716", card: "#132322" } },
+      { id: "px-lava",    n: "Lava",         r: "e", c: ["#E2501C", "#F5A623"], s: "#3B3B3B", L: { bg: "#FBEFE7", card: "#FFFFFF" }, D: { bg: "#170D09", card: "#241510" } },
+      { id: "px-ungu",    n: "Dimensi Ungu", r: "l", c: ["#3B1E6E", "#9B5DE5", "#E0AAFF", "#9B5DE5", "#3B1E6E"], s: "#2FC4C4", anim: true, dark: true, D: { bg: "#0E0A18", card: "#1A1428" } },
     ] },
   tampilan: { name: "Chest Tampilan", price: 60, desc: "Gaya kartu, tombol, dan huruf.",
     def: { id: "default", n: "Washi (bawaan)", r: "d" },
@@ -3385,6 +3599,7 @@ const CHESTS = {
       { id: "sorot",  n: "Kartu Sorot",      r: "e" },
       { id: "kintsugi", n: "Kintsugi Emas",  r: "l" },
       { id: "hologram", n: "Hologram",       r: "l" },
+      { id: "pixel",  n: "Pixel",            r: "l" },
     ] },
   icon: { name: "Chest Icon", price: 40, desc: "Ikon profil yang tampil di beranda.",
     def: { id: "default", n: "Toga (bawaan)", r: "d", e: "🎓" },
@@ -3414,6 +3629,7 @@ const CHESTS = {
       { id: "seigaiha", n: "Seigaiha Halus", r: "r" }, { id: "asanoha", n: "Asanoha Halus", r: "r" },
       { id: "cerah", n: "Langit Cerah", r: "e" }, { id: "senja", n: "Senja", r: "e" }, { id: "aurora", n: "Aurora", r: "e" }, { id: "fuji", n: "Fuji Pagi", r: "e" },
       { id: "sakura", n: "Sakura Berguguran", r: "l" }, { id: "kunang", n: "Kunang-kunang", r: "l" }, { id: "aurorahidup", n: "Aurora Hidup", r: "l" },
+      { id: "pxbukit", n: "Bukit Blok", r: "r" }, { id: "pxmalam", n: "Malam Pixel", r: "e", dark: true }, { id: "pxhutan", n: "Hutan Pixel", r: "l" },
     ] },
 };
 /* Kombinasi siap pakai: w = warna, t = tampilan, b = background */
@@ -3427,6 +3643,9 @@ const SETS = [
   { n: "Malam Neon",   d: "Ungu-pink menyala, paling pas di mode gelap.", w: "anggur", t: "neon", b: "aurora" },
   { n: "Musim Semi",   d: "Sakura dan matcha dengan kelopak berguguran.", w: "sakura", t: "bulat", b: "sakura" },
   { n: "Kintsugi",     d: "Serba emas dengan kunang-kunang.", w: "kilau", t: "kintsugi", b: "kunang" },
+  { n: "Dunia Blok",   d: "Rumput dan tanah, gaya pixel, bukit kotak-kotak.", w: "px-rumput", t: "pixel", b: "pxbukit" },
+  { n: "Petualang Pixel", d: "Panel biru ala game petualangan di tengah hutan pixel.", w: "px-berlian", t: "pixel", b: "pxhutan" },
+  { n: "Malam Pixel",  d: "Dimensi ungu di bawah bulan kotak.", w: "px-ungu", t: "pixel", b: "pxmalam" },
 ];
 /* Ikon karakter Halloween (SVG buatan sendiri, viewBox 0 0 100 100) */
 const HW_ICONS = {
@@ -3559,15 +3778,9 @@ const HW_ITEMS = {
   ],
 };
 Object.entries(HW_ITEMS).forEach(([cat, list]) => list.forEach(it => { it.ev = "hw"; CHESTS[cat].items.push(it); }));
-SETS.push(
-  { n: "Malam Halloween", d: "Dasbor labu & kelelawar, kuburan dengan kunang-kunang.", w: "hw-halloween", t: "hw-pesta", b: "hw-kunang" },
-  { n: "Kuburan Bulan",   d: "Teal bulan purnama dan jaring laba-laba.",            w: "hw-bulan",     t: "hw-jaring", b: "hw-kuburteal" },
-  { n: "Rumah Hantu",     d: "Api labu di depan rumah hantu bulan oranye.",          w: "hw-api",       t: "hw-labu",   b: "hw-rumahhantu" },
-);
-const EVENT_CHESTS = {
-  halloween: { name: "Chest Halloween", price: 100, event: "hw",
-    desc: "Edisi event: palet warna, tampilan labu & kelelawar, ikon karakter seram, dan background kuburan." },
-};
+/* Event Halloween sudah selesai: chest-nya dihapus dari Toko. Item Halloween yang sudah
+   didapat murid tetap tersimpan & bisa dipakai; yang belum dimiliki tidak ditampilkan lagi. */
+const EVENT_CHESTS = {};
 function getChest(key) { return CHESTS[key] || EVENT_CHESTS[key]; }
 function eventPool(ev) { return CHEST_KEYS_ALL.flatMap(cat => CHESTS[cat].items.filter(i => i.ev === ev).map(it => ({ cat, it }))); }
 const CHEST_KEYS_ALL = ["warna", "tampilan", "icon", "bg"];
@@ -3649,17 +3862,390 @@ function tryBarHTML() {
 }
 function tryAttr(cat, id) { return isOwned(cat, id) ? "" : `data-try="${cat}|${id}"`; }
 
+
+/* =========================================================================
+   PET — teman belajar dari Chest Pet. Nemenin di atas kartu soal,
+   ikut senang kalau jawaban benar (cap 正) dan sedih kalau salah.
+   Art SVG buatan sendiri, viewBox 0 0 100 100.
+   ========================================================================= */
+function petFace(x1, x2, y, mx, my, ink) {
+  ink = ink || "#2B2118";
+  const eye = (x) => `<ellipse cx="${x}" cy="${y}" rx="3.4" ry="4.2" fill="${ink}"/><circle cx="${x + 1.2}" cy="${y - 1.7}" r="1.3" fill="#fff"/>`;
+  const happyEye = (x) => `<path d="M${x - 4} ${y + 1.5} Q${x} ${y - 4.5} ${x + 4} ${y + 1.5}" stroke="${ink}" stroke-width="2.2" fill="none" stroke-linecap="round"/>`;
+  const sadEye = (x, d) => `<path d="M${x - 3.6} ${y + 0.5} Q${x} ${y + 3.4} ${x + 3.6} ${y + 0.5}" stroke="${ink}" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M${x - 4 * d} ${y - 6.5} L${x + 3 * d} ${y - 4.2}" stroke="${ink}" stroke-width="1.6" stroke-linecap="round"/>`;
+  return `<circle cx="${x1 - 4.5}" cy="${y + 6.5}" r="3.4" fill="#F7A1B0" opacity=".55"/><circle cx="${x2 + 4.5}" cy="${y + 6.5}" r="3.4" fill="#F7A1B0" opacity=".55"/>
+    <g class="pf pf-n"><g class="pblink">${eye(x1)}${eye(x2)}</g>
+      <path d="M${mx - 4} ${my} Q${mx - 2} ${my + 3} ${mx} ${my} Q${mx + 2} ${my + 3} ${mx + 4} ${my}" stroke="${ink}" stroke-width="1.8" fill="none" stroke-linecap="round"/></g>
+    <g class="pf pf-h">${happyEye(x1)}${happyEye(x2)}
+      <path d="M${mx - 5} ${my - 1} Q${mx} ${my + 8} ${mx + 5} ${my - 1} Z" fill="#B4374A" stroke="${ink}" stroke-width="1.4" stroke-linejoin="round"/></g>
+    <g class="pf pf-s">${sadEye(x1, 1)}${sadEye(x2, -1)}
+      <path d="M${mx - 4} ${my + 3} Q${mx} ${my - 1.5} ${mx + 4} ${my + 3}" stroke="${ink}" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <path class="ptear" d="M${x1 + 1} ${y + 4} q-2.8 4.4 0 6 q2.8 -1.6 0 -6z" fill="#6CB8EE"/></g>`;
+}
+const PET_ART = {
+  tanuki: `<g class="pt-tail" style="transform-origin:68px 80px">
+      <ellipse cx="80" cy="70" rx="10" ry="18" transform="rotate(35 80 70)" fill="#8A5A3C"/>
+      <path d="M74 60 q8 2 12 8 M71 67 q8 2 12 8 M69 74 q6 1 9 5" stroke="#5B3A1E" stroke-width="3.2" fill="none" stroke-linecap="round"/></g>
+    <ellipse cx="38" cy="93" rx="8" ry="5" fill="#6B4423"/><ellipse cx="62" cy="93" rx="8" ry="5" fill="#6B4423"/>
+    <ellipse cx="50" cy="74" rx="25" ry="21" fill="#A0703F"/><ellipse cx="50" cy="78" rx="15" ry="13" fill="#F1DDBB"/>
+    <circle cx="30" cy="27" r="8" fill="#6B4423"/><circle cx="70" cy="27" r="8" fill="#6B4423"/><circle cx="30" cy="28" r="4" fill="#C9956A"/><circle cx="70" cy="28" r="4" fill="#C9956A"/>
+    <ellipse cx="50" cy="45" rx="26" ry="22" fill="#A0703F"/>
+    <ellipse cx="40" cy="46" rx="9" ry="7.5" fill="#7B5232"/><ellipse cx="60" cy="46" rx="9" ry="7.5" fill="#7B5232"/>
+    <ellipse cx="50" cy="55" rx="11" ry="8" fill="#F1DDBB"/><ellipse cx="50" cy="50.5" rx="3.4" ry="2.4" fill="#2B2118"/>
+    <path d="M47 21 C44 12 52 6 60 8 C58 15 53 20 47 21Z" fill="#7FB069" stroke="#4E7A3A" stroke-width="1.4"/><path d="M48 20 L57 10" stroke="#4E7A3A" stroke-width="1.2"/>
+    ${petFace(40, 60, 46, 50, 57, "#1A120B")}`,
+  neko: `<ellipse cx="38" cy="93" rx="8" ry="5" fill="#FFFDF8" stroke="#E2D8C8" stroke-width="1.5"/><ellipse cx="62" cy="93" rx="8" ry="5" fill="#FFFDF8" stroke="#E2D8C8" stroke-width="1.5"/>
+    <ellipse cx="50" cy="75" rx="24" ry="20" fill="#FFFDF8" stroke="#E2D8C8" stroke-width="1.5"/>
+    <circle cx="50" cy="80" r="9" fill="#F4C542" stroke="#B8860B" stroke-width="1.5"/><text class="noflip" x="50" y="84" text-anchor="middle" font-size="9" font-weight="700" fill="#8A5A0B" style="font-family:var(--f-head)">福</text>
+    <g class="pt-paw" style="transform-origin:70px 66px"><ellipse cx="76" cy="52" rx="7.5" ry="11" fill="#FFFDF8" stroke="#E2D8C8" stroke-width="1.5"/><ellipse cx="76" cy="47" rx="3.2" ry="2.6" fill="#F7A1B0"/></g>
+    <path d="M28 36 L26 14 L44 26Z M72 36 L74 14 L56 26Z" fill="#FFFDF8" stroke="#E2D8C8" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M30 30 L29 19 L39 26Z M70 30 L71 19 L61 26Z" fill="#F7A1B0"/>
+    <ellipse cx="50" cy="45" rx="25" ry="21" fill="#FFFDF8" stroke="#E2D8C8" stroke-width="1.5"/>
+    <path d="M34 28 C38 24 46 25 46 31 C42 34 36 34 33 32Z" fill="#F2A65A"/><path d="M60 27 C64 26 68 28 68 32 C64 33 61 31 60 27Z" fill="#3A3431"/>
+    <path d="M27 63 Q50 70 73 63" stroke="#D7263D" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="50" cy="68" r="4.6" fill="#F4C542" stroke="#B8860B" stroke-width="1.3"/>
+    <path d="M47.6 52 h4.8 l-2.4 2.6z" fill="#F08AA0"/>
+    <path d="M33 53 H22 M33 56 L23 59 M67 53 H78 M67 56 L77 59" stroke="#B9AFA2" stroke-width="1.3" stroke-linecap="round"/>
+    ${petFace(41, 59, 45, 50, 56)}`,
+  kitsune: `<g class="pt-tail" style="transform-origin:64px 84px">
+      <path d="M62 84 C78 84 92 72 90 52 C89 42 82 36 78 40 C80 54 74 66 60 72Z" fill="#F08A3C"/>
+      <path d="M90 52 C89 42 82 36 78 40 C79 45 79 49 78 53 C83 52 87 52 90 52Z" fill="#FFF5E8"/></g>
+    <ellipse cx="39" cy="93" rx="7" ry="5" fill="#5A2E14"/><ellipse cx="59" cy="93" rx="7" ry="5" fill="#5A2E14"/>
+    <ellipse cx="49" cy="75" rx="21" ry="19" fill="#F08A3C"/><ellipse cx="49" cy="79" rx="12" ry="13" fill="#FFF5E8"/>
+    <path d="M30 34 L27 8 L46 27Z M70 34 L73 8 L54 27Z" fill="#F08A3C" stroke="#C25F1F" stroke-width="1.4" stroke-linejoin="round"/>
+    <path d="M32 29 L30 15 L41 26Z M68 29 L70 15 L59 26Z" fill="#5A2E14"/>
+    <path d="M24 44 C24 28 76 28 76 44 C76 52 72 58 68 61 L50 66 L32 61 C28 58 24 52 24 44Z" fill="#F08A3C"/>
+    <path d="M33 54 C38 50 44 52 50 56 C56 52 62 50 67 54 C64 62 57 67 50 67 C43 67 36 62 33 54Z" fill="#FFF5E8"/>
+    <path d="M37 36 q4 -3 7 0 M56 36 q4 -3 7 0" stroke="#D7263D" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <ellipse cx="50" cy="56" rx="3" ry="2.2" fill="#2B2118"/>
+    ${petFace(41, 59, 45, 50, 60)}`,
+  koi: `<g class="pt-bub"><circle cx="20" cy="30" r="3" fill="none" stroke="#7CC4F2" stroke-width="1.4"/><circle cx="14" cy="18" r="2" fill="none" stroke="#7CC4F2" stroke-width="1.2"/></g>
+    <g class="pt-tail" style="transform-origin:74px 56px">
+      <path d="M72 56 C82 42 92 38 97 40 C92 48 90 52 92 56 C90 60 92 64 97 72 C92 74 82 70 72 56Z" fill="#F26B3A" stroke="#C2421A" stroke-width="1.4" stroke-linejoin="round"/></g>
+    <path d="M44 30 C50 20 60 18 66 22 C62 26 58 30 56 34Z" fill="#F26B3A" stroke="#C2421A" stroke-width="1.3" stroke-linejoin="round"/>
+    <ellipse cx="46" cy="56" rx="30" ry="24" fill="#FFFBF5" stroke="#E7D9C8" stroke-width="1.5"/>
+    <path d="M30 36 C38 32 48 34 52 42 C46 48 36 46 30 36Z" fill="#F26B3A"/><path d="M56 60 C62 54 72 56 74 62 C70 70 60 70 56 60Z" fill="#F26B3A"/><circle cx="62" cy="44" r="4" fill="#2B2118" opacity=".75"/>
+    <path d="M40 76 C44 84 52 86 56 82 C52 78 46 76 40 76Z" fill="#F7A07A" stroke="#C2421A" stroke-width="1.2"/>
+    <path d="M30 30 C26 22 28 16 32 14 M32 22 L27 20 M38 30 C38 22 42 16 46 16 M40 22 L45 21" stroke="#D4A017" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <path d="M26 64 C18 66 14 72 18 78 M30 66 C26 72 28 78 32 80" stroke="#D4A017" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    ${petFace(32, 50, 52, 40, 64)}`,
+  kirin: `<circle cx="50" cy="56" r="44" fill="url(#kirinGlow)" class="pt-glow"/>
+    <g class="pt-spark"><path d="M14 22 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" fill="#FDE68A"/><path d="M86 30 l1.5 3.5 3.5 1.5 -3.5 1.5 -1.5 3.5 -1.5 -3.5 -3.5 -1.5 3.5 -1.5z" fill="#FFF3C4"/></g>
+    <rect x="33" y="84" width="7" height="11" rx="3" fill="#C8901D"/><rect x="60" y="84" width="7" height="11" rx="3" fill="#C8901D"/>
+    <rect x="33" y="92" width="7" height="4" rx="1.5" fill="#5B3A1E"/><rect x="60" y="92" width="7" height="4" rx="1.5" fill="#5B3A1E"/>
+    <ellipse cx="50" cy="76" rx="22" ry="16" fill="#F2C14E"/>
+    <circle cx="42" cy="74" r="2" fill="#E0A82E"/><circle cx="50" cy="78" r="2" fill="#E0A82E"/><circle cx="58" cy="74" r="2" fill="#E0A82E"/>
+    <path d="M26 30 C16 36 18 50 24 56 C20 46 26 40 30 40Z M74 30 C84 36 82 50 76 56 C80 46 74 40 70 40Z" fill="#3AA6B9"/>
+    <path d="M28 26 C20 30 20 40 24 44 C24 38 28 34 32 34Z M72 26 C80 30 80 40 76 44 C76 38 72 34 68 34Z" fill="#7DD3E0"/>
+    <path d="M38 26 C36 16 32 12 30 8 M36 18 L31 18 M62 26 C64 16 68 12 70 8 M64 18 L69 18" stroke="#C8901D" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M50 24 L47 10 L53 10Z" fill="#FFE28A" stroke="#C8901D" stroke-width="1.2" stroke-linejoin="round"/>
+    <ellipse cx="50" cy="45" rx="23" ry="20" fill="#F7D06B"/>
+    <ellipse cx="50" cy="56" rx="13" ry="9" fill="#FBE3A1"/><circle cx="46" cy="55" r="1.4" fill="#8A5A0B"/><circle cx="54" cy="55" r="1.4" fill="#8A5A0B"/>
+    <path d="M40 30 C44 26 56 26 60 30 C56 33 44 33 40 30Z" fill="#3AA6B9"/>
+    ${petFace(40, 60, 44, 50, 60)}`,
+};
+const PET_DEFS = `<defs><radialGradient id="kirinGlow"><stop offset=".35" stop-color="#FDE68A" stop-opacity=".75"/><stop offset="1" stop-color="#FDE68A" stop-opacity="0"/></radialGradient></defs>`;
+const PET_LINES = {
+  tanuki: ["ゆっくり いこう！", "Santai aja, pelan-pelan."],
+  neko: ["ふくを まねくよ！", "Semoga hoki ya!"],
+  kitsune: ["しゅうちゅう！", "Fokus ya, kamu bisa."],
+  koi: ["のぼろう！", "Ayo naik terus!"],
+  kirin: ["きみなら できる！", "Kamu pasti bisa!"],
+};
+const PET_IDLE = [["つぎ！", "Soal berikutnya!"], ["がんばって！", "Semangat!"], ["いいね！", "Lanjut terus!"], ["おちついて。", "Tenang, baca pelan-pelan."]];
+const PET_HAPPY = [["やった！", "Benar!"], ["すごい！", "Hebat!"], ["せいかい！", "Mantap!"], ["さすが！", "Keren!"]];
+const PET_SAD = [["ドンマイ！", "Gak apa-apa."], ["つぎ がんばろう！", "Ayo soal berikutnya!"], ["おしい！", "Dikit lagi!"]];
+const PET_HOME = [["おかえり！", "Yuk belajar bareng."], ["えへへ", "Makasih udah dielus!"]];
+function petPick(a) { return a[Math.floor(Math.random() * a.length)]; }
+function petSVG(id) { return `<svg class="pet-svg" viewBox="0 0 100 100" aria-hidden="true">${PET_DEFS}${PET_ART[id] || ""}</svg>`; }
+function petEq() { return (SAVE && SAVE.eq.pet && SAVE.eq.pet !== "default") ? ITEM("pet", SAVE.eq.pet) : null; }
+function petHTML(it, cls) {
+  return `<div class="pet pet-${it.id} rar-${it.r} ${cls || ""}"><span class="pet-fx"><i>✦</i><i>♥</i><i>✧</i><i>✦</i></span>${petSVG(it.id)}</div>`;
+}
+function petBubbleHTML([jp, id]) { return `<b>${jp}</b>${id}`; }
+/* ---------- pet jalan-jalan ----------
+   Pet bolak-balik di "jalur" (pettrack), kadang berhenti & balik arah.
+   Posisi disimpan di PW supaya tidak loncat ke awal tiap ganti soal. */
+const PW = { x: null, dir: -1, raf: 0, last: 0, pauseUntil: 0, reactUntil: 0, sayT: 0, track: null, speed: 26 };
+const PET_REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function petTrackHTML(it, id, extra) {
+  return `<div class="pettrack ${extra || ""}" id="${id}"><div class="petwalker">${petHTML(it)}</div><div class="petbubble float" id="petBubble"></div></div>`;
+}
+function petSay(line, cls, ms) {
+  const b = document.getElementById("petBubble"); if (!b) return;
+  b.className = "petbubble float show " + (cls || "");
+  b.innerHTML = petBubbleHTML(line);
+  clearTimeout(PW.sayT);
+  if (ms) PW.sayT = setTimeout(() => { if (b.isConnected) b.classList.remove("show"); }, ms);
+  petPlace();
+}
+function petPlace() {
+  const t = PW.track; if (!t || !t.isConnected) return;
+  const w = t.querySelector(".petwalker"), b = t.querySelector(".petbubble");
+  const maxX = Math.max(0, t.clientWidth - w.offsetWidth);
+  PW.x = Math.min(Math.max(PW.x, 0), maxX);
+  w.style.transform = `translateX(${PW.x.toFixed(1)}px)`;
+  if (b) {
+    const bx = Math.min(Math.max(PW.x + w.offsetWidth / 2 - b.offsetWidth / 2, 0), Math.max(0, t.clientWidth - b.offsetWidth));
+    b.style.transform = `translateX(${bx.toFixed(1)}px)`;
+  }
+}
+function startWalk(track) {
+  cancelAnimationFrame(PW.raf);
+  PW.track = track; PW.reactUntil = 0; PW.last = 0;
+  const pet = track.querySelector(".pet"), w = track.querySelector(".petwalker");
+  const maxX = () => Math.max(0, track.clientWidth - w.offsetWidth);
+  if (PW.x === null || PW.x > maxX()) PW.x = Math.random() * maxX();
+  pet.classList.toggle("flip", PW.dir > 0);
+  petPlace();
+  if (PET_REDUCED) return;
+  const step = (t) => {
+    if (!track.isConnected) return;
+    const dt = PW.last ? Math.min(60, t - PW.last) / 1000 : 0; PW.last = t;
+    const now = performance.now(), moving = now > PW.pauseUntil && now > PW.reactUntil;
+    if (moving) {
+      PW.x += PW.dir * PW.speed * dt;
+      const m = maxX();
+      if (PW.x <= 0) { PW.x = 0; PW.dir = 1; PW.pauseUntil = now + 600 + Math.random() * 900; }
+      else if (PW.x >= m) { PW.x = m; PW.dir = -1; PW.pauseUntil = now + 600 + Math.random() * 900; }
+      else if (Math.random() < dt * 0.25) PW.pauseUntil = now + 900 + Math.random() * 1800;   // berhenti sebentar
+      else if (Math.random() < dt * 0.08) PW.dir *= -1;                                         // tiba-tiba balik arah
+      pet.classList.toggle("flip", PW.dir > 0);
+    }
+    pet.classList.toggle("walking", moving);
+    petPlace();
+    PW.raf = requestAnimationFrame(step);
+  };
+  PW.raf = requestAnimationFrame(step);
+}
+/* dipanggil setiap render: kalau ada kartu soal dengan cap 正, pasang jalur pet di atasnya */
+function mountPet() {
+  const home = document.getElementById("homeTrack");
+  if (home) { startWalk(home); petSay(PET_HOME[0], "", 3500); return; }
+  const it = petEq(), stamp = document.getElementById("stamp");
+  if (!it || !stamp || document.getElementById("petTrack")) return;
+  const card = stamp.closest(".qcard"); if (!card) return;
+  const line = state.idx === 0 ? PET_LINES[it.id] : state.streak >= 3 ? [`コンボ ×${state.streak}！`, "Pertahankan!"] : petPick(PET_IDLE);
+  const wrap = document.createElement("div");
+  wrap.innerHTML = petTrackHTML(it, "petTrack");
+  const track = wrap.firstElementChild;
+  card.parentNode.insertBefore(track, card);
+  startWalk(track);
+  if (state.idx === 0 || state.streak >= 3 || Math.random() < 0.35) petSay(line, "", 3000);
+}
+function petMood(el, mood) { el.classList.remove("happy", "sad", "walking"); void el.offsetWidth; el.classList.add(mood); }
+function petReact(ok, timeout) {
+  const t = document.getElementById("petTrack"); if (!t) return;
+  PW.reactUntil = Infinity;   // berhenti jalan sampai soal berikutnya
+  petMood(t.querySelector(".pet"), ok ? "happy" : "sad");
+  petSay(ok ? (state.streak >= 3 ? [`コンボ ×${state.streak}！`, "Lanjutkan!"] : petPick(PET_HAPPY)) : timeout ? ["じかん ぎれ…", "Waktu habis, ayo lebih cepat!"] : petPick(PET_SAD), ok ? "ok" : "ng", 0);
+}
+function petHomeHTML() { return ""; }
+
+/* ---------- pet keliling layar di semua halaman (kecuali saat ngerjain soal) ----------
+   Tanuki, Neko, Kitsune jalan di bawah layar; Koi & Kirin terbang ke mana-mana.
+   Lapisan ini di luar #app, jadi tidak ikut terhapus saat render. Tidak bisa diketuk
+   (pointer-events:none) supaya tidak menghalangi tombol. */
+const PET_FLY = ["koi", "kirin"];
+const PET_SCREEN_LINES = {
+  "main-menu": PET_HOME[0],
+  shop: ["ガチャ しよう！", "Buka chest yuk!"],
+  inventory: ["コレクション！", "Lihat koleksi kita."],
+  rank: ["かとう！", "Ayo naik rank!"],
+};
+const PR = { el: null, raf: 0, last: 0, id: null, screen: null, x: 0, y: 0, dir: -1, tx: null, ty: null, pauseUntil: 0, sayT: 0, size: 58, plat: null, jump: null, perch: null, perchTo: null, nextHop: 0, nextTalk: 0 };
+function prBounds() {
+  const nav = document.querySelector(".bottomnav");
+  const nh = nav ? nav.getBoundingClientRect().height : 0;
+  return { W: window.innerWidth, H: window.innerHeight - nh, top: 64 };
+}
+function prSay(line) {
+  if (!PR.el) return;
+  const b = PR.el.querySelector(".petbubble");
+  b.innerHTML = petBubbleHTML(line); b.classList.add("show");
+  clearTimeout(PR.sayT); PR.sayT = setTimeout(() => b.classList.remove("show"), 3600);
+  prPlace();
+}
+function prPlace() {
+  const el = PR.el; if (!el) return;
+  const w = el.querySelector(".petwalker"), b = el.querySelector(".petbubble");
+  w.style.transform = `translate(${PR.x.toFixed(1)}px, ${PR.y.toFixed(1)}px)`;
+  const bw = b.offsetWidth, bh = b.offsetHeight;
+  const bx = Math.min(Math.max(PR.x + PR.size / 2 - bw / 2, 6), window.innerWidth - bw - 6);
+  const by = PR.y - bh - 4 < 6 ? PR.y + PR.size + 4 : PR.y - bh - 4;
+  b.style.transform = `translate(${bx.toFixed(1)}px, ${by.toFixed(1)}px)`;
+}
+function petUpdateLayer() {
+  const it = petEq(), hide = !it || ["quiz", "sim-test"].includes(state.screen);
+  if (hide) {
+    if (PR.el) PR.el.hidden = true;
+    cancelAnimationFrame(PR.raf); PR.raf = 0; PR.screen = null;
+    return;
+  }
+  if (!PR.el) {
+    PR.el = document.createElement("div"); PR.el.id = "petLayer";
+    document.body.appendChild(PR.el);
+  }
+  PR.el.hidden = false;
+  const fly = PET_FLY.includes(it.id), b = prBounds();
+  if (PR.id !== it.id) {
+    PR.id = it.id;
+    PR.el.innerHTML = `<div class="petwalker">${petHTML(it)}</div><div class="petbubble float"></div>`;
+    PR.x = Math.random() * (b.W - PR.size); PR.y = fly ? b.top + Math.random() * (b.H - b.top - PR.size) : b.H - PR.size - 4;
+    PR.tx = null;
+  }
+  if (PR.screen !== state.screen) {
+    PR.screen = state.screen; PR.plat = null; PR.jump = null; PR.perch = null; PR.tx = null;
+    if (!fly) PR.y = b.H - PR.size - 4;
+    const line = PET_SCREEN_LINES[state.screen] || (state.screen.includes("result") ? ["おつかれ！", "Kerja bagus!"] : Math.random() < 0.4 ? petPick(PET_IDLE) : null);
+    if (line) setTimeout(() => prSay(line), 250);
+  }
+  prPlace();
+  if (PET_REDUCED || PR.raf) return;
+  const step = (t) => {
+    if (!PR.el || PR.el.hidden) { PR.raf = 0; return; }
+    const p = PR.el.querySelector(".pet"), dt = PR.last ? Math.min(60, t - PR.last) / 1000 : 0; PR.last = t;
+    const B = prBounds(), now = performance.now(), maxX = Math.max(0, B.W - PR.size);
+    const isFly = PET_FLY.includes(PR.id), ground = B.H - PR.size - 4;
+    if (!PR.nextTalk) PR.nextTalk = now + 9000 + Math.random() * 8000;
+    if (!PR.nextHop) PR.nextHop = now + 2500 + Math.random() * 3000;
+    if (now > PR.nextTalk) { PR.nextTalk = now + 14000 + Math.random() * 14000; prSay(petChatLine()); }
+    let moving = now > PR.pauseUntil, mode = "walk";
+    if (PR.jump) {
+      /* lagi loncat: lintasan parabola dari titik awal ke atas kartu (atau ke tanah) */
+      const J = PR.jump; J.t = Math.min(1, J.t + dt / J.dur);
+      const tx = J.plat && J.plat.isConnected ? J.plat.getBoundingClientRect() : null;
+      const y1 = tx ? tx.top - PR.size + 4 : ground;
+      PR.x = J.x0 + (J.x1 - J.x0) * J.t;
+      PR.y = J.y0 + (y1 - J.y0) * J.t - J.arc * 4 * J.t * (1 - J.t);
+      mode = "jump";
+      if (J.t >= 1) { PR.plat = tx ? J.plat : null; PR.jump = null; PR.pauseUntil = now + 350 + Math.random() * 500; }
+    } else if (isFly) {
+      const maxY = Math.max(B.top, ground);
+      if (PR.perch && PR.perch.isConnected && now < PR.pauseUntil) {
+        const r = PR.perch.getBoundingClientRect(); PR.y = r.top - PR.size + 4; moving = false;   // duduk di atas kartu
+      } else {
+        PR.perch = null;
+        if (PR.tx === null) {
+          const plats = Math.random() < 0.35 ? prPlatforms(B) : [];
+          if (plats.length) {   // pilih kartu buat hinggap
+            const pl = plats[Math.floor(Math.random() * plats.length)];
+            PR.tx = pl.r.left + Math.random() * Math.max(0, pl.r.width - PR.size); PR.ty = pl.r.top - PR.size + 4; PR.perchTo = pl.el;
+          } else { PR.tx = Math.random() * maxX; PR.ty = B.top + Math.random() * (maxY - B.top); PR.perchTo = null; }
+        }
+        if (moving) {
+          const dx = PR.tx - PR.x, dy = PR.ty - PR.y, d = Math.hypot(dx, dy);
+          if (d < 3) {
+            PR.tx = null;
+            if (PR.perchTo) { PR.perch = PR.perchTo; PR.pauseUntil = now + 2200 + Math.random() * 2600; }
+            else if (Math.random() < 0.5) PR.pauseUntil = now + 800 + Math.random() * 1600;
+          } else { const v = Math.min(d, 46 * dt); PR.x += dx / d * v; PR.y += dy / d * v; if (Math.abs(dx) > 2) PR.dir = dx > 0 ? 1 : -1; }
+        }
+        PR.y = Math.min(Math.max(PR.y, B.top), maxY);
+      }
+    } else {
+      /* jalan di tanah atau di atas kartu */
+      let lo = 0, hi = maxX, plR = null;
+      if (PR.plat) {
+        plR = PR.plat.isConnected ? PR.plat.getBoundingClientRect() : null;
+        if (!plR || plR.top < B.top || plR.top > B.H - 12) { prJumpTo(null, PR.x, 30, now); plR = null; }   // kartunya keluar layar: turun
+        else { PR.y = plR.top - PR.size + 4; lo = plR.left; hi = Math.max(lo, plR.right - PR.size); }
+      } else PR.y = ground;
+      if (!PR.jump && moving) {
+        PR.x += PR.dir * 30 * dt;
+        if (PR.x <= lo) { PR.x = lo; PR.dir = 1; PR.pauseUntil = now + 600 + Math.random() * 900; }
+        else if (PR.x >= hi) { PR.x = hi; PR.dir = -1; PR.pauseUntil = now + 600 + Math.random() * 900; }
+        else if (Math.random() < dt * 0.22) PR.pauseUntil = now + 1000 + Math.random() * 2000;
+        else if (Math.random() < dt * 0.07) PR.dir *= -1;
+      }
+      if (!PR.jump && now > PR.nextHop && now > PR.pauseUntil) {
+        PR.nextHop = now + 4000 + Math.random() * 6000;
+        const plats = prPlatforms(B).filter(x => x.el !== PR.plat);
+        if (PR.plat && (!plats.length || Math.random() < 0.4)) prJumpTo(null, PR.x + (Math.random() - .5) * 120, 40, now);
+        else if (plats.length) {
+          plats.sort((a, b) => Math.abs(a.r.left + a.r.width / 2 - PR.x) - Math.abs(b.r.left + b.r.width / 2 - PR.x));
+          const pl = plats[Math.floor(Math.random() * Math.min(3, plats.length))];
+          prJumpTo(pl.el, pl.r.left + Math.random() * Math.max(0, pl.r.width - PR.size), 46, now);
+        }
+      }
+      if (PR.jump) mode = "jump";
+    }
+    PR.x = Math.min(Math.max(PR.x, 0), maxX);
+    p.classList.toggle("flip", PR.dir > 0);
+    p.classList.toggle("walking", moving && mode === "walk");
+    p.classList.toggle("jumping", mode === "jump");
+    prPlace();
+    PR.raf = requestAnimationFrame(step);
+  };
+  PR.last = 0; PR.raf = requestAnimationFrame(step);
+}
+/* kartu-kartu yang bisa dinaiki pet */
+const PET_PLAT_SEL = ".profile,.statbox,.category-tile,.shopcard,.invitem,.rankmini,.levelrow,.modecard,.balance,.shopbanner,.infobox,.welcome,.result,.reward,.rk-hero";
+function prPlatforms(B) {
+  return [...document.querySelectorAll(PET_PLAT_SEL)].map(el => ({ el, r: el.getBoundingClientRect() }))
+    .filter(p => p.r.width >= PR.size + 12 && p.r.top > B.top + PR.size && p.r.top < B.H - 40 && p.r.left >= -2 && p.r.right <= B.W + 2);
+}
+function prJumpTo(plat, x1, arc, now) {
+  const B = prBounds(), maxX = Math.max(0, B.W - PR.size);
+  x1 = Math.min(Math.max(x1, 0), maxX);
+  const y1 = plat ? plat.getBoundingClientRect().top - PR.size + 4 : B.H - PR.size - 4;
+  const dist = Math.hypot(x1 - PR.x, y1 - PR.y);
+  PR.jump = { x0: PR.x, y0: PR.y, x1, plat, t: 0, dur: 0.45 + Math.min(0.5, dist / 900), arc: arc + Math.max(0, PR.y - y1) * 0.35 };
+  PR.dir = x1 >= PR.x ? 1 : -1; PR.plat = null;
+}
+const PET_CHAT = [
+  ["お疲れ様です！", "otsukaresama desu · Makasih udah kerja keras!"],
+  ["元気ですか？", "genki desu ka · Apa kabar?"],
+  ["がんばって！", "ganbatte · Semangat!"],
+  ["よろしくね！", "yoroshiku ne · Mohon bantuannya ya!"],
+  ["いっしょに 勉強しよう！", "issho ni benkyou shiyou · Yuk belajar bareng!"],
+  ["日本語、楽しい！", "nihongo, tanoshii · Bahasa Jepang seru!"],
+  ["ちょっと 休もうか？", "chotto yasumou ka · Istirahat bentar?"],
+  ["おなか すいた…", "onaka suita · Laper nih…"],
+  ["ねむい…", "nemui · Ngantuk…"],
+  ["すごいね！", "sugoi ne · Keren!"],
+  ["大丈夫！", "daijoubu · Gak apa-apa, pelan-pelan aja."],
+  ["水を 飲んでね。", "mizu o nonde ne · Jangan lupa minum ya."],
+  ["一歩ずつ！", "ippo zutsu · Selangkah demi selangkah!"],
+  ["まいにち 少しずつ！", "mainichi sukoshi zutsu · Tiap hari sedikit-sedikit!"],
+  ["ファイト！", "faito · Ayo, kamu bisa!"],
+  ["また 明日ね！", "mata ashita ne · Sampai besok ya!"],
+];
+function petChatLine() {
+  const h = new Date().getHours();
+  if (Math.random() < 0.25) {
+    if (h >= 4 && h < 10) return ["おはよう！", "ohayou · Selamat pagi!"];
+    if (h >= 10 && h < 17) return ["こんにちは！", "konnichiwa · Selamat siang!"];
+    if (h >= 17 && h < 22) return ["こんばんは！", "konbanwa · Selamat malam!"];
+    return ["もう 遅いよ。", "mou osoi yo · Udah malam, jangan begadang ya."];
+  }
+  return petPick(PET_CHAT);
+}
+CHESTS.pet = { name: "Chest Pet", price: 80, desc: "Teman belajar yang nemenin pas ngerjain soal. Ikut senang kalau jawabanmu benar, sedih kalau salah.",
+  def: { id: "default", n: "Tanpa pet", r: "d" },
+  items: [
+    { id: "tanuki",  n: "Tanuki",      r: "c" },
+    { id: "neko",    n: "Maneki Neko", r: "u" },
+    { id: "kitsune", n: "Kitsune",     r: "r" },
+    { id: "koi",     n: "Koi Naga",    r: "e" },
+    { id: "kirin",   n: "Kirin Emas",  r: "l" },
+  ] };
+
 const CHEST_KEYS = Object.keys(CHESTS);
-const CAT_LABEL = { warna: "Warna", tampilan: "Tampilan", icon: "Icon", bg: "Background" };
-const TOTAL_ITEMS = CHEST_KEYS.reduce((a, k) => a + CHESTS[k].items.length, 0);
+const CAT_LABEL = { warna: "Warna", tampilan: "Tampilan", icon: "Icon", bg: "Background", pet: "Pet" };
+function invItems(cat) {
+  return CHESTS[cat].items.filter(i => !i.ev || isOwned(cat, i.id))
+    .map((it, i) => [it, i]).sort((a, b) => (RAR_ORDER.indexOf(a[0].r) - RAR_ORDER.indexOf(b[0].r)) || (a[1] - b[1])).map(x => x[0]);
+}
+function totalItems() { return CHEST_KEYS.reduce((a, k) => a + invItems(k).length, 0); }
 function ITEM(cat, id) { return CHESTS[cat].items.find(i => i.id === id) || CHESTS[cat].def; }
 
 /* ---------- simpan progres (per perangkat) ---------- */
 let SAVE = null;
 function freshSave() {
   return { v: 1, coins: 100, earned: 0, quizzes: 0, pulls: 0, streak: 0, lastDay: "", theme: null, pity: {},
-    owned: { warna: [], tampilan: [], icon: [], bg: [] },
-    eq: { warna: "default", tampilan: "default", icon: "default", bg: "default" }, ranks: freshRanks(), redeemed: [] };
+    owned: { warna: [], tampilan: [], icon: [], bg: [], pet: [] },
+    eq: { warna: "default", tampilan: "default", icon: "default", bg: "default", pet: "default" }, ranks: freshRanks(), redeemed: [] };
 }
 function sanitizeSave(p) {
   const s = freshSave();
@@ -3826,6 +4412,7 @@ function previewHTML(cat, it, xl) {
   if (cat === "warna") return `<span class="pv sw${x}${it.anim ? " anim" : ""}" style="background:${swatchCSS(it)}"></span>`;
   if (cat === "icon") return `<span class="pv ic${x} rar-${it.r}">${iconInner(it)}</span>`;
   if (cat === "bg") return `<span class="pv bgwrap${x}"><i class="bg-${it.id}"></i></span>`;
+  if (cat === "pet") return `<span class="pv pt${x} rar-${it.r}">${PET_ART[it.id] ? petSVG(it.id) : `<span class="nopet">∅</span>`}</span>`;
   return `<span class="pv uiprev${x} uiscope ui-${it.id}"><i class="uiprev-card">あA</i></span>`;
 }
 function chestHTML(key, cls) { return `<div class="chest k-${key} ${cls || ""}"><div class="lid"></div><div class="lock"></div><div class="box"></div></div>`; }
@@ -3856,6 +4443,7 @@ function mainMenuHTML() {
         <div class="pf-daily ${claimed ? "done" : ""}">${claimed ? "✓ Bonus harian hari ini sudah diambil" : "Bonus harian: +20 koin untuk kuis pertama hari ini"}</div>
       </div>
     </div>
+    ${petHomeHTML()}
     <div class="statrow">
       <div class="statbox"><b><span class="coin"></span>${fmtNum(SAVE.coins)}</b><small>Koin</small></div>
       <div class="statbox"><b>${curStreak()}</b><small>Hari beruntun</small></div>
@@ -3874,9 +4462,9 @@ function mainMenuHTML() {
       ${chestHTML("bg")}
       <div style="flex:1;min-width:0;">
         <h3>Toko Chest</h3>
-        <p>Tukar koin dengan warna, tampilan, ikon, dan background.</p>
-        <div class="minibar"><i style="width:${(ownedTotal() / TOTAL_ITEMS * 100).toFixed(1)}%"></i></div>
-        <div class="minilabel">Koleksi ${ownedTotal()} / ${TOTAL_ITEMS}</div>
+        <p>Tukar koin dengan warna, tampilan, ikon, background, dan pet.</p>
+        <div class="minibar"><i style="width:${(ownedTotal() / totalItems() * 100).toFixed(1)}%"></i></div>
+        <div class="minilabel">Koleksi ${ownedTotal()} / ${totalItems()}</div>
       </div>
     </button>
     <div class="footer-note">Progres &amp; koin tersimpan di perangkat ini · v${APP_VERSION}</div>
@@ -3932,8 +4520,8 @@ function redeemCode(raw) {
   const code = String(raw || "").toUpperCase().replace(/[\s-]/g, "");
   if (!code) return { ok: false, msg: "Masukkan kode dulu." };
   const ah = redeemHash(code);
-  if (ah === "eccc76eb") return reviewUnlock();
-  if (ah === "48120083") return reviewRestore();
+  if (ah === "eccc76eb" || ah === "428f3282") return reviewUnlock();
+  if (ah === "48120083" || ah === "a3fe32e9") return reviewRestore();
   const hit = REDEEM_CODES.find(c => c.h === ah);
   if (!hit) return { ok: false, msg: "Kode tidak dikenal. Cek lagi penulisannya." };
   if (SAVE.redeemed.includes(hit.id) || deviceRedeemed().includes(hit.id)) return { ok: false, msg: "Kode ini sudah pernah dipakai dan tidak bisa dipakai lagi." };
@@ -4069,7 +4657,7 @@ function setsHTML() {
 }
 function inventoryHTML() {
   const tab = state.invTab, isSet = tab === "set", ch = CHESTS[tab];
-  const tabs = CHEST_KEYS.map(k => `<button class="segbtn ${k === tab ? "on" : ""}" data-invtab="${k}">${CAT_LABEL[k]}<small>${ownedIn(k)}/${CHESTS[k].items.length}</small></button>`).join("");
+  const tabs = CHEST_KEYS.map(k => `<button class="segbtn ${k === tab ? "on" : ""}" data-invtab="${k}">${CAT_LABEL[k]}<small>${ownedIn(k)}/${invItems(k).length}</small></button>`).join("");
   const cell = (it) => {
     const own = isOwned(tab, it.id), on = realEq()[tab] === it.id;
     return `<button class="invitem rar-${it.r} ${own ? "" : "locked"} ${on ? "on" : ""}" ${own ? `data-equip="${it.id}"` : tryAttr(tab, it.id)}>
@@ -4085,7 +4673,7 @@ function inventoryHTML() {
     <div class="sub">Ketuk item yang sudah dimiliki untuk memasangnya. Ketuk item terkunci untuk mencobanya sebentar. Item terkunci didapat dari chest di Toko.</div>
     <div class="invtabs">${tabs}</div>
     <button class="segbtn setbtn ${isSet ? "on" : ""}" data-invtab="set">Kombinasi siap pakai<small>${SETS.filter(setOwned).length}/${SETS.length} lengkap</small></button>
-    ${isSet ? setsHTML() : `<div class="invgrid">${cell(ch.def)}${ch.items.map(cell).join("")}</div>`}
+    ${isSet ? setsHTML() : `<div class="invgrid">${cell(ch.def)}${invItems(tab).map(cell).join("")}</div>`}
     <details class="infobox"><summary>Cadangkan / pulihkan progres</summary>
       <p>Progres hanya tersimpan di perangkat ini. Salin kode di bawah untuk pindah ke perangkat lain atau sebagai cadangan.</p>
       <textarea id="bkOut" rows="3" readonly>${exportCode()}</textarea>
@@ -4106,6 +4694,12 @@ function attachShopHandlers() {
   if ($("btnCoins") && !$("btnCoins").classList.contains("static")) $("btnCoins").addEventListener("click", goShop);
   if ($("homeShop")) $("homeShop").addEventListener("click", goShop);
   if ($("homeAvatar")) $("homeAvatar").addEventListener("click", () => goInventory("icon"));
+  if ($("homeTrack")) $("homeTrack").addEventListener("click", () => {
+    const p = $("homeTrack").querySelector(".pet");
+    petMood(p, "happy"); PW.reactUntil = performance.now() + 1300;
+    setTimeout(() => p.classList.remove("happy"), 1300);
+    petSay(PET_HOME[1], "ok", 2200);
+  });
   if ($("homeContinue")) $("homeContinue").addEventListener("click", goKotobaSetup);
   document.querySelectorAll("[data-buy]").forEach(b => b.addEventListener("click", () => buyChest(b.dataset.buy)));
   document.querySelectorAll("[data-odds]").forEach(b => b.addEventListener("click", keepY(() => { state.shopOpen = state.shopOpen === b.dataset.odds ? null : b.dataset.odds; })));
