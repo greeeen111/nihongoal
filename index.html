@@ -1799,12 +1799,14 @@ let GAME_LOADING = null;
 function loadGameScript() {
   if (window.NSGame) return Promise.resolve();
   if (GAME_LOADING) return GAME_LOADING;
-  GAME_LOADING = new Promise((res, rej) => {
+  // coba di folder game/ dulu; kalau file-nya terupload di folder utama repo, ambil dari sana
+  const tryLoad = (path) => new Promise((res, rej) => {
     const sc = document.createElement("script");
-    sc.src = "game/game.js?v=" + encodeURIComponent(APP_VERSION);
-    sc.onload = () => res(); sc.onerror = () => { sc.remove(); GAME_LOADING = null; rej(); };
+    sc.src = path + "?v=" + encodeURIComponent(APP_VERSION);
+    sc.onload = () => (window.NSGame ? res() : rej()); sc.onerror = () => { sc.remove(); rej(); };
     document.head.appendChild(sc);
   });
+  GAME_LOADING = tryLoad("game/game.js").catch(() => tryLoad("game.js")).catch((e) => { GAME_LOADING = null; throw e; });
   return GAME_LOADING;
 }
 const GAME_API = {
@@ -3690,7 +3692,7 @@ Object.assign(state, { dokLv: "N5", dokList: [] });
 /* =========================================================================
    V2 — KOIN, TOKO GACHA, KOLEKSI, KOSMETIK, SIMPAN PROGRES
    ========================================================================= */
-const APP_VERSION = "3.0.0";
+const APP_VERSION = "3.0.1";
 const SAVE_KEY = "nihongoStudy.save.v1";   // JANGAN diganti saat update, supaya progres murid tidak hilang
 const RAR = {
   c: { name: "Common",   w: 50,  refund: 5 },
