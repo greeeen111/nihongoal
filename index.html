@@ -1227,6 +1227,19 @@ body .rankmini.rm-s8{
 .rankmini.rm-s8 .rstar.on{ color:#B4235A; text-shadow:0 0 6px rgba(255,255,255,.8); }
 body.focus .rankmini.rmt::before{ animation:none; }
 @media (prefers-reduced-motion: reduce){ .rankmini.rmt::before{ animation:none; } }
+
+/* ---------- kartu menu Game ---------- */
+body .category-tile.c-game{ grid-column:1 / -1; min-height:auto; flex-direction:row; align-items:center; gap:14px; color:#fff;
+  background:linear-gradient(125deg, #2B2140 0%, #46306B 55%, #6A3E7E 100%) !important; border:2px solid #3F2631 !important; box-shadow:0 5px 0 #3F2631 !important; clip-path:none !important; }
+body .category-tile.c-game::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:.35;
+  background:linear-gradient(transparent 70%, rgba(106,170,58,.9) 70%, rgba(106,170,58,.9) 78%, rgba(139,90,43,.9) 78%),
+    radial-gradient(circle at 85% 30%, #FFE36E 0 6px, transparent 7px); }
+body .category-tile.c-game .catmark{ background:#3F2631; border:none; color:#FFD84A; font-family:'DotGothic16', var(--f-head); width:52px; height:52px; font-size:28px; position:relative; }
+body .category-tile.c-game h3{ color:#fff; font-family:'DotGothic16', var(--f-head); font-size:17px; }
+body .category-tile.c-game p{ color:rgba(255,255,255,.82); }
+body .category-tile.c-game .meta{ color:#FFD84A; }
+body .category-tile.c-game .catstatus{ color:#3F2631; background:#FFD84A; border-color:#FFD84A; }
+body .category-tile.c-game > div{ position:relative; }
 /* ---------- PET (teman belajar) ---------- */
 .chest.k-pet{ --cc:#EC6F9E; --cd:#9D2F5C; } .chest.k-pet .lock{ background:#FDE68A; }
 .pf-h, .pf-s{ display:none; }
@@ -1781,6 +1794,36 @@ function lessonsLabel(arr) {
 }
 function selectedWords() { return vocabByLessons(state.kSel); }
 
+/* ---------- GAME (v3.0): file game ada di folder game/, dimuat hanya saat dibuka ---------- */
+let GAME_LOADING = null;
+function loadGameScript() {
+  if (window.NSGame) return Promise.resolve();
+  if (GAME_LOADING) return GAME_LOADING;
+  GAME_LOADING = new Promise((res, rej) => {
+    const sc = document.createElement("script");
+    sc.src = "game/game.js?v=" + encodeURIComponent(APP_VERSION);
+    sc.onload = () => res(); sc.onerror = () => { sc.remove(); GAME_LOADING = null; rej(); };
+    document.head.appendChild(sc);
+  });
+  return GAME_LOADING;
+}
+const GAME_API = {
+  save: () => SAVE,
+  persist: () => saveSave(),
+  addCoins(n) {
+    n = Math.max(0, Math.floor(n)); if (!n) return;
+    SAVE.coins += n; SAVE.earned += n; saveSave();
+    const pill = document.querySelector("#btnCoins span:last-child"); if (pill) pill.textContent = fmtNum(SAVE.coins);
+  },
+};
+function goGame() { clearTimer(); state.screen = "game"; render(); }
+function mountGame() {
+  const root = document.getElementById("gameRoot");
+  if (!root) { if (window.NSGame) window.NSGame.unmount(); return; }
+  root.innerHTML = `<div class="g-wait" style="text-align:center;color:var(--muted);padding:30px 0">Memuat game…</div>`;
+  loadGameScript().then(() => { if (root.isConnected) window.NSGame.mount(root, GAME_API); })
+    .catch(() => { root.innerHTML = `<div style="text-align:center;color:var(--muted);padding:30px 0">Game gagal dimuat. Pastikan folder <b>game</b> sudah diupload dan ada koneksi internet, lalu coba lagi.</div>`; });
+}
 function goKotobaHome() { clearTimer(); state.screen = "kotoba-home"; render(); }
 function goKotobaSetup() { if (!KOTOBA_LESSONS.length) setKBook(state.kBook); clearTimer(); state.screen = "kotoba-setup"; render(); }
 
@@ -1791,7 +1834,7 @@ function goBack() {
   const s = state.screen;
   const map = {
     "shop": "main-menu", "inventory": "main-menu", "rank": "main-menu", "rank-result": "rank", "dokkai-home": "main-menu", "dokkai-result": "dokkai-home",
-    "kanji-home": "main-menu", "kotoba-home": "main-menu", "bunpo-home": "main-menu", "dokkai-home": "main-menu",
+    "game": "main-menu", "kanji-home": "main-menu", "kotoba-home": "main-menu", "bunpo-home": "main-menu", "dokkai-home": "main-menu",
     "flash-pick": "kanji-home", "level-pick": "kanji-home", "speed-pick": "kanji-home",
     "kotoba-setup": "kotoba-home", "kotoba-result": "kotoba-setup",
     "kbook-setup": "kanji-home", "kbook-result": "kbook-setup", "sim-home": "kanji-home", "sim-test": "sim-home", "sim-result": "sim-home",
@@ -2018,8 +2061,9 @@ function render() {
   applyCosmetics();
   app.innerHTML = topbarHTML() + tryBarHTML() + screenHTML() + bottomNavHTML();
   app.classList.toggle("hasnav", ["main-menu", "rank", "shop", "inventory"].includes(state.screen));
-  document.body.classList.toggle("focus", ["quiz", "sim-test"].includes(state.screen));
+  document.body.classList.toggle("focus", ["quiz", "sim-test", "game"].includes(state.screen));
   attachHandlers();
+  mountGame();
   mountPet();
   petUpdateLayer();
   if (document.getElementById("tryDone")) document.getElementById("tryDone").addEventListener("click", () => endTry(true));
@@ -2052,7 +2096,7 @@ function topbarHTML() {
   const themeBtn = `<button class="themebtn" id="btnTheme" title="${forcedDark() ? "Item Halloween yang dipakai selalu memakai mode gelap" : "Ganti tema terang/gelap"}">${effTheme() === "dark" ? "&#9728;" : "&#9789;"}</button>`;
   const sec = currentSectionKey();
   const top = ["main-menu", "rank", "shop", "inventory"].includes(state.screen);
-  const label = state.screen === "rank" || state.screen === "rank-result" || (state.screen === "quiz" && state.mode === "rank") ? "Rank" : state.screen === "main-menu" ? "Beranda" : state.screen === "shop" ? "Toko" : state.screen === "inventory" ? "Koleksi" : (sec ? SECTION_META[sec].label : "Belajar");
+  const label = state.screen === "rank" || state.screen === "rank-result" || (state.screen === "quiz" && state.mode === "rank") ? "Rank" : state.screen === "main-menu" ? "Beranda" : state.screen === "shop" ? "Toko" : state.screen === "inventory" ? "Koleksi" : state.screen === "game" ? "Game" : (sec ? SECTION_META[sec].label : "Belajar");
   const busy = ["quiz", "sim-test"].includes(state.screen);
   const coin = `<button class="coinpill ${busy ? "static" : ""}" id="btnCoins" title="Koin"><span class="coin"></span><span>${fmtNum(SAVE.coins)}</span></button>`;
   return `
@@ -2076,6 +2120,7 @@ function screenHTML() {
     case "shop": html = shopHTML(); break;
     case "rank": html = rankHTML(); break;
     case "dokkai-home": html = dokkaiHomeHTML(); break;
+    case "game": html = `<div id="gameRoot"></div>`; break;
     case "dokkai-result": html = dokkaiResultHTML(); break;
     case "rank-result": html = rankResultHTML(); break;
     case "inventory": html = inventoryHTML(); break;
@@ -2990,7 +3035,8 @@ function attachHandlers() {
   document.querySelectorAll("[data-section]").forEach(btn => {
     btn.addEventListener("click", () => {
       const key = btn.dataset.section;
-      if (key === "kanji") goKanjiHome();
+      if (key === "game") goGame();
+      else if (key === "kanji") goKanjiHome();
       else if (key === "kotoba") goKotobaHome();
       else if (key === "dokkai") goDokkaiHome();
       else goPlaceholder(key);
@@ -3644,7 +3690,7 @@ Object.assign(state, { dokLv: "N5", dokList: [] });
 /* =========================================================================
    V2 — KOIN, TOKO GACHA, KOLEKSI, KOSMETIK, SIMPAN PROGRES
    ========================================================================= */
-const APP_VERSION = "2.9.9";
+const APP_VERSION = "3.0.0";
 const SAVE_KEY = "nihongoStudy.save.v1";   // JANGAN diganti saat update, supaya progres murid tidak hilang
 const RAR = {
   c: { name: "Common",   w: 50,  refund: 5 },
@@ -4200,7 +4246,7 @@ function prPlace() {
   b.style.transform = `translate(${bx.toFixed(1)}px, ${by.toFixed(1)}px)`;
 }
 function petUpdateLayer() {
-  const it = petEq(), hide = !it || ["quiz", "sim-test"].includes(state.screen);
+  const it = petEq(), hide = !it || ["quiz", "sim-test", "game"].includes(state.screen);
   if (hide) {
     if (PR.el) PR.el.hidden = true;
     cancelAnimationFrame(PR.raf); PR.raf = 0; PR.screen = null;
@@ -4369,7 +4415,8 @@ let SAVE = null;
 function freshSave() {
   return { v: 1, coins: 100, earned: 0, quizzes: 0, pulls: 0, streak: 0, lastDay: "", theme: null, pity: {},
     owned: { warna: [], tampilan: [], icon: [], bg: [], pet: [] },
-    eq: { warna: "default", tampilan: "default", icon: "default", bg: "default", pet: "default" }, ranks: freshRanks(), redeemed: [] };
+    eq: { warna: "default", tampilan: "default", icon: "default", bg: "default", pet: "default" }, ranks: freshRanks(), redeemed: [],
+    game: { st: {}, chr: "m" } };
 }
 function sanitizeSave(p) {
   const s = freshSave();
@@ -4378,6 +4425,12 @@ function sanitizeSave(p) {
   if (Array.isArray(p.redeemed)) s.redeemed = p.redeemed.filter(x => typeof x === "string").slice(0, 200);
   ["coins", "earned", "quizzes", "pulls", "streak"].forEach(k => { if (Number.isFinite(p[k]) && p[k] >= 0) s[k] = Math.floor(p[k]); });
   if (typeof p.lastDay === "string") s.lastDay = p.lastDay;
+  if (p.game && typeof p.game === "object") {
+    if (p.game.chr === "f" || p.game.chr === "m") s.game.chr = p.game.chr;
+    if (p.game.st && typeof p.game.st === "object") Object.entries(p.game.st).slice(0, 200).forEach(([k, v]) => {
+      if (/^[\w-]{1,24}$/.test(k) && Number.isFinite(v)) s.game.st[k] = Math.max(0, Math.min(3, Math.floor(v)));
+    });
+  }
   if (p.theme === "dark" || p.theme === "light") s.theme = p.theme;
   CHEST_KEYS.forEach(k => {
     const ids = new Set(CHESTS[k].items.map(i => i.id));
@@ -4545,6 +4598,7 @@ function chestHTML(key, cls) { return `<div class="chest k-${key} ${cls || ""}">
 function mainMenuHTML() {
   const ic = ITEM("icon", SAVE.eq.icon), claimed = SAVE.lastDay === dayKey();
   const tiles = [
+    { key: "game", cls: "c-game", mark: "遊", title: "Petualangan Nihongo", desc: "Mini game: jalan keliling kota, sapa tetangga dengan sopan, kalahkan bos di tujuan!", meta: "3 stage · bos fight", ready: true, badge: "BARU" },
     { key: "kotoba", cls: "c-kotoba", mark: "言", title: "Kotoba", desc: "Flashcard & kuis kosakata per pelajaran.", meta: `${fmtNum(VOCAB.length)} kata · 5 buku`, ready: true },
     { key: "kanji", cls: "c-kanji", mark: "漢", title: "Kanji", desc: "Mode kecepatan, kuis per bab, simulasi JLPT.", meta: `${fmtNum(Object.keys(KJDB).length)} kanji · 30 simulasi`, ready: true },
     { key: "bunpo", cls: "c-bunpo", mark: "文", title: "Bunpo", desc: "Pola kalimat & tata bahasa.", meta: "", ready: false },
@@ -4552,7 +4606,7 @@ function mainMenuHTML() {
   ];
   const tilesHTML = tiles.map(t => `
     <button class="category-tile ${t.cls} ${t.ready ? "" : "disabled"}" data-section="${t.key}">
-      <span class="catstatus ${t.ready ? "ready" : "soon"}">${t.ready ? "Siap" : "Segera"}</span>
+      <span class="catstatus ${t.ready ? "ready" : "soon"}">${t.badge || (t.ready ? "Siap" : "Segera")}</span>
       <div class="catmark">${t.mark}</div>
       <div><h3>${t.title}</h3><p>${t.desc}</p>${t.meta ? `<div class="meta">${t.meta}</div>` : ""}</div>
     </button>`).join("");

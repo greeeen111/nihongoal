@@ -1,0 +1,273 @@
+{
+  "versi": 1,
+  "catatan": "Isi stage game. Tiap stage: 5 tetangga (sapaan/percakapan) lalu bos. Di 'pilihan', tepat satu yang ok:true. Sprite: m = cowok, f = cewek, w = berseragam. Rambut: coklat/abu/hitam. Baju: lihat daftar warna di game.js.",
+  "stages": [
+    {
+      "id": "s1",
+      "judul": "Beli Pensil & Bolpen",
+      "sub": "Pagi hari di perumahan. Sapa tetangga dengan sopan, lalu belanja di konbini.",
+      "lokasi": "desa",
+      "waktu": "pagi",
+      "tujuan": { "nama": "Konbini", "jp": "コンビニ", "gedung": "konbini" },
+      "tetangga": [
+        {
+          "nama": "Nenek Suzuki", "sprite": "f", "rambut": "abu", "baju": "ungu",
+          "kata": "おはようございます。", "arti": "Selamat pagi.",
+          "tugas": "Balas salam pagi dari nenek tetangga.",
+          "pilihan": [ { "t": "おはようございます。", "ok": true }, { "t": "おはよう！", "ok": false } ],
+          "senang": { "jp": "いい こですね。", "id": "Anak yang sopan, ya." },
+          "marah": { "jp": "あら…「おはようございます」でしょう？", "id": "Ke orang yang lebih tua pakai「おはようございます」, dong!" }
+        },
+        {
+          "nama": "Kenta (anak tetangga)", "sprite": "m", "rambut": "hitam", "baju": "merah",
+          "kata": "おはよう！", "arti": "Pagi!",
+          "tugas": "Anak kecil menyapa dengan santai. Balas yang cocok.",
+          "pilihan": [ { "t": "こんばんは。", "ok": false }, { "t": "おはよう！", "ok": true } ],
+          "senang": { "jp": "いって らっしゃーい！", "id": "Hati-hati di jalan!" },
+          "marah": { "jp": "えっ？ まだ あさだよ！", "id": "Hah? Ini masih pagi, bukan malam!" }
+        },
+        {
+          "nama": "Pak Tanaka", "sprite": "m", "rambut": "abu", "baju": "hijau",
+          "kata": "おでかけですか。", "arti": "Mau keluar?",
+          "tugas": "Bilang kamu mau ke konbini sebentar.",
+          "pilihan": [ { "t": "ちょっと コンビニまで。", "ok": true }, { "t": "コンビニに いません。", "ok": false }, { "t": "いいえ、でかけます。", "ok": false } ],
+          "senang": { "jp": "いって らっしゃい。", "id": "Hati-hati, ya." },
+          "marah": { "jp": "え？ いみが わかりません…", "id": "Hah? Jawabannya nggak nyambung…" }
+        },
+        {
+          "nama": "Bu Yamada", "sprite": "f", "rambut": "hitam", "baju": "biru",
+          "kata": "いって らっしゃい。", "arti": "Hati-hati di jalan. (diucapkan ke orang yang pergi)",
+          "tugas": "Kamu yang pergi. Balas dengan ucapan yang benar.",
+          "pilihan": [ { "t": "いって らっしゃい。", "ok": false }, { "t": "いって きます。", "ok": true } ],
+          "senang": { "jp": "はい、きを つけて。", "id": "Iya, hati-hati." },
+          "marah": { "jp": "それは みおくる ひとの ことばですよ。", "id": "Itu ucapan untuk orang yang mengantar. Yang pergi bilang「いってきます」." }
+        },
+        {
+          "nama": "Pak Kimura", "sprite": "m", "rambut": "coklat", "baju": "kuning",
+          "kata": "いい てんきですね。", "arti": "Cuacanya bagus, ya.",
+          "tugas": "Setujui obrolan soal cuaca.",
+          "pilihan": [ { "t": "そうですか。", "ok": false }, { "t": "そうですね。", "ok": true }, { "t": "どういたしまして。", "ok": false } ],
+          "senang": { "jp": "ほんとうに きもちが いいですね。", "id": "Bener-bener bikin seger, ya." },
+          "marah": { "jp": "「そうですか」は あたらしい ことを きいた ときですよ。", "id": "「そうですか」dipakai kalau baru dengar info baru. Untuk setuju pakai「そうですね」." }
+        }
+      ],
+      "bos": {
+        "nama": "Kasir Konbini", "jp": "てんいん", "sprite": "w", "rambut": "coklat", "baju": "konbini",
+        "hp": 100, "waktu": 12,
+        "intro": { "jp": "いらっしゃいませ！", "id": "Kasir muncul! Beli pensil & bolpen. Jawab pertanyaannya secepat mungkin dan habiskan HP-nya!" },
+        "soal": [
+          {
+            "kata": "なにを さがして いますか。", "arti": "Cari apa?",
+            "tugas": "Bilang kamu cari pensil dan bolpen.",
+            "pilihan": [ { "t": "えんぴつと ボールペンです。", "ok": true }, { "t": "えんぴつを たべます。", "ok": false }, { "t": "はい、さがします。", "ok": false } ],
+            "marah": { "jp": "えっ？ たべるんですか…？", "id": "Hah? Mau dimakan…? Jawab barang yang dicari." }
+          },
+          {
+            "kata": "えんぴつは なんぼん いりますか。", "arti": "Pensilnya perlu berapa batang?",
+            "tugas": "Minta 2 batang. Ingat kata bantu bilangan untuk benda panjang.",
+            "pilihan": [ { "t": "２まい おねがいします。", "ok": false }, { "t": "２ほん おねがいします。", "ok": true }, { "t": "２だい おねがいします。", "ok": false } ],
+            "marah": { "jp": "えんぴつは「ほん」で かぞえますよ。", "id": "Pensil dihitung pakai「ほん」(本). 「まい」untuk kertas, 「だい」untuk mesin." }
+          },
+          {
+            "kata": "ボールペンは くろと あか、どちらが いいですか。", "arti": "Bolpennya hitam atau merah, mana yang lebih baik?",
+            "tugas": "Pilih yang hitam.",
+            "pilihan": [ { "t": "くろが いいです。", "ok": true }, { "t": "くろは どちらですか。", "ok": false }, { "t": "どちらも いいえです。", "ok": false } ],
+            "marah": { "jp": "しつもんに こたえて ください。", "id": "Tolong jawab pertanyaannya, dong." }
+          },
+          {
+            "kata": "ぜんぶで ３８０えんです。", "arti": "Semuanya 380 yen.",
+            "tugas": "Bayar sambil menyerahkan uang.",
+            "pilihan": [ { "t": "いくらですか。", "ok": false }, { "t": "ごちそうさまでした。", "ok": false }, { "t": "じゃ、これで おねがいします。", "ok": true } ],
+            "marah": { "jp": "いま いいましたよ…", "id": "Kan barusan saya sebutkan harganya…" }
+          },
+          {
+            "kata": "ふくろは いりますか。", "arti": "Perlu kantong plastik?",
+            "tugas": "Tolak dengan sopan karena barangnya sedikit.",
+            "pilihan": [ { "t": "いいえ、いります。", "ok": false }, { "t": "いいえ、けっこうです。", "ok": true }, { "t": "ふくろは だれですか。", "ok": false } ],
+            "marah": { "jp": "えっと…いるんですか、いらないんですか？", "id": "Eh… jadi perlu atau nggak?" }
+          }
+        ],
+        "menang": { "jp": "ありがとうございました！ また おこしくださいませ。", "id": "Terima kasih! Silakan datang lagi." },
+        "kalah": { "jp": "…つぎの おきゃくさま、どうぞ。", "id": "…Pelanggan berikutnya, silakan." }
+      }
+    },
+    {
+      "id": "s2",
+      "judul": "Belanja di Supermarket",
+      "sub": "Siang hari di kota. Bantu orang yang bertanya, lalu belanja telur dan apel.",
+      "lokasi": "kota",
+      "waktu": "siang",
+      "tujuan": { "nama": "Supermarket", "jp": "スーパー", "gedung": "super" },
+      "tetangga": [
+        {
+          "nama": "Pemilik toko roti", "sprite": "m", "rambut": "coklat", "baju": "putih",
+          "kata": "こんにちは。", "arti": "Selamat siang.",
+          "tugas": "Balas salam siang.",
+          "pilihan": [ { "t": "おはようございます。", "ok": false }, { "t": "こんにちは。", "ok": true } ],
+          "senang": { "jp": "きょうも あついですね。", "id": "Hari ini panas juga, ya." },
+          "marah": { "jp": "もう おひるですよ。", "id": "Udah siang, loh." }
+        },
+        {
+          "nama": "Turis", "sprite": "f", "rambut": "coklat", "baju": "hijau",
+          "kata": "すみません、えきは どこですか。", "arti": "Permisi, stasiun di mana?",
+          "tugas": "Stasiunnya kelihatan jauh di sana. Tunjukkan arahnya.",
+          "pilihan": [ { "t": "えきです。", "ok": false }, { "t": "あそこです。", "ok": true }, { "t": "どういたしまして。", "ok": false } ],
+          "senang": { "jp": "ありがとうございます！", "id": "Terima kasih!" },
+          "marah": { "jp": "え…？ どこに あるんですか？", "id": "Eh…? Jadi ada di mana?" }
+        },
+        {
+          "nama": "Turis (lagi)", "sprite": "f", "rambut": "coklat", "baju": "hijau",
+          "kata": "どうも ありがとうございました。", "arti": "Terima kasih banyak.",
+          "tugas": "Balas ucapan terima kasih.",
+          "pilihan": [ { "t": "いただきます。", "ok": false }, { "t": "どう いたしまして。", "ok": true } ],
+          "senang": { "jp": "しんせつですね。", "id": "Baik hati, ya." },
+          "marah": { "jp": "ごはんじゃ ありませんよ！", "id": "Ini bukan mau makan!" }
+        },
+        {
+          "nama": "Teman sekelas", "sprite": "m", "rambut": "hitam", "baju": "biru",
+          "kata": "いっしょに ひるごはんを たべませんか。", "arti": "Mau makan siang bareng?",
+          "tugas": "Terima ajakannya dengan senang.",
+          "pilihan": [ { "t": "ええ、いいですね。", "ok": true }, { "t": "ええ、たべませんでした。", "ok": false }, { "t": "ひるごはんは なんですか。", "ok": false } ],
+          "senang": { "jp": "じゃ、かいものの あとで！", "id": "Oke, habis belanja ya!" },
+          "marah": { "jp": "え、たべるの？ たべないの？", "id": "Eh, jadi mau makan atau nggak?" }
+        },
+        {
+          "nama": "Polisi", "sprite": "w", "rambut": "hitam", "baju": "polisi",
+          "kata": "くるまが おおいですから、きを つけて ください。", "arti": "Banyak mobil, jadi hati-hati, ya.",
+          "tugas": "Jawab bahwa kamu mengerti.",
+          "pilihan": [ { "t": "はい、くるまです。", "ok": false }, { "t": "はい、わかりました。", "ok": true } ],
+          "senang": { "jp": "よろしい。", "id": "Bagus." },
+          "marah": { "jp": "…ちゃんと きいて いますか？", "id": "…Kamu dengerin nggak, sih?" }
+        }
+      ],
+      "bos": {
+        "nama": "Pegawai Supermarket", "jp": "てんいん", "sprite": "w", "rambut": "coklat", "baju": "super",
+        "hp": 100, "waktu": 11,
+        "intro": { "jp": "いらっしゃいませ！ なにか おさがしですか。", "id": "Pegawai supermarket muncul! Beli telur & apel, jawab secepat mungkin!" },
+        "soal": [
+          {
+            "kata": "なにか おさがしですか。", "arti": "Ada yang dicari?",
+            "tugas": "Tanya di mana telur.",
+            "pilihan": [ { "t": "たまごは どこに いますか。", "ok": false }, { "t": "たまごは どこに ありますか。", "ok": true }, { "t": "たまごは どこへ いきますか。", "ok": false } ],
+            "marah": { "jp": "たまごは いきものじゃ ありませんよ！", "id": "Telur itu bukan makhluk hidup, pakai「あります」!" }
+          },
+          {
+            "kata": "たまごは いくつ いりますか。", "arti": "Telurnya perlu berapa?",
+            "tugas": "Minta enam butir.",
+            "pilihan": [ { "t": "むっつ ください。", "ok": true }, { "t": "６にん ください。", "ok": false }, { "t": "むいか ください。", "ok": false } ],
+            "marah": { "jp": "「にん」は ひとを かぞえる ときですよ。", "id": "「にん」untuk menghitung orang, 「むいか」itu tanggal 6. Pakai「むっつ」." }
+          },
+          {
+            "kata": "りんごは ひとつ １５０えんです。いかがですか。", "arti": "Apelnya satu 150 yen. Bagaimana?",
+            "tugas": "Beli dua buah.",
+            "pilihan": [ { "t": "じゃ、ふたり ください。", "ok": false }, { "t": "じゃ、ふたつ ください。", "ok": true }, { "t": "けっこうですか。", "ok": false } ],
+            "marah": { "jp": "りんごは「ふたり」じゃ ありません！", "id": "Apel bukan orang!「ふたり」untuk dua orang." }
+          },
+          {
+            "kata": "ジュースと おちゃと どちらが いいですか。", "arti": "Jus dan teh, mana yang lebih baik?",
+            "tugas": "Pilih teh (bandingkan dua benda).",
+            "pilihan": [ { "t": "おちゃの ほうが いいです。", "ok": true }, { "t": "おちゃが いちばんじゃ ないです。", "ok": false }, { "t": "どちらも ジュースです。", "ok": false } ],
+            "marah": { "jp": "ふたつから えらぶ ときは「〜の ほうが」ですよ。", "id": "Kalau memilih dari dua, pakai「〜のほうが」." }
+          },
+          {
+            "kata": "カードですか、げんきんですか。", "arti": "Bayar pakai kartu atau tunai?",
+            "tugas": "Bayar tunai.",
+            "pilihan": [ { "t": "げんきんで おねがいします。", "ok": true }, { "t": "カードを なくしました。", "ok": false }, { "t": "げんきんが すきです。", "ok": false } ],
+            "marah": { "jp": "え…？ それで、どうしますか？", "id": "Eh…? Jadi bayarnya gimana?" }
+          }
+        ],
+        "menang": { "jp": "ありがとうございました！", "id": "Terima kasih banyak!" },
+        "kalah": { "jp": "おきゃくさま、うしろに ならんで いますので…", "id": "Maaf, antrean di belakang sudah panjang…" }
+      }
+    },
+    {
+      "id": "s3",
+      "judul": "Hari Pertama di Kaisha",
+      "sub": "Pagi di kawasan kantor. Sapa rekan kerja, lalu hadapi shachou!",
+      "lokasi": "kantor",
+      "waktu": "pagi",
+      "tujuan": { "nama": "Kantor", "jp": "かいしゃ", "gedung": "kaisha" },
+      "tetangga": [
+        {
+          "nama": "Satpam", "sprite": "w", "rambut": "abu", "baju": "polisi",
+          "kata": "おはようございます。", "arti": "Selamat pagi.",
+          "tugas": "Balas salam pagi di kantor.",
+          "pilihan": [ { "t": "こんにちは。", "ok": false }, { "t": "おはようございます。", "ok": true } ],
+          "senang": { "jp": "きょうから ですね。がんばって！", "id": "Mulai hari ini, ya. Semangat!" },
+          "marah": { "jp": "あさは「おはようございます」ですよ。", "id": "Pagi-pagi bilangnya「おはようございます」." }
+        },
+        {
+          "nama": "Senpai Yamashita", "sprite": "f", "rambut": "hitam", "baju": "jas",
+          "kata": "はじめまして。やましたです。", "arti": "Salam kenal. Saya Yamashita.",
+          "tugas": "Perkenalkan diri dengan sopan.",
+          "pilihan": [ { "t": "はじめまして。どうぞ よろしく おねがいします。", "ok": true }, { "t": "おひさしぶりです。", "ok": false }, { "t": "はじめまして。どう いたしまして。", "ok": false } ],
+          "senang": { "jp": "こちらこそ、よろしく。", "id": "Sama-sama, salam kenal." },
+          "marah": { "jp": "え？ はじめて あいましたよね？", "id": "Hah? Kita baru pertama kali ketemu, kan?" }
+        },
+        {
+          "nama": "Rekan Kato", "sprite": "m", "rambut": "coklat", "baju": "jas",
+          "kata": "ひるごはんに いって きます。", "arti": "Saya pergi makan siang dulu.",
+          "tugas": "Rekanmu mau pergi. Antar dengan ucapan yang tepat.",
+          "pilihan": [ { "t": "いって きます。", "ok": false }, { "t": "いって らっしゃい。", "ok": true } ],
+          "senang": { "jp": "いって きます！", "id": "Berangkat dulu!" },
+          "marah": { "jp": "いくのは わたしですよ…", "id": "Yang pergi kan saya…" }
+        },
+        {
+          "nama": "Senpai Mori", "sprite": "f", "rambut": "coklat", "baju": "biru",
+          "kata": "この しりょう、コピーしましょうか。", "arti": "Dokumen ini, mau saya fotokopikan?",
+          "tugas": "Terima tawaran bantuannya dengan sopan.",
+          "pilihan": [ { "t": "はい、コピーしましょう。", "ok": false }, { "t": "すみません。おねがいします。", "ok": true }, { "t": "いいえ、コピーです。", "ok": false } ],
+          "senang": { "jp": "まかせて ください。", "id": "Serahkan ke saya." },
+          "marah": { "jp": "てつだって もらう ときは「おねがいします」ですよ。", "id": "Kalau dibantu orang, bilangnya「おねがいします」." }
+        },
+        {
+          "nama": "Manajer Ito", "sprite": "m", "rambut": "abu", "baju": "jas",
+          "kata": "おさきに しつれいします。", "arti": "Saya pulang duluan.",
+          "tugas": "Atasan pulang lebih dulu. Ucapkan terima kasih atas kerja kerasnya.",
+          "pilihan": [ { "t": "ただいま。", "ok": false }, { "t": "いって らっしゃい。", "ok": false }, { "t": "おつかれさまでした。", "ok": true } ],
+          "senang": { "jp": "あしたも よろしく。", "id": "Besok juga mohon kerja samanya." },
+          "marah": { "jp": "…かいしゃでは「おつかれさまでした」ですよ。", "id": "…Di kantor, ke orang yang pulang bilang「おつかれさまでした」." }
+        }
+      ],
+      "bos": {
+        "nama": "Shachou", "jp": "しゃちょう", "sprite": "m", "rambut": "abu", "baju": "jas",
+        "hp": 100, "waktu": 10,
+        "intro": { "jp": "きみが あたらしい しゃいんですね。", "id": "Shachou muncul! Jawab pertanyaannya dengan sopan dan cepat!" },
+        "soal": [
+          {
+            "kata": "おくには どちらですか。", "arti": "Negara asalnya dari mana?",
+            "tugas": "Jawab nama negaramu.",
+            "pilihan": [ { "t": "インドネシアごです。", "ok": false }, { "t": "あちらです。", "ok": false }, { "t": "インドネシアです。", "ok": true } ],
+            "marah": { "jp": "くにを きいて いるんですよ。", "id": "Saya tanya negaranya, bukan bahasanya." }
+          },
+          {
+            "kata": "にほんに きて、どのくらいですか。", "arti": "Sudah berapa lama di Jepang?",
+            "tugas": "Sudah tiga bulan.",
+            "pilihan": [ { "t": "３がつです。", "ok": false }, { "t": "３かげつです。", "ok": true }, { "t": "３かいです。", "ok": false } ],
+            "marah": { "jp": "なんがつ じゃなくて、きかんですよ。", "id": "Bukan bulan apa (Maret), tapi lamanya: 「〜かげつ」." }
+          },
+          {
+            "kata": "しごとは なんじから なんじまでですか。", "arti": "Kerjanya dari jam berapa sampai jam berapa?",
+            "tugas": "Dari jam 9 sampai jam 5.",
+            "pilihan": [ { "t": "９じから ５じまでです。", "ok": true }, { "t": "９じまで ５じからです。", "ok": false }, { "t": "９じかんです。", "ok": false } ],
+            "marah": { "jp": "じゅんばんが へんですね。", "id": "Urutannya aneh. 「〜から〜まで」." }
+          },
+          {
+            "kata": "にほんごが できますか。", "arti": "Bisa bahasa Jepang?",
+            "tugas": "Jawab dengan rendah hati: bisa sedikit.",
+            "pilihan": [ { "t": "はい、じょうずです。", "ok": false }, { "t": "はい、すこし できます。", "ok": true }, { "t": "いいえ、ぜんぜん できます。", "ok": false } ],
+            "marah": { "jp": "じぶんで「じょうず」とは いいませんよ。", "id": "Orang Jepang nggak memuji diri sendiri「じょうず」. Jawab rendah hati." }
+          },
+          {
+            "kata": "じゃ、あしたから がんばって ください。", "arti": "Kalau begitu, mulai besok berusaha keras, ya.",
+            "tugas": "Jawab penuh semangat dan sopan.",
+            "pilihan": [ { "t": "はい、がんばって ください。", "ok": false }, { "t": "ごちそうさまでした。", "ok": false }, { "t": "はい、がんばります。よろしく おねがいします。", "ok": true } ],
+            "marah": { "jp": "がんばるのは きみですよ！", "id": "Yang harus berusaha itu kamu!" }
+          }
+        ],
+        "menang": { "jp": "いい へんじですね。きたいして いますよ。", "id": "Jawaban yang bagus. Saya menantikan kerjamu." },
+        "kalah": { "jp": "…もう すこし べんきょうしてから きて ください。", "id": "…Belajar lagi dulu, baru datang lagi, ya." }
+      }
+    }
+  ]
+}
