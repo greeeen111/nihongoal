@@ -1228,18 +1228,9 @@ body .rankmini.rm-s8{
 body.focus .rankmini.rmt::before{ animation:none; }
 @media (prefers-reduced-motion: reduce){ .rankmini.rmt::before{ animation:none; } }
 
-/* ---------- kartu menu Game ---------- */
-body .category-tile.c-game{ grid-column:1 / -1; min-height:auto; flex-direction:row; align-items:center; gap:14px; color:#fff;
-  background:linear-gradient(125deg, #2B2140 0%, #46306B 55%, #6A3E7E 100%) !important; border:2px solid #3F2631 !important; box-shadow:0 5px 0 #3F2631 !important; clip-path:none !important; }
-body .category-tile.c-game::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:.35;
-  background:linear-gradient(transparent 70%, rgba(106,170,58,.9) 70%, rgba(106,170,58,.9) 78%, rgba(139,90,43,.9) 78%),
-    radial-gradient(circle at 85% 30%, #FFE36E 0 6px, transparent 7px); }
-body .category-tile.c-game .catmark{ background:#3F2631; border:none; color:#FFD84A; font-family:'DotGothic16', var(--f-head); width:52px; height:52px; font-size:28px; position:relative; }
-body .category-tile.c-game h3{ color:#fff; font-family:'DotGothic16', var(--f-head); font-size:17px; }
-body .category-tile.c-game p{ color:rgba(255,255,255,.82); }
-body .category-tile.c-game .meta{ color:#FFD84A; }
-body .category-tile.c-game .catstatus{ color:#3F2631; background:#FFD84A; border-color:#FFD84A; }
-body .category-tile.c-game > div{ position:relative; }
+/* ---------- kartu menu Game (ikut tema tampilan) ---------- */
+body .category-tile.c-game{ grid-column:1 / -1; min-height:auto; flex-direction:row; align-items:center; gap:14px; }
+.category-tile.c-game .catmark{ color:var(--amber-dark); border-color:var(--amber); width:52px; height:52px; font-size:28px; flex-shrink:0; }
 /* ---------- PET (teman belajar) ---------- */
 .chest.k-pet{ --cc:#EC6F9E; --cd:#9D2F5C; } .chest.k-pet .lock{ background:#FDE68A; }
 .pf-h, .pf-s{ display:none; }
@@ -4601,7 +4592,7 @@ function chestHTML(key, cls) { return `<div class="chest k-${key} ${cls || ""}">
 function mainMenuHTML() {
   const ic = ITEM("icon", SAVE.eq.icon), claimed = SAVE.lastDay === dayKey();
   const tiles = [
-    { key: "game", cls: "c-game", mark: "遊", title: "Petualangan Nihongo", desc: "Mini game: jalan keliling kota, sapa tetangga dengan sopan, kalahkan bos di tujuan!", meta: "3 stage · bos fight", ready: true, badge: "BARU" },
+    { key: "game", cls: "c-game", mark: "遊", title: "Petualangan Nihongo", desc: "Mini game: jalan keliling kota, sapa tetangga dengan sopan, kalahkan bos di tujuan!", meta: "10 stage · bos fight", ready: true, badge: "BARU" },
     { key: "kotoba", cls: "c-kotoba", mark: "言", title: "Kotoba", desc: "Flashcard & kuis kosakata per pelajaran.", meta: `${fmtNum(VOCAB.length)} kata · 5 buku`, ready: true },
     { key: "kanji", cls: "c-kanji", mark: "漢", title: "Kanji", desc: "Mode kecepatan, kuis per bab, simulasi JLPT.", meta: `${fmtNum(Object.keys(KJDB).length)} kanji · 30 simulasi`, ready: true },
     { key: "bunpo", cls: "c-bunpo", mark: "文", title: "Bunpo", desc: "Pola kalimat & tata bahasa.", meta: "", ready: false },
