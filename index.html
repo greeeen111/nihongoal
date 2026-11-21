@@ -1817,6 +1817,7 @@ const GAME_API = {
     SAVE.coins += n; SAVE.earned += n; saveSave();
     const pill = document.querySelector("#btnCoins span:last-child"); if (pill) pill.textContent = fmtNum(SAVE.coins);
   },
+  exit() { if (window.NSGame) window.NSGame.unmount(); goMainMenu(); },
 };
 function goGame() { clearTimer(); state.screen = "game"; render(); }
 function mountGame() {
@@ -3692,7 +3693,7 @@ Object.assign(state, { dokLv: "N5", dokList: [] });
 /* =========================================================================
    V2 — KOIN, TOKO GACHA, KOLEKSI, KOSMETIK, SIMPAN PROGRES
    ========================================================================= */
-const APP_VERSION = "3.0.1";
+const APP_VERSION = "3.1.0";
 const SAVE_KEY = "nihongoStudy.save.v1";   // JANGAN diganti saat update, supaya progres murid tidak hilang
 const RAR = {
   c: { name: "Common",   w: 50,  refund: 5 },
