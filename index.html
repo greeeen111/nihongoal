@@ -1544,6 +1544,33 @@ body .category-tile.c-jft{ grid-column:1 / -1; min-height:auto; flex-direction:r
 .jd-sign{ text-align:right; font-weight:800; }
 .jd-tbl .jd-tb{ font-size:13.5px; }
 .jd-mapd .jft-map{ display:block; width:100%; height:auto; border-radius:8px; border:1px solid #ccc; margin-bottom:6px; }
+
+/* tanda hafal */
+.memobar{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0 6px; }
+.memobtn{ padding:12px 8px; border-radius:var(--b-radius, 12px); border:2px solid var(--line); background:var(--card); color:var(--ink); font:inherit; font-weight:800; font-size:15px; cursor:pointer; }
+.memobtn.ng{ border-color:color-mix(in srgb, var(--seal) 55%, var(--line)); color:var(--seal); }
+.memobtn.ok{ border-color:color-mix(in srgb, var(--moss) 55%, var(--line)); color:var(--moss); }
+.memobtn.ng.on{ background:var(--seal); color:#fff; border-color:var(--seal); }
+.memobtn.ok.on{ background:var(--moss); color:#fff; border-color:var(--moss); }
+.memostat{ display:flex; flex-wrap:wrap; gap:6px 12px; justify-content:center; font-size:12.5px; font-weight:700; color:var(--muted); margin:4px 0 8px; }
+.memostat .ok{ color:var(--moss); } .memostat .ng{ color:var(--seal); }
+.memostat.big{ font-size:15px; margin:8px 0 12px; }
+.memoseg{ flex-wrap:wrap; } .memoseg .segbtn{ flex:1 1 30%; font-size:12.5px; }
+.memodone{ text-align:center; border:2px dashed var(--line); border-radius:14px; padding:14px; margin:12px 0; background:var(--card); }
+.memodone .primary{ margin-top:4px; } .memoall{ font-weight:800; color:var(--moss); margin:6px 0; }
+.flashcard.memo-ok .flashface::after, .flashcard.memo-ng .flashface::after{ position:absolute; top:10px; right:12px; font-size:12px; font-weight:800; padding:2px 9px; border-radius:999px; color:#fff; }
+.flashcard.memo-ok .flashface::after{ content:"✓ Hafal"; background:var(--moss); }
+.flashcard.memo-ng .flashface::after{ content:"✗ Belum hafal"; background:var(--seal); }
+/* font pilihan pengguna */
+body.ufont, body.ufont *{ --f-head:var(--uf) !important; --f-body:var(--uf) !important; }
+body.ufont{ font-family:var(--uf); }
+.fontgrid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.fontitem{ position:relative; display:flex; flex-direction:column; align-items:flex-start; gap:2px; text-align:left; padding:12px; border-radius:var(--c-radius, 14px); border:2px solid var(--line); background:var(--card); color:var(--ink); cursor:pointer; font:inherit; }
+.fontitem.on{ border-color:var(--indigo); box-shadow:0 0 0 2px color-mix(in srgb, var(--indigo) 30%, transparent); }
+.fontitem .badge{ position:absolute; top:8px; right:8px; font-size:10.5px; font-weight:800; background:var(--indigo); color:#fff; padding:1px 8px; border-radius:999px; }
+.fontitem .fontpv{ font-size:30px; line-height:1.25; font-weight:700; margin-bottom:4px; --f-head:initial; }
+.fontitem .fontpv small{ display:block; font-size:15px; font-weight:500; }
+.fontitem .nm{ font-weight:800; font-size:13.5px; } .fontitem > small{ font-size:11.5px; color:var(--muted); line-height:1.4; }
 </style>
 </head>
 <body>
@@ -1941,7 +1968,9 @@ function goPlaceholder(section) { state.screen = section + "-home"; render(); }
 function startFlashcards(level) {
   state.mode = "flash";
   state.level = level;
-  state.flashDeck = shuffle(getFlashcardableByLevel(level));
+  state.flashDeck = memoFilter(shuffle(getFlashcardableByLevel(level)));
+  if (!state.flashDeck.length) { alert("Semua kartu di level ini sudah ditandai hafal 🎉 Ganti pilihan kartu ke 'Semua' untuk mengulang."); return; }
+  state.flashDone = false;
   state.flashIdx = 0;
   state.flashFlipped = false;
   state.screen = "flashcard";
@@ -2075,7 +2104,9 @@ function startKotobaFlashcard() {
   const words = selectedWords();
   if (!words.length) return;
   state.mode = "kotoba-flash";
-  state.flashDeck = (state.kShuffle ? shuffle(words) : words).map(w => ({ w }));
+  state.flashDeck = memoFilter((state.kShuffle ? shuffle(words) : words).map(w => ({ w })));
+  if (!state.flashDeck.length) return;
+  state.flashDone = false;
   state.flashIdx = 0;
   state.flashFlipped = false;
   state.screen = "flashcard";
@@ -2235,6 +2266,80 @@ function gradeFor(pct) {
   return { letter: "D", msg: "Coba pelajari kartu belajarnya dulu, ya." };
 }
 
+
+/* ================= TANDA HAFAL (flashcard) ================= */
+const MEMO_KEY = "nihongoal.memo.v1", MEMOF_KEY = "nihongoal.memoFilter.v1";
+let MEMO = (() => { try { return JSON.parse(localStorage.getItem(MEMO_KEY) || "{}") || {}; } catch (e) { return {}; } })();
+function memoSave() { try { localStorage.setItem(MEMO_KEY, JSON.stringify(MEMO)); } catch (e) {} }
+function cardKey(c) {
+  if (c.w) return "w:" + c.w.b + "|" + c.w.l + "|" + c.w.k;
+  if (c.c) return "c:" + c.c;
+  return "q:" + (c.prompt || "") + "|" + (c.correct || "");
+}
+function memoOf(c) { return MEMO[cardKey(c)]; }            // 1 = hafal, 0 = belum hafal, undefined = belum ditandai
+function memoSet(c, v) { const k = cardKey(c); if (MEMO[k] === v) delete MEMO[k]; else MEMO[k] = v; memoSave(); }
+function memoFilter(cards, f) {
+  f = f || state.memoF;
+  if (f === "ng") return cards.filter(c => memoOf(c) === 0);
+  if (f === "todo") return cards.filter(c => memoOf(c) !== 1);
+  return cards;
+}
+function memoCount(cards) { let h = 0, b = 0; cards.forEach(c => { const m = memoOf(c); if (m === 1) h++; else if (m === 0) b++; }); return { h, b, n: cards.length - h - b }; }
+function memoSetupHTML(cards, num) {
+  const c = memoCount(cards);
+  const seg = [["all", `Semua (${cards.length})`], ["todo", `Belum hafal + baru (${c.b + c.n})`], ["ng", `✗ Belum hafal (${c.b})`]]
+    .map(([v, l]) => `<button class="segbtn ${state.memoF === v ? "on" : ""}" data-memof="${v}">${l}</button>`).join("");
+  return `<div class="setupsec"><div class="setuplabel">${num ? num + " · " : ""}Kartu yang dilatih</div>
+    <div class="seg memoseg">${seg}</div>
+    <div class="memostat"><span class="ok">✓ ${c.h} hafal</span><span class="ng">✗ ${c.b} belum hafal</span><span>${c.n} belum ditandai</span></div>
+    ${c.h + c.b ? `<button class="pill" id="memoReset" style="margin-top:8px;">Hapus tanda di pilihan ini</button>` : ""}</div>`;
+}
+function memoBarHTML() {
+  const deck = state.flashDeck, card = deck[state.flashIdx], m = memoOf(card), c = memoCount(deck);
+  const done = state.flashDone ? `<div class="memodone">
+      <b>Satu putaran selesai!</b>
+      <div class="memostat big"><span class="ok">✓ ${c.h} hafal</span><span class="ng">✗ ${c.b} belum hafal</span>${c.n ? `<span>${c.n} belum ditandai</span>` : ""}</div>
+      ${c.b + c.n ? `<button class="primary" id="memoRetry">Hafalkan lagi yang belum hafal (${c.b + c.n})</button>` : `<div class="memoall">Semua kartu sudah hafal 🎉</div>`}
+      <button class="ghost" id="memoRestart">Ulangi semua kartu</button></div>` : "";
+  return `<div class="memobar">
+      <button class="memobtn ng ${m === 0 ? "on" : ""}" id="memoNo">✗ Belum hafal</button>
+      <button class="memobtn ok ${m === 1 ? "on" : ""}" id="memoYes">✓ Sudah hafal</button></div>
+    <div class="memostat"><span class="ok">✓ ${c.h}</span><span class="ng">✗ ${c.b}</span><span>${c.n} belum ditandai</span></div>${done}`;
+}
+function memoMark(v) {
+  memoSet(state.flashDeck[state.flashIdx], v);
+  if (state.flashIdx < state.flashDeck.length - 1) {
+    const el = document.getElementById("flashcardEl");
+    if (el) { el.style.transition = "transform .18s ease, opacity .18s ease"; el.style.transform = "translateX(-130%) rotate(-10deg)"; el.style.opacity = "0"; }
+    setTimeout(() => { state.flashIn = "right"; flashNext(); }, el ? 170 : 0);
+  } else { state.flashDone = true; render(); setTimeout(() => { const d = document.querySelector(".memodone"); if (d) d.scrollIntoView({ behavior: "smooth", block: "center" }); }, 30); }
+}
+function attachMemo() {
+  const $ = (id) => document.getElementById(id);
+  document.querySelectorAll("[data-memof]").forEach(b => b.addEventListener("click", () => {
+    state.memoF = b.dataset.memof; try { localStorage.setItem(MEMOF_KEY, state.memoF); } catch (e) {}
+    const y = window.scrollY; render(); window.scrollTo(0, y);
+  }));
+  if ($("memoReset")) $("memoReset").addEventListener("click", () => {
+    const cards = memoSetupCards(); if (!confirm(`Hapus tanda hafal untuk ${cards.length} kartu di pilihan ini?`)) return;
+    cards.forEach(c => delete MEMO[cardKey(c)]); memoSave(); const y = window.scrollY; render(); window.scrollTo(0, y);
+  });
+  if (state.screen !== "flashcard" || !state.flashDeck || !state.flashDeck.length) return;
+  const el = $("flashcardEl"), m = memoOf(state.flashDeck[state.flashIdx]);
+  if (el) { el.classList.toggle("memo-ok", m === 1); el.classList.toggle("memo-ng", m === 0); }
+  if ($("memoYes")) $("memoYes").addEventListener("click", () => memoMark(1));
+  if ($("memoNo")) $("memoNo").addEventListener("click", () => memoMark(0));
+  if ($("memoRetry")) $("memoRetry").addEventListener("click", () => {
+    state.flashDeck = shuffle(state.flashDeck.filter(c => memoOf(c) !== 1)); state.flashIdx = 0; state.flashFlipped = false; state.flashDone = false; render();
+  });
+  if ($("memoRestart")) $("memoRestart").addEventListener("click", () => { state.flashDeck = shuffle(state.flashDeck.concat()); state.flashIdx = 0; state.flashFlipped = false; state.flashDone = false; render(); });
+}
+function memoSetupCards() {
+  if (state.screen === "kotoba-setup") return selectedWords().map(w => ({ w }));
+  if (state.screen === "kbook-setup") return jKanjiList(jWords()).map(c => ({ c }));
+  if (state.screen === "flash-pick") return LEVELS.filter(lv => lv.num !== 3).flatMap(lv => getFlashcardableByLevel(lv.num));
+  return [];
+}
 /* ================= FLASHCARD FLOW ================= */
 function flashFlip() {
   state.flashFlipped = !state.flashFlipped;
@@ -2462,10 +2567,11 @@ function kotobaSetupHTML() {
         <span>Acak urutan kartu<small>Matikan untuk urut sesuai buku</small></span>
         <input type="checkbox" id="kShuffleSw" ${state.kShuffle ? "checked" : ""}>
       </label>
-    </div>`;
+    </div>${memoSetupHTML(words.map(w => ({ w })))}`;
 
-  const count = isQuiz ? nQ : words.length;
-  const startLabel = isQuiz ? `Mulai Kuis (${nQ} soal)` : `Mulai Flashcard (${words.length} kartu)`;
+  const count = isQuiz ? nQ : memoFilter(words.map(w => ({ w }))).length;
+  const nCard = memoFilter(words.map(w => ({ w }))).length;
+  const startLabel = isQuiz ? `Mulai Kuis (${nQ} soal)` : nCard ? `Mulai Flashcard (${nCard} kartu)` : "Tidak ada kartu (semua sudah hafal 🎉)";
   const note = isQuiz && state.kDir === "kana" && eligible < words.length
     ? `<div class="selsum">${words.length - eligible} kata tanpa kanji dilewati pada arah ini.</div>` : "";
 
@@ -2541,8 +2647,8 @@ function kotobaFlashcardHTML() {
         </div>
       </div>
     </div>
-    <div class="flashhint">Ketuk kartu untuk membalik · geser ke kiri/kanan untuk ganti kata</div>
-    <div class="flashnav">
+    <div class="flashhint">Ketuk kartu untuk membalik · geser untuk ganti kartu · tandai hafal/belum di bawah</div>
+    ${memoBarHTML()}<div class="flashnav">
       <button id="flashPrev" ${state.flashIdx === 0 ? "disabled" : ""}>&larr; Sebelumnya</button>
       <button id="flashNext" ${state.flashIdx === deck.length - 1 ? "disabled" : ""}>Berikutnya &rarr;</button>
     </div>
@@ -2663,6 +2769,7 @@ function flashPickHTML() {
     <div class="eyebrow">Belajar Dulu</div>
     <h2 style="margin-bottom:8px;">Pilih level flashcard</h2>
     <div class="sub">Level 3 fokus di soal penalaran (deskripsi &amp; kategori), jadi paling pas langsung dicoba di Kuis Bertahap.</div>
+    ${memoSetupHTML(LEVELS.filter(lv => lv.num !== 3).flatMap(lv => getFlashcardableByLevel(lv.num)))}
     ${rows}
   `;
 }
@@ -2694,8 +2801,8 @@ function flashcardHTML() {
         </div>
       </div>
     </div>
-    <div class="flashhint">Ketuk kartu untuk membalik · geser ke kiri/kanan untuk ganti kata</div>
-    <div class="flashnav">
+    <div class="flashhint">Ketuk kartu untuk membalik · geser untuk ganti kartu · tandai hafal/belum di bawah</div>
+    ${memoBarHTML()}<div class="flashnav">
       <button id="flashPrev" ${state.flashIdx === 0 ? "disabled" : ""}>&larr; Sebelumnya</button>
       <button id="flashNext" ${state.flashIdx === deck.length - 1 ? "disabled" : ""}>Berikutnya &rarr;</button>
     </div>
@@ -2997,7 +3104,9 @@ function startKBookCards() {
   const ks = jKanjiList(jWords());
   if (!ks.length) return;
   state.mode = "kbook-flash";
-  state.flashDeck = shuffle(ks).map(c => ({ c }));
+  state.flashDeck = memoFilter(shuffle(ks).map(c => ({ c })));
+  if (!state.flashDeck.length) return;
+  state.flashDone = false;
   state.flashIdx = 0; state.flashFlipped = false; state.screen = "flashcard"; render();
 }
 function startKBookQuiz(words) {
@@ -3025,7 +3134,8 @@ function kbookSetupHTML() {
       ${dirs.map(([k, ic, t, d]) => `<button class="levelrow ${state.jDir === k ? "on" : ""}" data-jdir="${k}"><div class="num">${ic}</div><div><h4>${t}</h4><p>${d}</p></div></button>`).join("")}
     </div>
     <div class="setupsec"><div class="setuplabel">6 · Jumlah soal</div>${seg("jcount", state.jCount, [[10, "10"], [20, "20"], [30, "30"], [0, "Semua"]])}</div>` : "";
-  const n = isQuiz ? nQ : ks.length;
+  const nCard = memoFilter(ks.map(c => ({ c }))).length;
+  const n = isQuiz ? nQ : nCard;
   return `
     <div class="eyebrow">Kanji dari Buku — ${KJ_BOOK_NAME[state.jBook]}</div>
     <h2 style="margin-bottom:4px;">Atur Latihan Kanji</h2>
@@ -3041,8 +3151,8 @@ function kbookSetupHTML() {
       <div class="selsum"><strong>Pel. ${lessonsLabel(state.jSel)}</strong> · ${ks.length} kanji · ${words.length} kata berkanji</div>
     </div>
     <div class="setupsec"><div class="setuplabel">4 · Mau latihan apa?</div>${seg("jmode", state.jMode, [["card", "Kartu Kanji"], ["quiz", "Kuis Kata Kanji"]])}</div>
-    ${quizSec}
-    <button class="primary" id="jStart" ${n === 0 ? "disabled" : ""}>${isQuiz ? `Mulai Kuis (${nQ} soal)` : `Mulai Kartu (${ks.length} kanji)`}</button>`;
+    ${quizSec}${isQuiz ? "" : memoSetupHTML(ks.map(c => ({ c })), 5)}
+    <button class="primary" id="jStart" ${n === 0 ? "disabled" : ""}>${isQuiz ? `Mulai Kuis (${nQ} soal)` : nCard ? `Mulai Kartu (${nCard} kanji)` : "Tidak ada kartu (semua sudah hafal 🎉)"}</button>`;
 }
 
 function kbookFlashcardHTML() {
@@ -3069,8 +3179,8 @@ function kbookFlashcardHTML() {
         </div>
       </div>
     </div>
-    <div class="flashhint">Ketuk kartu untuk membalik · geser ke kiri/kanan untuk ganti kata</div>
-    <div class="flashnav">
+    <div class="flashhint">Ketuk kartu untuk membalik · geser untuk ganti kartu · tandai hafal/belum di bawah</div>
+    ${memoBarHTML()}<div class="flashnav">
       <button id="flashPrev" ${state.flashIdx === 0 ? "disabled" : ""}>&larr; Sebelumnya</button>
       <button id="flashNext" ${state.flashIdx === state.flashDeck.length - 1 ? "disabled" : ""}>Berikutnya &rarr;</button>
     </div>
@@ -3324,6 +3434,7 @@ function attachHandlers() {
     btn.addEventListener("click", () => startFlashcards(Number(btn.dataset.flashlevel)));
   });
 
+  attachMemo();
   // flashcard
   if ($("flashcardEl")) $("flashcardEl").addEventListener("click", flashFlip);
   attachFlashSwipe();
@@ -4620,7 +4731,7 @@ Object.assign(state, { jft: null });
 /* =========================================================================
    V2 — KOIN, TOKO GACHA, KOLEKSI, KOSMETIK, SIMPAN PROGRES
    ========================================================================= */
-const APP_VERSION = "3.7.0";
+const APP_VERSION = "3.8.0";
 const SAVE_KEY = "nihongoStudy.save.v1";   // JANGAN diganti saat update, supaya progres murid tidak hilang
 const RAR = {
   c: { name: "Common",   w: 50,  refund: 5 },
@@ -5344,12 +5455,48 @@ function totalItems() { return CHEST_KEYS.reduce((a, k) => a + invItems(k).lengt
 function ITEM(cat, id) { return CHESTS[cat].items.find(i => i.id === id) || CHESTS[cat].def; }
 
 /* ---------- simpan progres (per perangkat) ---------- */
+
+/* ================= FONT (Koleksi) ================= */
+const FONTS = [
+  { id: "def", n: "Bawaan tema", d: "Ikut tampilan yang sedang dipakai" },
+  { id: "maru", n: "Zen Maru Gothic", f: "Zen Maru Gothic", d: "Bulat & lembut" },
+  { id: "kaku", n: "Zen Kaku Gothic", f: "Zen Kaku Gothic New", d: "Tegas & jelas" },
+  { id: "klee", n: "Klee One", f: "Klee One", g: "Klee+One:wght@400;600", d: "Gaya buku pelajaran, bagus buat hafal bentuk kanji" },
+  { id: "mincho", n: "Shippori Mincho", f: "Shippori Mincho", d: "Gaya buku & koran" },
+  { id: "notos", n: "Noto Serif JP", f: "Noto Serif JP", g: "Noto+Serif+JP:wght@400;700", d: "Mincho modern" },
+  { id: "noto", n: "Noto Sans JP", f: "Noto Sans JP", g: "Noto+Sans+JP:wght@400;700;900", d: "Standar, gaya HP" },
+  { id: "mplus", n: "M PLUS Rounded", f: "M PLUS Rounded 1c", g: "M+PLUS+Rounded+1c:wght@400;700;800", d: "Bulat modern" },
+  { id: "kosugi", n: "Kosugi Maru", f: "Kosugi Maru", g: "Kosugi+Maru", d: "Bulat tipis" },
+  { id: "yomogi", n: "Yomogi", f: "Yomogi", g: "Yomogi", d: "Tulisan tangan santai" },
+  { id: "hachi", n: "Hachi Maru Pop", f: "Hachi Maru Pop", g: "Hachi+Maru+Pop", d: "Imut" },
+  { id: "yusei", n: "Yusei Magic", f: "Yusei Magic", g: "Yusei+Magic", d: "Gaya spidol" },
+  { id: "rock", n: "RocknRoll One", f: "RocknRoll One", g: "RocknRoll+One", d: "Tebal & bulat" },
+  { id: "dot", n: "DotGothic16", f: "DotGothic16", d: "Piksel" },
+];
+const FONT_SAMPLE = "日本語の漢字あいうアイウ食飲学生Aa";
+function fontLink(id, href) { if (document.getElementById(id)) return; const l = document.createElement("link"); l.id = id; l.rel = "stylesheet"; l.href = href; document.head.appendChild(l); }
+function applyFont() {
+  const F = FONTS.find(x => x.id === (SAVE && SAVE.font)) || FONTS[0], root = document.documentElement;
+  document.body.classList.toggle("ufont", F.id !== "def");
+  if (F.id === "def") { root.style.removeProperty("--uf"); return; }
+  if (F.g) fontLink("uf-" + F.id, `https://fonts.googleapis.com/css2?family=${F.g}&display=swap`);
+  root.style.setProperty("--uf", `'${F.f}', 'Zen Maru Gothic', 'Zen Kaku Gothic New', sans-serif`);
+}
+function fontsHTML() {
+  fontLink("uf-preview", "https://fonts.googleapis.com/css2?" + FONTS.filter(F => F.g).map(F => "family=" + F.g.split(":")[0]).join("&") + "&text=" + encodeURIComponent(FONT_SAMPLE) + "&display=swap");
+  const cur = SAVE.font || "def";
+  return `<div class="footer-note" style="margin:4px 0 10px;">Gratis, bisa diganti kapan saja. Font dipakai di semua teks aplikasi, termasuk kartu dan soal.</div>
+    <div class="fontgrid">${FONTS.map(F => `<button class="fontitem ${cur === F.id ? "on" : ""}" data-font="${F.id}">
+      ${cur === F.id ? `<span class="badge">Dipakai</span>` : ""}
+      <div class="fontpv" ${F.f ? `style="font-family:'${F.f}', sans-serif"` : ""}>日本語<small>漢字 あア Aa</small></div>
+      <span class="nm">${F.n}</span><small>${F.d}</small></button>`).join("")}</div>`;
+}
 let SAVE = null;
 function freshSave() {
   return { v: 1, coins: 100, earned: 0, quizzes: 0, pulls: 0, streak: 0, lastDay: "", theme: null, pity: {},
     owned: { warna: [], tampilan: [], icon: [], bg: [], pet: [] },
     eq: { warna: "default", tampilan: "default", icon: "default", bg: "default", pet: "default" }, ranks: freshRanks(), redeemed: [],
-    game: { st: {}, chr: "m" } };
+    game: { st: {}, chr: "m" }, font: "def" };
 }
 function sanitizeSave(p) {
   const s = freshSave();
@@ -5365,6 +5512,7 @@ function sanitizeSave(p) {
     });
   }
   if (p.theme === "dark" || p.theme === "light") s.theme = p.theme;
+  if (typeof p.font === "string" && FONTS.some(f => f.id === p.font)) s.font = p.font;
   CHEST_KEYS.forEach(k => {
     const ids = new Set(CHESTS[k].items.map(i => i.id));
     if (p.owned && Array.isArray(p.owned[k])) s.owned[k] = [...new Set(p.owned[k].filter(id => ids.has(id)))];
@@ -5461,6 +5609,7 @@ const PAL_PROPS = ["--indigo", "--indigo-dark", "--accent-bg", "--on-accent", "-
 /* ---------- terapkan kosmetik ---------- */
 let BG_APPLIED = null;
 function applyCosmetics() {
+  applyFont();
   const root = document.documentElement, st = root.style;
   // warna
   const acc = ITEM("warna", SAVE.eq.warna);
@@ -5785,7 +5934,8 @@ function inventoryHTML() {
     <div class="sub">Ketuk item yang sudah dimiliki untuk memasangnya. Ketuk item terkunci untuk mencobanya sebentar. Item terkunci didapat dari chest di Toko.</div>
     <div class="invtabs">${tabs}</div>
     <button class="segbtn setbtn ${isSet ? "on" : ""}" data-invtab="set">Kombinasi siap pakai<small>${SETS.filter(setOwned).length}/${SETS.length} lengkap</small></button>
-    ${isSet ? setsHTML() : `<div class="invgrid">${cell(ch.def)}${invItems(tab).map(cell).join("")}</div>`}
+    <button class="segbtn setbtn ${tab === "font" ? "on" : ""}" data-invtab="font">Aa · Font huruf<small>${(FONTS.find(f => f.id === SAVE.font) || FONTS[0]).n}</small></button>
+    ${tab === "font" ? fontsHTML() : isSet ? setsHTML() : `<div class="invgrid">${cell(ch.def)}${invItems(tab).map(cell).join("")}</div>`}
     <details class="infobox"><summary>Cadangkan / pulihkan progres</summary>
       <p>Progres hanya tersimpan di perangkat ini. Salin kode di bawah untuk pindah ke perangkat lain atau sebagai cadangan.</p>
       <textarea id="bkOut" rows="3" readonly>${exportCode()}</textarea>
@@ -5816,6 +5966,7 @@ function attachShopHandlers() {
   document.querySelectorAll("[data-buy]").forEach(b => b.addEventListener("click", () => buyChest(b.dataset.buy)));
   document.querySelectorAll("[data-odds]").forEach(b => b.addEventListener("click", keepY(() => { state.shopOpen = state.shopOpen === b.dataset.odds ? null : b.dataset.odds; })));
   document.querySelectorAll("[data-invtab]").forEach(b => b.addEventListener("click", keepY(() => { state.invTab = b.dataset.invtab; })));
+  document.querySelectorAll("[data-font]").forEach(b => b.addEventListener("click", keepY(() => { SAVE.font = b.dataset.font; saveSave(); })));
   document.querySelectorAll("[data-equip]").forEach(b => b.addEventListener("click", keepY(() => { if (PREVIEW) endTry(false); SAVE.eq[state.invTab] = b.dataset.equip; saveSave(); })));
   document.querySelectorAll("[data-tryset]").forEach(b => b.addEventListener("click", () => {
     const st = SETS[Number(b.dataset.tryset)]; startTry([["warna", st.w], ["tampilan", st.t], ["bg", st.b]], st.n);
@@ -5841,7 +5992,7 @@ function attachShopHandlers() {
     else $("bkMsg").textContent = "Kode tidak valid. Pastikan disalin lengkap.";
   });
 }
-Object.assign(state, { invTab: "warna", shopOpen: null, lastReward: null });
+Object.assign(state, { invTab: "warna", shopOpen: null, lastReward: null, flashDone: false, memoF: (() => { try { const v = localStorage.getItem(MEMOF_KEY); return ["all", "todo", "ng"].includes(v) ? v : "all"; } catch (e) { return "all"; } })() });
 loadSave();
 if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
